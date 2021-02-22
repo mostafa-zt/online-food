@@ -16,8 +16,8 @@
     <meta name="keywords" content="Online Food" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- logo icon -->
-    <link rel="shortcut icon" href="images/favicon.png">
-    <environment include="Development">
+    <link rel="shortcut icon" href="~/favicon-32x32.png">
+    <environment>
         <!--  ------ usermain -----   -->
         <link href="~/css/user/bootstrap.css" rel="stylesheet" />
         <!-- Main Style -->
@@ -29,7 +29,6 @@
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 
         <link href="~/css/fontawesome.css" rel="stylesheet" />
         <link href="~/css/im-icon.css" rel="stylesheet" />
@@ -47,19 +46,7 @@
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
         <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     </environment>
-    <environment exclude="Development">
-        <link href="~/css/user/usermain.min.css" rel="stylesheet" />
-        <!-- icons and fonts -->
-        <link href="~/css/OnlineFood.min.css" rel="stylesheet" />
-        <!-- bootstrap file input uploader CSS -->
-        <link href="~/lib/bootstrap-fileinput-master/css/fileinput.min.css" rel="stylesheet" />
-        <script src="~/js/user/jquery-2.2.4.min.js"></script>
-        <!-- semantic -->
-        <link href="~/lib/semantic/semantic.min.css" rel="stylesheet" />
-        <script src="~/lib/semantic/semantic.min.js"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    </environment>
+    
 </head>
 <body class="sticky logo-white submenu-closed theme-green">
     <!-- wrap Page -->
@@ -124,7 +111,7 @@
         </div>
 
     </div>
-    <environment include="Development">
+    <environment >
         <!-- Core Js -->
         @*<script src="~/js/admin/admin.js"></script>*@
         <!-- customize JS -->
