@@ -7,12 +7,28 @@
   <ItemGroup>
     <Compile Remove="Areas\Admin\**" />
     <Compile Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <Compile Remove="wwwroot\css\fonts\**" />
+    <Compile Remove="wwwroot\lib\cedarmap\**" />
+    <Compile Remove="wwwroot\lib\MD.BootstrapPersianDateTimePicker\**" />
+    <Compile Remove="wwwroot\views\**" />
     <Content Remove="Areas\Admin\**" />
     <Content Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <Content Remove="wwwroot\css\fonts\**" />
+    <Content Remove="wwwroot\lib\cedarmap\**" />
+    <Content Remove="wwwroot\lib\MD.BootstrapPersianDateTimePicker\**" />
+    <Content Remove="wwwroot\views\**" />
     <EmbeddedResource Remove="Areas\Admin\**" />
     <EmbeddedResource Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <EmbeddedResource Remove="wwwroot\css\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\lib\cedarmap\**" />
+    <EmbeddedResource Remove="wwwroot\lib\MD.BootstrapPersianDateTimePicker\**" />
+    <EmbeddedResource Remove="wwwroot\views\**" />
     <None Remove="Areas\Admin\**" />
     <None Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <None Remove="wwwroot\css\fonts\**" />
+    <None Remove="wwwroot\lib\cedarmap\**" />
+    <None Remove="wwwroot\lib\MD.BootstrapPersianDateTimePicker\**" />
+    <None Remove="wwwroot\views\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +59,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\admin\admin.js" />
+    <None Include="wwwroot\js\admin\app.js" />
+    <None Include="wwwroot\js\admin\customize.js" />
+    <None Include="wwwroot\js\admin\light-gallery-image.js" />
+    <None Include="wwwroot\js\admin\table.min.js" />
     <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\CODE_OF_CONDUCT.md" />
     <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\CONTRIBUTING.md" />
     <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\ISSUE_TEMPLATE.md" />

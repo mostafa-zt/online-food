@@ -6734,7 +6734,7 @@ td {
     }
 
 .page-background {
-    background-image: url(/image/background/pizza-double.jpg);
+    background-image: url(/image/tomato.png);
 }
 
 .wrap-login {
@@ -6745,22 +6745,15 @@ td {
 }
 
 .login-form-logo {
-    font-size: 60px;
-    color: #333333;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: transparent;
     margin: 0 auto;
+    margin-bottom: 15px;
 }
 
-    .login-form-logo img {
-        width: 100px;
-        border-radius: 50%;
-    }
+
 
 
 .login-form-title {
