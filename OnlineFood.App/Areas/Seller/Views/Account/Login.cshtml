@@ -1,0 +1,151 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<!--<![endif]-->
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <base href="/">
+    <title> Online Food | Login </title>
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!">
+    <meta name="description" content="Online Food" />
+    <meta name="keywords" content="Online Food" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- logo icon -->
+    <link rel="shortcut icon" href="images/favicon.png">
+    <environment include="Development">
+        <!--  ------ usermain -----   -->
+        <link href="~/css/user/bootstrap.css" rel="stylesheet" />
+        <!-- Main Style -->
+        <link href="~/css/user/style.css" rel="stylesheet" />
+        <!-- customize CSS Style -->
+        <link href="~/css/user/customize.css" rel="stylesheet" />
+        <link href="~/css/user/base.css" rel="stylesheet" />
+        <link href="~/css/user/responsive.css" rel="stylesheet" />
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+        <link href="~/css/fontawesome.css" rel="stylesheet" />
+        <link href="~/css/im-icon.css" rel="stylesheet" />
+        <link href="~/css/material-icon.css" rel="stylesheet" />
+        <link href="~/css/glyphicon.css" rel="stylesheet" />
+        <link href="~/css/menu-category.css" rel="stylesheet" />
+        <!-- bootstrap file input uploader CSS -->
+        <link href="~/lib/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+        <!-- JQuery JS -->
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic css js -->
+        <link href="~/lib/semantic/semantic.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.js"></script>
+        <!-- JQuery Validate Unobtrusive -->
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/user/usermain.min.css" rel="stylesheet" />
+        <!-- icons and fonts -->
+        <link href="~/css/OnlineFood.min.css" rel="stylesheet" />
+        <!-- bootstrap file input uploader CSS -->
+        <link href="~/lib/bootstrap-fileinput-master/css/fileinput.min.css" rel="stylesheet" />
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic -->
+        <link href="~/lib/semantic/semantic.min.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+</head>
+<body class="sticky logo-white submenu-closed theme-green">
+    <!-- wrap Page -->
+    <div id="wrap">
+        <div class="overlay"></div>
+        <div class="container-login page-background">
+            <div class="wrap-login">
+                <form class="login100-form validate-form" asp-action="login" asp-controller="account" asp-area="seller" method="post">
+                    <input type="hidden" asp-for="ReturnUrl" />
+                    <span class="login-form-logo">
+                        <img src="~/image/logo.png" />
+                    </span>
+                    <span class="login-form-title">
+                        مدیریت سیستم سفارش آنلاین غذا <b style="color:#C8F094;">نت فودی</b>
+                    </span>
+                    <div asp-validation-summary="All" class="message danger-msg @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                        <i class="material-icons">error</i>
+                        <div class="message-body">
+                            <h4 style="margin-right: 20px;color: red;">خطا !</h4>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line ">
+                            <i class="im im-icon-User prefix"></i>
+                            <input type="text" asp-for="UserName" class="form-control" autocomplete="off">
+                            <label asp-for="UserName" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line ">
+                            <i class="im im-icon-Key prefix"></i>
+                            <input type="password" asp-for="Password" class="form-control" autocomplete="off">
+                            <label asp-for="Password" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="contact100-form-checkbox">
+                        <div class="form-check">
+                            <p>
+                                <label>
+                                    <input asp-for="RememberMe" type="checkbox" checked="checked">
+                                    <span class="rememberme">مرا به خاطر بسپار</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-green btn-medium btn-3e btn-icon full-width">
+                        <i class="fa fas fa-key"></i>
+                        Login
+                    </button>
+                    <a href="/seller/account/register?ReturnUrl=@Model.ReturnUrl" class="lnk-effect text-center margin_top_20">If you don't have any account, Click here to register.</a>
+
+                    @*<div class="text-center p-t-50">
+                            <a class="txt1" href="forgot-password.html">
+                                Forgot Password?
+                            </a>
+                        </div>*@
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <environment include="Development">
+        <!-- Core Js -->
+        @*<script src="~/js/admin/admin.js"></script>*@
+        <!-- customize JS -->
+        <script src="~/js/admin/customize.js"></script>
+        <script src="~/js/admin/table.min.js"></script>
+
+        <!-- JQuery UI Custom JS -->
+        <script src="~/js/user/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="~/js/user/theia-sticky-sidebar.min.js"></script>
+        <!-- customize JS -->
+        <script src="~/js/user/customize.js"></script>
+        <!-- bootstrap notification JS -->
+        <script src="~/js/bootstrap-notify.js"></script>
+        <!-- jquery slim scroll -->
+        <script src="~/js/jquery.slimscroll.min.js"></script>
+        <!-- bootstrap file input uploader JS -->
+        <script src="~/lib/bootstrap-fileinput-master/js/fileinput.js"></script>
+        <script src="~/lib/bootstrap-fileinput-master/js/locales/fa.js"></script>
+        <script src="~/lib/bootstrap-fileinput-master/themes/fa/theme.min.js"></script>
+    </environment>
+
+    @Html.AlertNotification(TempData)
+</body>
+</html>

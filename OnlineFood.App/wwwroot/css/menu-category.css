@@ -1,0 +1,91 @@
+﻿.menu-category-icon {
+    width: 45px;
+    height: 39px;
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url(/img/general/cats/icon-default.png);
+    background-size: 35px;
+    -webkit-transition: all .25s cubic-bezier(.19,1,.22,1);
+    -moz-transition: all .25s cubic-bezier(.19,1,.22,1);
+    -o-transition: all .25s cubic-bezier(.19,1,.22,1);
+    transition: all .25s cubic-bezier(.19,1,.22,1);
+}
+
+.pizza {
+    background: url(/image/menucategory/pizza.svg) top center no-repeat;
+}
+.burger {
+    background: url(/image/menucategory/burger.svg) top center no-repeat;
+}
+.fastfood {
+    background: url(/image/menucategory/fastfood.svg) top center no-repeat;
+}
+.fries-potato {
+    background: url(/image/menucategory/french-fries.svg) top center no-repeat;
+}
+.drink {
+    background: url(/image/menucategory/soda.svg) top center no-repeat;
+}
+.cupcake {
+    background: url(/image/menucategory/doughnut.svg) top center no-repeat;
+}
+.sandwich {
+    background: url(/image/menucategory/sandwich.svg) top center no-repeat;
+}
+.desert {
+    background: url(/image/menucategory/jelly.svg) top center no-repeat;
+}
+.pasta {
+    background: url(/image/menucategory/spaghetti.svg) top center no-repeat;
+}
+.salad {
+    background: url(/image/menucategory/salad.svg) top center no-repeat;
+}
+.sokhari {
+    background: url(/image/menucategory/roast-chicken.svg) top center no-repeat;
+}
+.kabab {
+    background: url(/image/menucategory/skewer.svg) top center no-repeat;
+}
+.bread {
+    background: url(/image/menucategory/bread.svg) top center no-repeat;
+}
+.khorak {
+    background: url(/image/menucategory/cinnamon-roll.svg) top center no-repeat;
+}
+.boshghab {
+    background: url(/image/menucategory/cinnamon-roll.svg) top center no-repeat;
+}
+.soup {
+    background: url(/image/menucategory/soup.svg) top center no-repeat;
+}
+.khorosht {
+    background: url(/image/menucategory/soup.svg) top center no-repeat;
+}
+.hotdog {
+    background: url(/image/menucategory/hot-dog.svg) top center no-repeat;
+}
+.fruit-juice {
+    background: url(/image/menucategory/lemonade.svg) top center no-repeat;
+}
+.cake {
+    background: url(/image/menucategory/pancakes.svg) top center no-repeat;
+}
+.chicken {
+    background: url(/image/menucategory/chicken-leg.svg) top center no-repeat;
+}
+.doner-kabab {
+    background: url(/image/menucategory/bacon.svg) top center no-repeat;
+}
+.ice-cream {
+    background: url(/image/menucategory/ice-cream-4.svg) top center no-repeat;
+}
+.cake-icecream {
+    background: url(/image/menucategory/muffin.svg) top center no-repeat;
+}
+.seafood {
+    background: url(/image/menucategory/fish.svg) top center no-repeat;
+}
+.irani {
+    background: url(/image/menucategory/rice.svg) top center no-repeat;
+}

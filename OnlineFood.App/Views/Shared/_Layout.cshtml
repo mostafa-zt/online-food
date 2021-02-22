@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="fa" dir="rtl"> <![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="fa" dir="rtl"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="fa" dir="rtl">
+<!--<![endif]-->
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <base href="/">
+    <title>  سفارش آنلاین غذا از بهترین رستوران ها و فست فودها | نت فودی | @ViewData["Title"] </title>
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!">
+    <meta name="description" content="سفارش غذا از بهترین رستوران ها و فست فودهای تهران، کرج، مشهد، اصفهان، شیراز و رشت و ... با ارسال سریع و پشتیبانی مناسب" />
+    <meta name="keywords" content="سفارش آنلاین غذا، سفارش آنلاین شیرینی ، سفارش اینترنتی غذا، سفارش غذا آنلاین ، رستوران های تهران" />
+    @*<meta name="keywords" content="رستوران های تهران, رستوران , رستوران های تهران, لازانیا, تیرامیسو, دسر, شله زرد, انواع کباب, انواع ساندویچ, انواع پیتزا, سفارش اینترنتی غذای سنتی, غذای خانگی, غذای ایرانی, کباب, پیتزا, ساندویچ, رستوران, تهران, رستوران های, سفارش آنلاین, سفارش غذا در ایران, ایران, غذاهای دریایی, غذا, سنتی, خانگی, ساندویچ های گرم, ساندویچ های سرد, پیتزا ایتالیایی, رستوران ایتالیایی, سفره خانه, رستوران های ایرانی, رستوران ایرانی, رستوران های فرنگی, رستوران فرنگی, فست فود" />*@
+    @*<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">*@
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="foodbarg.com">
+    <meta property="og:title" content="سفارش آنلاین غذا از بهترین رستوران ها و فست فودها | نت فودی" />
+    <meta property="og:description" content="سفارش غذا از بهترین رستوران ها و فست فودهای تهران، کرج، مشهد، اصفهان، شیراز و رشت و ... با ارسال سریع و پشتیبانی مناسب" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://OnlineFood.com" />
+    <meta property="og:image" content="https://OnlineFood.com/app/user/assets/img/base/LogoForHome_shadow.png" />
+    <meta property="og:site_name" content="نت فودی" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta name="twitter:title" content="نت فودی، سفارش آنلاین غذا از بهترین رستوران ها و فست فودها">
+    <meta name="twitter:description" content="سفارش غذا از بهترین رستوران ها و فست فودهای تهران، کرج، مشهد، اصفهان، شیراز و رشت و ... با ارسال سریع و پشتیبانی مناسب با نت فودی" />
+    <meta name="twitter:image" content="https://OnlineFood.com/app/user/assets/img/base/LogoForHome_shadow.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="icon" href="https://OnlineFood.com/app/user/assets/img/pizza.png" sizes="64x64">
+    @*<link rel="manifest" href="https://OnlineFood.com/manifest.json?v=1">*@
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="OnlineFood">
+    <meta name="apple-mobile-web-app-title" content="OnlineFood">
+    <meta name="msapplication-starturl" content="/">
+    <link rel="publisher" href="https://www.OnlineFood.com" />
+    <!-- logo icon -->
+    <link rel="shortcut icon" href="images/favicon.png">
+    <environment include="Development">
+        <!--  ------ usermain -----   -->
+        <link href="~/css/user/bootstrap.rtl.css" rel="stylesheet" />
+        <!-- Main Style -->
+        <link href="~/css/user/style.css" rel="stylesheet" />
+        <!-- customize CSS Style -->
+        <link href="~/css/user/customize.css" rel="stylesheet" />
+        <link href="~/css/user/base.css" rel="stylesheet" />
+        <link href="~/css/user/responsive.css" rel="stylesheet" />
+        <!-- Skins Style Green -->
+        @*<link href="~/css/user/green.css" rel="stylesheet" />*@
+        @*<link href="~/css/user/loaded.css" rel="stylesheet" />*@
+        <!-- farsi fonts and icons -->
+        <link href="~/css/fonts-fa.css" rel="stylesheet" />
+        <link href="~/css/fontawesome.css" rel="stylesheet" />
+        <link href="~/css/im-icon.css" rel="stylesheet" />
+        <link href="~/css/material-icon.css" rel="stylesheet" />
+        <link href="~/css/glyphicon.css" rel="stylesheet" />
+        <link href="~/css/menu-category.css" rel="stylesheet" />
+        <!-- JQuery JS -->
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic css js -->
+        <link href="~/lib/semantic/semantic.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.js"></script>
+        <!-- JQuery Validate Unobtrusive -->
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/user/usermain.min.css" rel="stylesheet" />
+        <!-- icons and fonts -->
+        <link href="~/css/OnlineFood.min.css" rel="stylesheet" />
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic -->
+        <link href="~/lib/semantic/semantic.min.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <style>
+        .ordercart-top-review {
+            float: left;
+            margin-left: 100px;
+        }
+    </style>
+    @RenderSection("css", required: false)
+</head>
+
+<body class="sticky logo-white submenu-closed theme-green">
+    <!--[if lte IE 8]>
+        <p class="chromeframe">أنت تستخدم <strong>متصفح</strong> قديم. يرجي <a href="http://browsehappy.com/">ترقية متصفحك</a>.</p>
+    <![endif]-->
+    <!-- Preload -->
+    @*<div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>*@<!-- End Preload -->
+    <!-- wrap Page -->
+    <div id="wrap">
+        <!-- Header -->
+        <header class="style1 sticky">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">
+                        <img src="~/image/logo.png" />
+                    </a>
+                </div>
+                <div class="bt-menu-trigger hidden-lg hidden-md" id="sidebarCollapse">
+                    <span></span>
+                </div>
+                @*<div class="ordercart-top-review">
+                    <div class="ordercart-top" id="ordercart-oneLook">
+                        <i class="im im im-icon-Shopping-Cart"></i>
+                        <span>4</span>
+                    </div>
+                </div>*@
+                <div class="pull-left">
+                    <div class="inline-block basket-counter">
+                        <a class="m_trigger" data-effect="st-effect-1" style="cursor:pointer">
+                            <span class="im im-icon-Full-Basket icon-style"></span>
+                            <span class="basket-counter-value">@(System.Convert.ToInt32(ViewData["TotalOrderCartNumber"]).GetPersianNumber())</span>
+                        </a>
+                    </div>
+                </div>
+                @*<button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+            <span>Toggle Sidebar</span>
+        </button>*@
+                <!-- responsive Sidebar  -->
+                <nav id="sidebar">
+                    <div id="responsive-sidebar">
+                        <div class="sidebar-header">
+                            <h3>مرکز فروشندگان</h3>
+                        </div>
+                        <ul class="list-link">
+                            <li class="sidebar-user-panel">
+                                <div class="user-panel">
+                                    <div class=" image">
+                                        <img src="~/image/item/user.png" class="img-circle user-img-circle" alt="User Image" />
+                                    </div>
+                                </div>
+                                <div class="profile-usertitle">
+                                    <div class="sidebar-userpic-name"> مصطفی زرتاج </div>
+                                    <div class="profile-usertitle-job "> مدیریت رستوران فود لند </div>
+                                </div>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "home")">
+                                <a href="/admin/">
+                                    <i class="im im-icon-Home"></i>
+                                    <span>صفحه اصلی</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "account")">
+                                <a href="/admin/account/">
+                                    <i class="im im-icon-Chef"></i>
+                                    <span>پروفایل من</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "restaurant")">
+                                <a href="/admin/restaurant/">
+                                    <i class="im im-icon-Shop"></i>
+                                    <span>رستوران من</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "restaurantmenu")">
+                                <a href="/admin/restaurantmenu/">
+                                    <i class="im im-icon-Receipt-3"></i>
+                                    <span>منوی فروش من</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "restaurantimage")">
+                                <a href="/admin/restaurantimage/">
+                                    <i class="im im-icon-Folder-Pictures"></i>
+                                    <span>گالری تصاویر من</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "usercomment")">
+                                <a href="/admin/usercomment/">
+                                    <i class="im im-icon-Speach-BubbleDialog"></i>
+                                    <span>نقد و نظرات</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="row">
+                    <!-- user header dropdown -->
+                    <nav class="hidden-sm hidden-xs">
+                        <div class="c-header__btn-container" style="position:fixed;">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="c-header__btn-user-container">
+                                    <a href="javascript:void(0);" class="c-header__btn-user js-dropdown-toggle">
+                                        <img src="~/image/item/user.png" class="img-circle user-img-circle" alt="User Image" style="width:40px;height:auto;" />
+                                        <div class="c-header-user-title"> @User.GetFullName() </div>
+                                        <div class="c-header-role-name"> @User.GetRoleName() </div>
+                                    </a>
+                                    <div class="c-header__user-dropdown js-dropdown-menu" style="display: none;">
+                                        <ul class="list-link">
+                                            <li><a href="index.html"><i class="im im-icon-User"></i>پروفایل</a></li>
+                                            <li><a href="index-2.html"><i class="im im-icon-Shop"></i>سفارش های من</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="c-header-user-signin-up">
+                                    <div class="c-header-user-login inline-block">
+                                        <a href="#"><i class="im im-icon-Password icon-style"></i> ورود </a>
+                                    </div>
+                                    <div class="c-header-user-register inline-block">
+                                        <a href="#"><i class="im im-icon-Add-User icon-style"></i> ثبت نام </a>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- End container -->
+        </header>
+        <!-- End Header -->
+        <div class="overlay"></div>
+        <!-- End Header -->
+        @RenderBody()
+        <!-- mobile app -->
+        <div class="">
+            <div class="container get-apps margin_top_100">
+                <div class="row">
+                    <div class="col-sm-8 col-md-8">
+                        <h3>اپیلیکیشن نت فودی</h3>
+                        <p>
+                            با استفاده از اپلیکیشن نت فودی، به راحتی غذای خود را سفارش دهید.
+                        </p>
+                        <div class="apps-image">
+                            <a href="#">
+                                <img src="~/image/item/cafebazar.png" />
+                            </a>
+                            <a href="#">
+                                <img src="~/image/item/googleplay.png" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4 apps-cover">
+                        <img src="~/image/background/apps.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End mobile app -->
+        <!-- Footer-top -->
+        <footer id="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 footer-section">
+                        <h4>درباره نت فودی</h4>
+                        <p>
+                            نت فودی یک اپلیکیشن و وب سایت سفارش غذا در ایران می باشد که تنها در سه مرحله کاربر میتواند از نزدیک ترین رستوران محل زندگی خود سفارش غذا ؛ سفارش پیش غذا ؛ سفارش صبحانه ؛ سفارش نهار ؛ سفارش شام و... ثبت نماید.
+                            اپلیکیشن سفارش غذای نت فودی برای تلفن همراه از گوگل پلی ؛ کافه بازار ؛ سیب اپ و ایران اپس قابل دانلود می باشد و این امکان فراهم است تا کاربران با استفاده از تلفن همراه سفارش غذا را ثبت کنند.
+                            با اپلیکیشن نت فودی به راحتی و با چند کلیک ساده می‌توانید رستوران‌های نزدیک خودتان را جست‌و‌جو کرده و غذای دلخواه خود را سفارش دهید.
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-sm-6 footer-section">
+                        <h4>ارتباط با ما</h4>
+                        <p>تیم پشتیبانی نت فودی در تمام ساعات، آماده‌ی پاسخگویی و راهنمایی شما هستند و تا لحظه‌ی برطرف شدن مشکل، شما را همراهی خواهند کرد.</p>
+                        <ul class="footer-contact">
+                            <li>شماره موبایل : <span> @((09356835588).GetPersianNumber()) </span></li>
+                            <li> ایمیل :  <span> mostafa.zartaj@gmail.com </span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 footer-section">
+                        <h4>نت فودی</h4>
+                        <ul class="footer-menu">
+                            <li><a class="lnk-effect" target="_blank" href="/seller/account/register/">ثبت رستوران</a></li>
+                            <li><a class="lnk-effect" target="_blank" href="/restaurant/">جستجوی رستوران ها</a></li>
+                            <li><a class="lnk-effect" target="_blank" href="/restaurantmenu/">صفحه رستوران</a></li>
+                            <li><a class="lnk-effect" target="_blank" href="/order/">صفحه پرداخت</a></li>
+                        </ul>
+                    </div>
+                </div><!-- End row -->
+            </div><!-- End container -->
+        </footer>
+        <!-- End Footer-top -->
+        <!-- Footer-bottom -->
+        <footer id="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="social_footer">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- End row -->
+            </div><!-- End container -->
+        </footer>
+        <!-- End Footer-bottom -->
+        <!-- Footer Hello -->
+        <div id="hello-container">
+            <div class="hello-content">
+                <div class="hello-title">
+                    #نت_فودی
+                </div>
+                <div id="hello-sub" class="hello-center-v">
+                    <span>
+                        با نت فودی غذاتون رو آنلاین سفارش بدین!
+                    </span>
+                </div>
+                <a class="hello-btn" href="/ramadan" target="_blank">
+                    <span>اطلاعات بیشتر</span>
+                </a>
+            </div>
+            <span id="hello-close">
+                <i class="im im-icon-Close"></i>
+            </span>
+        </div>
+        <!-- End Footer Hello -->
+    </div>
+    <!-- End wrap Page -->
+    <!-- go-up -->
+    <div class="go-up"><i class="fa fa-chevron-up"></i></div>
+    <!-- End go-up -->
+    <environment include="Development">
+        <!-- COMMON SCRIPTS -->
+        <!-- JQuery UI Custom JS -->
+        <script src="~/js/user/jquery-ui-1.10.3.custom.min.js"></script>
+        @*<script src="~/js/user/jquery.easing.1.3.min.js"></script>*@
+        @*<script src="~/lib/user/js/ResizeSensor.min.js"></script>*@
+        <script src="~/js/user/theia-sticky-sidebar.min.js"></script>
+        @*<script src="~/js/user/parallax.min.js"></script>*@
+        @*<script src="~/js/user/jquery.themepunch.plugins.min.js"></script>*@
+        @*<script src="~/js/user/jquery.themepunch.revolution.min.js"></script>*@
+        @*<script src="~/lib/user/js/ion.rangeSlider.min.js"></script>*@
+        @*<script src="~/js/user/imagesloaded.pkgd.min.js"></script>*@
+        <!-- customize JS -->
+        <script src="~/js/user/customize.js"></script>
+        <!-- bootstrap notification JS -->
+        <script src="~/js/bootstrap-notify.min.js"></script>
+        <!-- jquery slim scroll -->
+        <script src="~/js/jquery.slimscroll.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/user/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="~/js/user/theia-sticky-sidebar.min.js"></script>
+        <script src="~/js/user/usermain.min.js"></script>
+        <!-- bootstrap notification JS -->
+        <script src="~/js/bootstrap-notify.min.js"></script>
+        <!-- jquery slim scroll -->
+        <script src="~/js/jquery.slimscroll.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //slim scroll for responsive sidebar
+            $('#responsive-sidebar').slimscroll({
+                height: 'auto'
+            });
+            //slim scroll for notify dropdown
+            $('#notify-dropdown-content').slimscroll({
+                height: 'auto'
+            });
+            $('#tab-container-cityarea-list').slimscroll({
+                height: 'auto'
+            });
+            //$('.m_panel').slimscroll({
+            //    height: 'auto',
+            //    alwaysVisible: true
+            //});
+            $('.ui.dropdown').dropdown('setting', {
+                allowAdditions: false,
+                message: { noResults: 'داده ای وجود ندارد', count: '{count} انتخاب شده است', },
+            });
+            //responsive sidebar
+            function responsive_sidebar_btn_trigger(element) {
+                if ($(element).hasClass('bt-menu-open')) {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').removeClass('active');
+                }
+                else {
+                    $('#sidebar').addClass('active');
+                    $('.overlay').addClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                }
+            }
+            $(".bt-menu-open, .overlay").on('click', function () {
+                $('#sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+                $('.bt-menu-trigger').removeClass('bt-menu-open')
+            });
+            function init() {
+                var button = document.querySelector('.bt-menu-trigger');
+                button.addEventListener('click', function () {
+                    responsive_sidebar_btn_trigger(button);
+                    button.classList.toggle('bt-menu-open');
+                });
+            }
+            init();
+            //Collapse or Expand Menu toggle
+            $('.menu-toggle').on('click', function (e) {
+                var $this = $(this);
+                var $content = $this.next();
+
+                if ($($this.parents('ul')[0]).hasClass('list')) {
+                    var $not = $(e.target).hasClass('menu-toggle') ? e.target : $(e.target).parents('.menu-toggle');
+
+                    $.each($('.menu-toggle.toggled').not($not).next(), function (i, val) {
+                        if ($(val).is(':visible')) {
+                            $(val).prev().toggleClass('toggled');
+                            $(val).slideUp();
+                        }
+                    });
+                }
+                $this.toggleClass('toggled');
+                $content.slideToggle(320);
+            });
+            //dropdown toggle
+            $('.js-dropdown-toggle').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $('.js-dropdown-menu').not($(this).next('.js-dropdown-menu')).hide();
+                if ($(this).next('.js-dropdown-menu').is(':visible')) {
+                    $(this).next('.js-dropdown-menu').hide();
+                    //notifAnimation.removeClass('c-header__btn-user--has-notif-no-animation');
+                } else {
+                    //notifAnimation.before().addClass('c-header__btn-user--has-notif-no-animation');
+                    $(this).next('.js-dropdown-menu').show();
+                }
+            })
+            $('html').click(function (e) {
+                if (!$(e.target).closest(".js-dropdown-menu").length) {
+                    jQuery('.js-dropdown-menu').hide();
+                }
+            })
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

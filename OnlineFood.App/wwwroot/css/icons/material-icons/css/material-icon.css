@@ -1,0 +1,62 @@
+﻿/*
+ *  Document   : _material.scss
+ *  Author     : RedStar Template
+ *  Description: This scss file for import material design icons classes
+ */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/MaterialIcons-Regular.eot);
+    /* For IE6-8 */
+    src: local("Material Icons"), local("MaterialIcons-Regular"), url(../fonts/MaterialIcons-Regular.woff2) format("woff2"), url(../fonts/MaterialIcons-Regular.woff) format("woff"), url(../fonts/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+.material-icons {
+    font-family: Material Icons;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+    line-height: 1;
+    height: 24px;
+}
+
+    .material-icons.md-18 {
+        font-size: 18px;
+    }
+
+    .material-icons.md-24 {
+        font-size: 24px;
+    }
+
+    .material-icons.md-26 {
+        font-size: 26px;
+    }
+
+    .material-icons.md-28 {
+        font-size: 28px;
+    }
+
+    .material-icons.md-30 {
+        font-size: 30px;
+    }
+
+    .material-icons.md-32 {
+        font-size: 32px;
+    }
+
+    .material-icons.md-36 {
+        font-size: 36px;
+    }
+
+    .material-icons.md-48 {
+        font-size: 48px;
+    }

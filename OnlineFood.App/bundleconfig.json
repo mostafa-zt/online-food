@@ -1,0 +1,242 @@
+[
+  //general css --- icons
+  {
+    "inputFiles": [
+      "wwwroot/css/fonts-fa.css",
+      "wwwroot/css/fontawesome.css",
+      "wwwroot/css/glyphicon.css",
+      "wwwroot/css/im-icon.css",
+      "wwwroot/css/material-icon.css",
+      "wwwroot/css/menu-category.css"
+    ],
+    "outputFileName": "wwwroot/css/netfoodi.min.css"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/css/validation.css"
+    ],
+    "outputFileName": "wwwroot/css/validation.min.css"
+  },
+  // admin css
+  {
+    "inputFiles": [
+      "wwwroot/css/admin/app.css",
+      "wwwroot/css/admin/customize.css",
+      "wwwroot/css/admin/style.css",
+      "wwwroot/css/admin/theme-green.css"
+    ],
+    "outputFileName": "wwwroot/css/admin/adminmain.min.css"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/css/admin/extra_pages.css"
+    ],
+    "outputFileName": "wwwroot/css/admin/extra_pages.min.css"
+  },
+  // user css
+  {
+    "inputFiles": [
+      "wwwroot/css/user/base.css",
+      "wwwroot/css/user/bootstrap.rtl.css",
+      "wwwroot/css/user/customize.css",
+      "wwwroot/css/user/green.css",
+      "wwwroot/css/user/responsive.css",
+      "wwwroot/css/user/style.css",
+      "wwwroot/css/user/loaded.css"
+    ],
+    "outputFileName": "wwwroot/css/user/usermain.min.css"
+  },
+  {
+    "inputFiles": [
+      "wwwroot/css/user/bootstrap.rtl.css"
+    ],
+    "outputFileName": "wwwroot/css/user/bootstrap.rtl.min.css"
+  },
+  //{
+  //  "inputFiles": [
+  //    "wwwroot/css/user/bootstrap.rtl.css"
+  //  ],
+  //  "outputFileName": "wwwroot/css/user/bootstrap.rtl.min.css"
+  //},
+  {
+    "inputFiles": [
+      "wwwroot/css/user/extra_pages.css"
+    ],
+    "outputFileName": "wwwroot/css/user/extra_pages.min.css"
+  },
+
+  // admin js
+  {
+    "outputFileName": "wwwroot/js/admin/adminmain.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/admin.js",
+      "wwwroot/js/admin/customize.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/app.min.js",
+    "inputFiles": [
+      "wwwroot/js/admin/app.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  // user js
+  {
+    "outputFileName": "wwwroot/js/user/usermain.min.js",
+    "inputFiles": [
+      "wwwroot/js/user/customize.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  // bootstrap file input css js
+  {
+    "inputFiles": [
+      "wwwroot/lib/bootstrap-fileinput-master/css/fileinput.css"
+    ],
+    "outputFileName": "wwwroot/lib/bootstrap-fileinput-master/css/fileinput.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap-fileinput-master/js/fileinput-all.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap-fileinput-master/js/fileinput.js",
+      "wwwroot/lib/bootstrap-fileinput-master/js/locales/fa.js",
+      "wwwroot/lib/bootstrap-fileinput-master/themes/fa/theme.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+
+  // semantic css js
+  {
+    "inputFiles": [
+      "wwwroot/lib/semantic/semantic.css"
+    ],
+    "outputFileName": "wwwroot/lib/semantic/semantic.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/lib/semantic/semantic.min.js",
+    "inputFiles": [
+      "wwwroot/lib/semantic/semantic.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  // auto-complete css js
+  {
+    "inputFiles": [
+      "wwwroot/lib/autoComplete-master/auto-complete.css"
+    ],
+    "outputFileName": "wwwroot/lib/autoComplete-master/auto-complete.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/lib/autoComplete-master/auto-complete.min.js",
+    "inputFiles": [
+      "wwwroot/lib/autoComplete-master/auto-complete.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  // owl.carousel css js
+  {
+    "inputFiles": [
+      "wwwroot/lib/owlcarousel/assets/owl.carousel.css",
+      "wwwroot/lib/owlcarousel/assets/owl.theme.default.css"
+    ],
+    "outputFileName": "wwwroot/lib/owlcarousel/assets/owl.carousel.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/lib/owlcarousel/owl.carousel.min.js",
+    "inputFiles": [
+      "wwwroot/lib/owlcarousel/owl.carousel.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  },
+  // views css js
+  {
+    "inputFiles": [
+      "wwwroot/views/user/home.css"
+    ],
+    "outputFileName": "wwwroot/views/user/home.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/views/user/home.min.js",
+    "inputFiles": [
+      "wwwroot/views/user/home.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true,
+      "outputMode": "singleLine"
+    },
+    "sourceMap": false
+  },
+  {
+    "inputFiles": [
+      "wwwroot/views/user/restaurant.css"
+    ],
+    "outputFileName": "wwwroot/views/user/restaurant.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/views/user/restaurant.min.js",
+    "inputFiles": [
+      "wwwroot/views/user/restaurant.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true,
+      "outputMode": "singleLine"
+    },
+    "sourceMap": false
+  },
+  {
+    "inputFiles": [
+      "wwwroot/views/user/restaurantmenu.css"
+    ],
+    "outputFileName": "wwwroot/views/user/restaurantmenu.min.css"
+  },
+  {
+    "outputFileName": "wwwroot/views/user/restaurantmenu.min.js",
+    "inputFiles": [
+      "wwwroot/views/user/restaurantmenu.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true,
+      "outputMode": "singleLine"
+    },
+    "sourceMap": false
+  },
+  {
+    "inputFiles": [
+      "wwwroot/views/user/commingsoon.css"
+    ],
+    "outputFileName": "wwwroot/views/user/commingsoon.min.css"
+  }
+
+]

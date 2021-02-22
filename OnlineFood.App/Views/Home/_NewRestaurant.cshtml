@@ -1,0 +1,40 @@
+﻿@model List<NewRestaurantViewModel>
+@foreach (var item in Model)
+{
+    <div class="restaurant-new-item">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <a href="@item.Link">
+                <div class="restaurant-item box ">
+                    <div class="corner-ribbon"><span>جدید</span></div>
+                    <div class="restaurant-img centered">
+                        <img class="restaurant-img-logo" src="@item.LogoUrl">
+                    </div>
+                    <div class="restaurant-content">
+                        <h3>@item.Title</h3>
+                        <div class="restaurant-cityarea">
+                            <i class="im im-icon-Map-Marker2 icon-style"></i>
+                            <span class="restaurant-cityarea-value">@item.CityArea</span>
+                        </div>
+                        <div class="ratings ">
+                            <ul class="stars line-sidebyside">
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li>
+                                    <span>@((item.RateCount).GetPersianNumber()) نظر</span>
+                                </li>
+                            </ul>
+                            <!-- End stars -->
+                        </div>
+                        <div class="comments margin_top_10">
+                            <i class="im im-icon-Speach-BubbleDialog icon-style"></i>
+                            <div class="comments-value">@((item.UserComments).GetPersianNumber()) پیام</div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+}

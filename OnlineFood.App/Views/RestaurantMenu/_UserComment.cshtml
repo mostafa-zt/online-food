@@ -1,0 +1,96 @@
+﻿@model UserCommentViewModel
+<div class="userrates">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="review-box review-percentage review-hearts">
+            <h2 class="review-box-header">نظرات کاربران</h2>
+            @foreach (var item in Model.RestaurantRateGroupViewModels)
+            {
+                <div class="review-item">
+                    <h5>@item.RestaurantRateType</h5><span class="number-review">@(!string.IsNullOrEmpty(item.Rate) ? item.Rate : "نظری داده نشده است")</span><span class="user-rate-image"><span style="width:@(!string.IsNullOrEmpty(item.Percent)? item.Percent : "نظری داده نشده است")"></span></span>
+                </div>
+            }
+            @*<div class="review-item">
+                    <h5>ارسال</h5><span class="number-review">5</span><span class="user-rate-image"><span style="width:100%"></span></span>
+                </div>
+                <div class="review-item">
+                    <h5>قیمت</h5><span class="number-review">4</span><span class="user-rate-image"><span style="width:91%"></span></span>
+                </div>
+                <div class="review-item">
+                    <h5>کیفیت</h5><span class="number-review">4.7</span><span class="user-rate-image"><span style="width:94%"></span></span>
+                </div>*@
+            <div class="review-summary">
+                <div class="review-final-score half-width centered">
+                    <h3>@(!string.IsNullOrEmpty(Model.RestauarntRate) ? Model.RestauarntRate : "نظری داده نشده است")<span class="user-rate-image col-centered"><span style="width:@(!string.IsNullOrEmpty(Model.RestaurantPercentRate)? Model.RestaurantPercentRate : "نظری داده نشده است")"></span></span></h3>
+                </div>
+                <div class="emoji-review centered">
+                    <div class="emoji-status"><i class="im im-icon-Thumbs-UpSmiley"></i><span>@(Model.Excellent.GetPersianNumber()) کاربر</span></div>
+                    <div class="emoji-status"><i class="im im-icon-Confused"></i><span>@(Model.Normal.GetPersianNumber()) کاربر</span></div>
+                    <div class="emoji-status"><i class="im im-icon-Angry"></i><span>@(Model.Bad.GetPersianNumber()) کاربر</span></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m_column">
+    <div id="commentlist" class="page-content">
+        <ol class="commentlist nopadding">
+            <li class="comment">
+                <div class="comment-body haschildren">
+                    <div class="author">
+                        <div class="comment-meta">
+                            <div><i class="im im-icon-Male icon-style"></i>رضا</div>
+                        </div>
+                        <span class="satisfaction-status-emoji pull-left">
+                            <i class="im im-icon-Thumbs-UpSmiley"></i>
+                        </span>
+                    </div>
+                    <div class="text inline-block">
+                        <i class="im im-icon-Speach-Bubble7 icon-style inline"></i>
+                        <p class="inline">غذا خوشمزه بود</p>
+                    </div>
+                    <div class="comment-footer full-width inline-block">
+                        <div class="ordered-food-comment pull-right">
+                            <div class="ordered-food">پیتزا</div>
+                            <div class="ordered-food">پیتزا پپپرونی</div>
+                            <div class="ordered-food">نوشابه</div>
+                        </div>
+                        <div class="date pull-left">پنج شنبه 17 اردیبهشت</div>
+                    </div>
+                </div>
+                <ul class="children nopadding">
+                    <li class="">
+                        <div class="comment-body">
+                            <div class="avatar"><img alt="" src="/upload/restaurant/09356835599/9147b6bd.png"></div>
+                            <div class="author">
+                                <div class="comment-meta">
+                                    <div>مدیریت رستوران دل ضعفه</div>
+                                </div>
+                            </div>
+                            <div class="text">
+                                <i class="im im-icon-Speach-Bubbles icon-style inline"></i>
+                                <p class="inline"> نوش جان </p>
+                            </div>
+                            <div class="comment-footer full-width inline-block">
+                                <div class="date pull-left">پنج شنبه 17 اردیبهشت</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- End children -->
+            </li>
+        </ol>
+        <!-- End commentlist -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

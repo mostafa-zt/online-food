@@ -1,0 +1,83 @@
+﻿@model List<ListRestaurantMenuViewModel>
+@foreach (var item in Model)
+{
+    <div id="restaurant_food_category-@item.RestaurantFoodCategoryClassname" class="full-width restaurant-food-category-content">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="restaurant-food-category-header" id="@item.RestaurantFoodCategoryClassname">
+                <div class="restaurant-food-category-title">
+                    <i class="menu-category-icon @item.RestaurantFoodCategoryClassname"></i>
+                    @item.RestaurantFoodCategory
+                </div>
+            </div>
+        </div>
+        @foreach (var menu in item.SubListRestaurantMenuViewModels)
+        {
+            <div class="col-lg-4 col-md-6 hidden-sm hidden-xs menuitem @(menu.IsOrdered ? "ordered" : "")" id="menuitem@(menu.Id)">
+                <div class="menu-item">
+                    <div class="menu-img">
+                        <img src="@menu.ImageUrl" alt="@menu.Title" />
+                        <div class="menu-favorite centered favorite">
+                            <a href="javascript:void(0);"><i class="fa fa-heart"></i></a>
+                        </div>
+                        <div class="menu-comments">
+                            <span class="comments">@(menu.UserComments.GetPersianNumber()) نظر <i class="im im-icon-User"></i></span>
+                        </div>
+                    </div>
+                    <div class="menu-content">
+                        <div class="restaurant-menu-title text-right">
+                            <h3 class="ui green right ribbon label">
+                                <label class="truncateText">@menu.Title</label>
+                            </h3>
+                        </div>
+                        <div class="restaurant-menu-description text-right">
+                            <p class="truncateText">@menu.Description</p>
+                        </div>
+                        <div class="restaurant-menu-price full-width text-right">
+                            <span>@(menu.Price.GetPersianNumber())</span>
+                        </div>
+                        <div class="actions">
+                            <div class="ordercart-management inline-block @(!menu.IsOrdered ? "hide" : "")">
+                                <div class="increase inline-block">
+                                    <a class="increase-decrease-buttons unselectable" title="افزایش تعداد سفارش" onclick="Increase(@menu.Id,this)">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                </div>
+                                <span class="incdec-value unselectable">@menu.NumberOfOrder.GetPersianNumber()</span>
+                                <div class="decrease inline-block">
+                                    <a class="increase-decrease-buttons unselectable" title="کاهش تعداد سفارش" onclick="Decrease(@menu.Id,this)">
+                                        <i class="fas fa-minus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="restaurant-menu-add @(menu.IsOrdered ? "hide" : "")">
+                                <button class="btn btn-green btn-round btn-3e btn-xs menu-add-btn" data-val="@menu.Id" data-title="@menu.Title" data-price="@menu.Price"><i class="im im-icon-Add-Basket"></i>افزودن به سبد خرید</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden-lg hidden-md col-sm-6 col-xs-12 menuitem @(menu.IsOrdered ? "ordered" : "")" id="m_menuitem@(menu.Id)">
+                <div class="m_menu-item">
+                    <div class="m_menuitem-main">
+                        <div class="m_menu-image">
+                            <img src="@menu.ImageUrl" alt="@menu.Title" />
+                        </div>
+                        <div class="m_menu-title truncateText inline-block">
+                            @menu.Title
+                        </div>
+                        <div class="m_menu-description truncateText">
+                            @menu.Description
+                        </div>
+                        <div class="m_menu-price inline-block">
+                            @(menu.Price.GetPersianNumber())
+                        </div>
+                        <div class="m_addbtn inline-block pull-left">
+                            <button class="btn btn-green btn-round btn-3e btn-xs menu-add-btn" data-val="@menu.Id" data-title="@menu.Title" data-price="@menu.Price"><i class="im im-icon-Add-Basket"></i>افزودن به سبد خرید</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

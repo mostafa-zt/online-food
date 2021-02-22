@@ -1,0 +1,76 @@
+﻿@model RegisterConfirmationViewModel
+
+
+<div class="row margin_top_10">
+    @*<div class="col-lg-4">
+            <fieldset class="seller-register-section">
+                <legend class="seller-register-section-header"> اطلاعات کاربری </legend>
+                <div class="">
+                    <div><label class="lbl-list-info" asp-for="Email"></label> <label class="lbl-list-info-text">@Model.Email</label></div>
+                    <div><label class="lbl-list-info" asp-for="PhoneNumber"></label> <label class="lbl-list-info-text">@Model.PhoneNumber</label></div>
+                </div>
+            </fieldset>
+        </div>*@
+    @if (!Model.IsLegal)
+    {
+        <div class="col-lg-4">
+            <fieldset class="section">
+                <legend class="section-header im-icon-User"> اطلاعات حقیقی </legend>
+                <div class="">
+                    <div><label class="lbl-list-info" asp-for="Firstname"></label> <label class="lbl-list-info-text">@Model.Firstname</label></div>
+                    <div><label class="lbl-list-info" asp-for="Lastname"></label> <label class="lbl-list-info-text">@Model.Lastname</label></div>
+                    <div><label class="lbl-list-info" asp-for="BirthDate"></label> <label class="lbl-list-info-text">@Model.BirthDate</label> </div>
+                    <div><label class="lbl-list-info" asp-for="Gender"></label> <label class="lbl-list-info-text">@Model.Gender</label></div>
+                    <div><label class="lbl-list-info" asp-for="NationalCode"></label> <label class="lbl-list-info-text">@Model.NationalCode</label></div>
+                    <div><label class="lbl-list-info" asp-for="BirthCertificateNumber"></label> <label class="lbl-list-info-text">@Model.BirthCertificateNumber</label></div>
+                </div>
+            </fieldset>
+        </div>
+    }
+    else
+    {
+        <div class="col-lg-4">
+            <fieldset class="section">
+                <legend class="section-header im-icon-Business-Man"> اطلاعات حقوقی </legend>
+                <div class="">
+                    <div><label class="lbl-list-info" asp-for="CompanyTitle"></label> <label class="lbl-list-info-text">@Model.CompanyTitle</label></div>
+                    <div><label class="lbl-list-info" asp-for="CompanyType"></label> <label class="lbl-list-info-text">@Model.CompanyType</label></div>
+                    <div><label class="lbl-list-info" asp-for="RegistrationNumber"></label> <label class="lbl-list-info-text">@Model.RegistrationNumber</label></div>
+                    <div><label class="lbl-list-info" asp-for="NationalId"></label> <label class="lbl-list-info-text">@Model.NationalId</label></div>
+                    <div><label class="lbl-list-info" asp-for="EconomicCode"></label> <label class="lbl-list-info-text">@Model.EconomicCode</label> </div>
+                </div>
+            </fieldset>
+        </div>
+    }
+
+    <div class="col-lg-4">
+        <fieldset class="section">
+            <legend class="section-header im-icon-Shop"> اطلاعات تجاری </legend>
+            <div class="">
+                <div><label class="lbl-list-info" asp-for="Title"></label> <label class="lbl-list-info-text">@Model.Title</label></div>
+                <div><label class="lbl-list-info" asp-for="SellerPosition"></label> <label class="lbl-list-info-text">@Model.SellerPosition</label></div>
+                <div><label class="lbl-list-info" asp-for="ShabaNumber"></label> <label class="lbl-list-info-text">@Model.ShabaNumber</label></div>
+                <div><label class="lbl-list-info" asp-for="RestaurantCategory"></label> <label class="lbl-list-info-text">@Model.RestaurantCategory</label></div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="col-lg-4">
+        <fieldset class="section">
+            <legend class="section-header im-icon-Phone"> اطلاعات تماس </legend>
+            <div class="">
+                <div><label class="lbl-list-info" asp-for="City"></label> <label class="lbl-list-info-text">@Model.City</label></div>
+                <div><label class="lbl-list-info" asp-for="FullAddress"></label> <label class="lbl-list-info-text">@Model.FullAddress</label></div>
+                <div><label class="lbl-list-info" asp-for="ZipCode"></label> <label class="lbl-list-info-text">@Model.ZipCode</label></div>
+                <div><label class="lbl-list-info" asp-for="PhoneNumber"></label> <label class="lbl-list-info-text">@Model.PhoneNumber</label></div>
+                <div><label class="lbl-list-info" asp-for="TelphoneNumber"></label> <label class="lbl-list-info-text">@Model.TelphoneNumber</label></div>
+                <div><label class="lbl-list-info" asp-for="Email"></label> <label class="lbl-list-info-text">@Model.Email</label></div>
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+
+
+
+

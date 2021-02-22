@@ -1,0 +1,54 @@
+﻿@model List<ListOrderCartViewModel>
+@if (Model != null && Model.Any())
+{
+    <div class="ordercart-detail-section full-width">
+        <div class="ordercart-detail" id="ordercart-detail-content">
+            @foreach (var item in Model)
+            {
+            <div class="ordercart-item" id="cartitem@(item.MenuId)">
+                <a class="remove-cartitem" onclick="Remove(@item.MenuId,this)"><i class="im im-icon-Close ordrercart-remove"></i></a>
+                <div class="ordercart-food">
+                    @item.Title
+                </div>
+                <div class="ordercart-price half-width">
+                    @item.Price.GetPersianNumber()
+                </div>
+                <div class="ordercart-management inline-block pull-left">
+                    <div class="increase inline-block">
+                        <a class="increase-decrease-buttons unselectable" title="افزایش تعداد سفارش" onclick="Increase(@item.MenuId)">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                    <span class="incdec-value unselectable">@item.Number.GetPersianNumber()</span>
+                    <div class="decrease inline-block">
+                        <a class="increase-decrease-buttons unselectable" title="کاهش تعداد سفارش" onclick="Decrease(@item.MenuId)">
+                            <i class="fas fa-minus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <div class="ordercart-totalprice fullWidth">
+            <div class="half-width text-right">مبلغ سفارش</div>
+            <div class="text-left" id="basket-totalprice-value">
+            </div>
+        </div>
+    </div>
+    <div class="fullWidth accept-order">
+        <button class="btn btn-3e btn-large btn-green-light">
+            <i class="im im-icon-Basket-Items"></i>
+            تایید سفارش
+        </button>
+    </div>
+}
+else
+{
+    <div class="ordercart-body-section full-width empty centered" id="ordercart-body-empty">
+        <div class="ordercart-empty">
+            <i class="im im-icon-Full-Basket"></i>
+            <span> سبد خرید خالی است </span>
+        </div>
+    </div>
+}
+

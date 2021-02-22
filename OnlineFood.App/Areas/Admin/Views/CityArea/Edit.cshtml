@@ -1,0 +1,256 @@
+﻿@model EditCityAreaViewModel
+@{
+    ViewData["Title"] = "ویرایش محله";
+}
+@section css{
+    <!-- cedarmap -->
+    <link href="~/lib/cedarmap/L.Control.Locate.min.css" rel="stylesheet" />
+    <link href="~/lib/cedarmap/reverse-geocoder.css" rel="stylesheet" />
+    <link href="~/lib/cedarmap/cedarmaps.css" rel="stylesheet" />
+}
+<div class="ui modal map-search-modal">
+    <input type="hidden" id="temp-search-map-result-address" />
+    <input type="hidden" id="temp-search-map-result-lng" />
+    <input type="hidden" id="temp-search-map-result-lat" />
+    <i class="close icon"></i>
+    <div class="map-search-header">
+        <div class="inline-block text-center map-search-header-main">
+            <i class="im im-icon-Map-Marker2"></i>
+            <span id="map-search-result-address-label"> مجیدیه </span>
+        </div>
+        <div class="inline-block">
+            <span>عرض جغرافیایی (Lat) :</span><span id="map-search-result-lat-label"></span>
+            <span>طول جغرافیایی (Lng) :</span><span id="map-search-result-lng-label"></span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-block positive btn-outline-success"><i class="im im-icon-Map-Marker2"></i>تایید آدرس</button>
+        </div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <i class="im im-icon-Map-Marker2 icon-header-card"></i>
+                    ویرایش <strong>محله</strong>
+                </h2>
+            </div>
+            <div class="body">
+                <form asp-action="edit" asp-controller="cityarea" asp-area="admin" method="post">
+                    <div asp-validation-summary="All" class="message danger-msg @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                        <i class="material-icons">error</i>
+                        <div class="message-body">
+                            <h4 style="margin-right: 20px;color: red;">خطا !</h4>
+                        </div>
+                    </div>
+                    <div class="row map-search-section centered">
+                        <div class="col-lg-6 map-search-section-main">
+                            <a href="javascript:void(0);" id="btn-select-location">
+                                آدرس را از روی نقشه انتخاب کنید
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-3">
+                            <label asp-for="CityId"></label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select asp-for="CityId" class="ui search dropdown"
+                                            asp-items="ViewBag.Cities as IEnumerable<SelectListItem>"></select>
+                                    <span asp-validation-for="CityId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Map-Marker2 prefix"></i>
+                                    <input type="text" asp-for="Title" class="form-control" autocomplete="off">
+                                    <label asp-for="Title" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Map-Marker2 prefix"></i>
+                                    <input type="text" asp-for="TitleEng" class="form-control ltr-direction" autocomplete="off">
+                                    <label asp-for="TitleEng" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="TitleEng" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="ActivityStatus"></label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select asp-for="ActivityStatus" class="ui dropdown"
+                                            asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.ActivityStatus>()"></select>
+                                    <span asp-validation-for="ActivityStatus" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-lg-4">
+                            <div class="form-group form-float">
+
+                                <input type="hidden" class="form-control" asp-for="Latitude" id="Latitude" />
+                                <i class="im im-icon-Map-Marker2 icon-style"></i>
+                                <label class="form-label latitude-label"> عرض جغرافیایی (lat) : </label>
+                                <label id="latitude-text">@Model.Latitude</label>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group form-float">
+
+                                <input type="hidden" class="form-control" asp-for="Longitude" id="Longitude" />
+                                <i class="im im-icon-Map-Marker2 icon-style "></i>
+                                <label class="form-label longitude-label"> طول جغرافیایی (lng) : </label>
+                                <label id="longitude-text">@Model.Longitude</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="actions col-md-10 col-sm-8 col-xs-7">
+                            <a href="/admin/cityarea/" class="btn btn-outline-info"><i class="fa fas fa-arrow-right"></i>بازگشت</a>
+                            <button type="submit" class="btn btn-outline-success"><i class="fa fas fa-save"></i>ثبت ویرایش</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!-- cedarmap -->
+    <script src="~/lib/cedarmap/L.Control.Locate.min.js"></script>
+    <script src="~/lib/cedarmap/cedarmaps.js"></script>
+    <script>
+        try {
+            L.cedarmaps.accessToken = '41119180b70ed7366df1594c52c08d29b78a9d57';
+        }
+        catch (err) {
+            throw new Error('You need to get an access token to be able to use cedarmaps SDK. ' +
+                'Send us an email to <info@cedar.ir>');
+        }
+        var tileJSONUrl = 'https://api.cedarmaps.com/v1/tiles/cedarmaps.streets.json?access_token=41119180b70ed7366df1594c52c08d29b78a9d57',
+            marker,
+            syntaxHighlight;
+    </script>
+    <script>
+        var map;
+        $(document).ready(function () {
+            $("#btn-select-location").click(function (e) {
+                debugger;
+                var city = $("#CityId").val();
+                //var test =document.getElementById('provinces').options[provincesList.selectedIndex].val()
+                $('.ui.modal').modal({
+                    closable: true,
+                    onDeny: function () {
+                        debugger;
+                        window.alert('Wait not yet!');
+                        return false;
+                    },
+                    onApprove: function () {
+                        debugger;
+                        var address = $("#temp-search-map-result-address").val();
+                        var lng = $("#temp-search-map-result-lng").val();
+                        var lat = $("#temp-search-map-result-lat").val();
+                        $("#Title").val(address).parent().addClass("focused");
+                        $("#Latitude").val(lat);
+                        $("#Longitude").val(lng);
+                        $("#latitude-text").html(lat);
+                        $("#longitude-text").html(lng);
+                    }
+                }).modal('show');
+                if (map == null || map == 'undefined') {
+                    // Initializing our map
+                    map = L.cedarmaps.map('map', tileJSONUrl, {
+                        scrollWheelZoom: true
+                    }).setView([37.283086336532335, 49.59080300602574], 15);
+                }
+                // Setting up our DOM elements.
+                /*document.getElementById('results'),*/
+                //latLngContainer = document.getElementById('latlng'),
+                //parsedResponseContainer = document.getElementById('parsed-response'),
+                //rawResponseContainer = document.getElementById('raw-response'),
+                //Setting up our DOM elements.
+                var resultAddressLabel = document.getElementById('map-search-result-address-label'),
+                    resultLatLabel = document.getElementById('map-search-result-lat-label'),
+                    resultLngLabel = document.getElementById('map-search-result-lng-label'),
+                    tempAddress = document.getElementById('temp-search-map-result-address'),
+                    tempLng = document.getElementById('temp-search-map-result-lng'),
+                    tempLat = document.getElementById('temp-search-map-result-lat');
+                // We need to introduce our index to geocoder module. "cedarmaps.streets" in this case.
+                var geocoder = L.cedarmaps.geocoder('cedarmaps.streets');
+                map.on('click', function (e) {
+                    if (marker) map.removeLayer(marker);
+                    marker = new L.marker(e.latlng).addTo(map);
+                    //loading.style.visibility = 'visible';
+                    //latLngContainer.innerHTML = 'LatLng: ' + e.latlng.lat + ', ' + e.latlng.lng;
+                    resultLatLabel.innerHTML = e.latlng.lat;
+                    resultLngLabel.innerHTML = e.latlng.lng;
+                    tempLng.value = e.latlng.lng;
+                    tempLat.value = e.latlng.lat;
+                    geocoder.reverseQuery(e.latlng, function callback(err, res) {
+                        //loading.style.visibility = 'hidden';
+                        debugger;
+                        //parsedResponseContainer.style.display = 'block';
+                        //rawResponseContainer.style.display = 'block';
+                        //var fullAddress = res.result.address + (res.result.locality != "" ? " - " + res.result.locality : "");
+                        var fullAddress = res.result.locality != "" ? res.result.locality : res.result.address  /*res.result.address*/;
+                        resultAddressLabel.innerHTML = fullAddress;
+                        tempAddress.value = fullAddress;
+                        //var parsedResponse = '<ul>' +
+                        //    '<li><strong>استان:</strong> ' + res.result.province + '</li>' +
+                        //    '<li><strong>شهر:</strong> ' + res.result.city + '</li>' +
+                        //    '<li><strong>محله:</strong> ' + res.result.locality + '</li>' + //important
+                        //    '<li><strong>خیابان:</strong> ' + res.result.address + '</li>' + //important
+                        //    '<li><strong>در منطقه طرح ترافیک:</strong> ' + (res.result.traffic_zone.in_central ? 'بله' : 'خیر') + '</li>' +
+                        //    '<li><strong>در منطقه زوج و فرد:</strong> ' + (res.result.traffic_zone.in_evenodd ? 'بله' : 'خیر') + '</li>' +
+                        //    '</ul>';
+                        //var rawResponse = '<pre class="language-javascript">' + syntaxHighlight(JSON.stringify(res, undefined, 2)) + '</pre>'
+                        //parsedResponseContainer.innerHTML = parsedResponse;
+                        //rawResponseContainer.innerHTML = rawResponse;
+                    });
+                });
+                //syntaxHighlight = function (json) {
+                //    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                //    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                //        var cls = 'number';
+                //        if (/^"/.test(match)) {
+                //            if (/:$/.test(match)) {
+                //                cls = 'key';
+                //            } else {
+                //                cls = 'string';
+                //            }
+                //        } else if (/true|false/.test(match)) {
+                //            cls = 'boolean';
+                //        } else if (/null/.test(match)) {
+                //            cls = 'null';
+                //        }
+                //        return '<span class="' + cls + '">' + match + '</span>';
+                //    });
+                //}
+            });
+            $('.ui.dropdown').dropdown('setting', {
+                allowAdditions: false,
+                message: { noResults: 'داده ای وجود ندارد', count: '{count} انتخاب شده است', },
+            });
+        })
+    </script>
+    @Html.AlertNotification(TempData)
+}

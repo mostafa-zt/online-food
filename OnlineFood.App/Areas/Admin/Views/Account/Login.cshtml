@@ -1,0 +1,115 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> ورود به سیستم | مدیریت سفارش آنلاین غذا نت فودی</title>
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <environment include="Development">
+        <!-- Plugins Core Css -->
+        <link href="~/css/admin/app.css" rel="stylesheet" />
+        <!-- Custom Css -->
+        <link href="~/css/admin/style.css" rel="stylesheet" />
+        <!-- theme green -->
+        <link href="~/css/admin/theme-green.css" rel="stylesheet" />
+        <!-- farsi fonts and icons -->
+        <link href="~/css/fonts-fa.css" rel="stylesheet" />
+        <link href="~/css/fontawesome.css" rel="stylesheet" />
+        <link href="~/css/im-icon.css" rel="stylesheet" />
+        <link href="~/css/material-icon.css" rel="stylesheet" />
+        <link href="~/css/glyphicon.css" rel="stylesheet" />
+        <link href="~/css/menu-category.css" rel="stylesheet" />
+        <!-- customize CSS Style -->
+        <link href="~/css/admin/customize.css" rel="stylesheet" />
+        <link href="~/css/validation.css" rel="stylesheet" />
+        <link href="~/css/admin/extra_pages.css" rel="stylesheet" />
+        <!-- jquery JS -->
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <!-- app Js-->
+        <script src="~/js/admin/app.js"></script>
+        <!-- semantic -->
+        <link href="~/lib/semantic/semantic.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.js"></script>
+        <!-- JQuery Validate Unobtrusive -->
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/admin/adminmain.min.css" rel="stylesheet" />
+        <!-- icons and fonts -->
+        <link href="~/css/OnlineFood.min.css" rel="stylesheet"/>
+        <link href="~/css/validation.min.css" rel="stylesheet" />
+        <link href="~/css/admin/extra_pages.min.css" rel="stylesheet" />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/js/admin/app.min.js"></script>
+        <!-- semantic -->
+        <link href="~/lib/semantic/semantic.min.css" rel="stylesheet"/>
+        <script src="~/lib/semantic/semantic.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+</head>
+<body class="login-page rtl">
+    <div class="limiter">
+        <div class="container-login100 page-background">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" asp-action="login" asp-controller="account" asp-area="admin" method="post">
+                    <input type="hidden" asp-for="ReturnUrl" />
+                    <span class="login100-form-logo">
+                        <img src="~/image/logo.png" />
+                    </span>
+                    <span class="login100-form-title p-b-34 p-t-27">
+                        مدیریت سیستم سفارش آنلاین غذا <b style="color:#C8F094;">نت فودی</b>
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input class="input100" asp-for="UserName" type="text" placeholder="نام کاربری">
+                        <i class="material-icons focus-input1001">person</i>
+                        <span asp-validation-for="UserName" class="text-danger invalid label"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" asp-for="Password" type="password" placeholder="رمز عبور">
+                        <i class="material-icons focus-input1001">lock</i>
+                        <span asp-validation-for="Password" class="text-danger invalid label"></span>
+                    </div>
+                    <div class="contact100-form-checkbox">
+                        <div class="form-check">
+                            <p>
+                                <label>
+                                    <input asp-for="RememberMe" type="checkbox" checked="checked">
+                                    <span class="rememberme">مرا به خاطر بسپار</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="btn btn-outline-success btn-border-radius">
+                            ورود به سیستم
+                        </button>
+                    </div>
+                    @*<div class="text-center p-t-50">
+                            <a class="txt1" href="forgot-password.html">
+                                Forgot Password?
+                            </a>
+                        </div>*@
+                </form>
+            </div>
+        </div>
+    </div>
+    <environment include="Development">
+        <!-- Core Js -->
+        <script src="~/js/admin/admin.js"></script>
+        <!-- customize JS -->
+        <script src="~/js/admin/customize.js"></script>
+        <script src="~/js/admin/table.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/admin/adminmain.min.js"></script>
+        <script src="~/js/admin/table.min.js"></script>
+    </environment>
+    @Html.AlertNotification(TempData)
+</body>
+</html>

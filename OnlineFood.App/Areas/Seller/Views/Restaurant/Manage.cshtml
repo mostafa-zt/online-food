@@ -1,0 +1,661 @@
+﻿@model EditRestaurantViewModel
+@{
+    ViewData["Title"] = "My Restaurant";
+}
+
+@section css{
+
+   
+    <style>
+       
+        .city-areas {
+            margin: 10px 0;
+        }
+
+        /*icon for city area autocomplete*/
+        .city_area_icon:before {
+            font-family: iconsmind;
+            content: "\e8da";
+            color: #ACE266;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .working-hour-panel {
+            padding: 20px 2px;
+            display: inline-block;
+            border: 2px solid #53924C;
+            border-radius: 10px;
+            text-align: center;
+            margin: 2px 2px;
+            flex-basis: 1;
+            width: 20%;
+        }
+
+        .working-hour-description i.im {
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin-left: 5px;
+            color: #52880B;
+            font-weight: bold;
+            font-style: normal;
+            margin-right:5px;
+        }
+
+        .working-hour-description:not(:last-child) {
+            margin: 15px 0px;
+        }
+
+        .working-hour-title {
+            margin-top: -15px !important;
+            font-weight: bold;
+        }
+
+        .working-hour-open, .working-hour-close {
+            font-weight: bold;
+        }
+
+            .working-hour-open span, .working-hour-close span {
+                font-weight: normal;
+            }
+
+        #working-hour-panel-remove {
+            color: #DB2828;
+            font-weight: bold;
+            position: relative;
+            left: -70px;
+            bottom: 21px;
+            cursor: pointer;
+        }
+
+        .working-hour-section {
+            margin-top: 10px;
+        }
+
+        .working-hour-section {
+            border: 2px solid #ebf7da;
+            border-radius: 5px;
+        }
+
+        /*.empty-working-hour {
+            background: url(/image/web/working-hour.svg) center center no-repeat;
+            overflow: hidden;
+            opacity: 0.4;
+            height: 100px;
+        }*/
+
+        /*.empty-working-hour:after {
+            content: "لطفا ساعات کاری رستوران را وارد کنید";
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: red;
+            font-weight: bold;
+            top: 70px;
+            background-color: white;
+            opacity: 1;
+        }*/
+
+        .days-check-box {
+            cursor: pointer;
+        }
+
+        label.days-check-box.selected {
+            background-color: #ebf7da;
+            cursor: default;
+        }
+
+        .days-check-box.selected span.not-box-check {
+            cursor: default !important;
+        }
+
+        .restaurant-valid-link {
+            position: absolute;
+            top: 42px;
+            font-size: 12px;
+            font-family: Vazir_Thin;
+            font-weight: bold;
+            color: #35752F;
+            direction: ltr;
+            text-align: left;
+            width: 100%;
+        }
+    </style>
+}
+
+<div class="card" id="seller-restaurant-manage">
+    <div class="header header-icon">
+        <h2 dir="ltr">
+            <a href="/" class="ui green right ribbon label">
+                <i class="im im-icon-Shop icon-header-card icon-style"></i>
+                My Restaurant
+            </a>
+        </h2>
+    </div>
+    <div class="body">
+        <form asp-action="manage" asp-controller="restaurant" asp-area="seller" method="post" id="frm-restaurant-edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="CityId" />
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="All" class="ui danger message @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                <div class="header list-info">
+                    خطا
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Shop-3 prefix"></i>
+                            <input type="text" asp-for="Title" class="form-control" autocomplete="on">
+                            <label asp-for="Title" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="Title" class="text-danger invalid label"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <label asp-for="RestaurantLevelEconomyId" class="label-dropdown"></label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <select asp-for="RestaurantLevelEconomyId" class="ui search dropdown dropdownWithicon im-icon-Financial"
+                                    asp-items="ViewBag.RestaurantLevelEconomies as IEnumerable<SelectListItem>"></select>
+                            <span asp-validation-for="RestaurantLevelEconomyId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label asp-for="RestaurantTypes" class="label-dropdown"></label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <select asp-for="RestaurantTypes" class="ui search dropdown" multiple="" asp-items="ViewBag.RestaurantTypes as IEnumerable<SelectListItem>"></select>
+                            <span asp-validation-for="RestaurantTypes" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-xs-12">
+                    <label asp-for="RestaurantFoodTypes" class="label-dropdown"></label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <select asp-for="RestaurantFoodTypes" class="ui search dropdown" multiple="" asp-items="ViewBag.RestaurantFoodTypes as IEnumerable<SelectListItem>"></select>
+                            <span asp-validation-for="RestaurantFoodTypes" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seller-address">
+                <fieldset class="section">
+                    <legend class="section-header im-icon-Location-2"> Address & Contact </legend>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Map2 prefix"></i>
+                                    <input type="text" asp-for="FullAddress" class="form-control" autocomplete="off">
+                                    <label asp-for="FullAddress" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="FullAddress" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <label asp-for="CityId" class="label-dropdown"></label>
+                            <div class="form-group label-dropdown">
+                                <div class="form-line">
+                                    <select asp-for="CityId" class="ui search dropdown"
+                                            asp-items="ViewBag.Cities as IEnumerable<SelectListItem>"></select>
+                                    <span asp-validation-for="CityId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Email prefix"></i>
+                                    <input type="text" asp-for="PostalCode" class="form-control" autocomplete="off">
+                                    <label asp-for="PostalCode" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="PostalCode" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Phone prefix"></i>
+                                    <input type="text" asp-for="PhoneNumber" class="form-control" autocomplete="off">
+                                    <label asp-for="PhoneNumber" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+
+            <div id="seller-address">
+                <fieldset class="section">
+                    <legend class="section-header im-icon-Scooter"> Delivery </legend>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Scooter prefix"></i>
+                                    <input type="text" asp-for="RestaurantCourierCost" class="form-control amount ltr-direction" autocomplete="on">
+                                    <label asp-for="RestaurantCourierCost" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="RestaurantCourierCost" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="deliverytime-section box margin_top_10">
+                        <div class="row centered">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <label asp-for="FromDeliveryTime" class="label-dropdown block"></label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select asp-for="FromDeliveryTime" onchange="FetchToDeliveryTime()" id="FromDeliveryTime" class="ui search dropdown dropdownWithicon im-icon-Clock-Forward" asp-items="ViewBag.FromDeliveryTimes as IEnumerable<SelectListItem>"></select>
+                                        <span asp-validation-for="FromDeliveryTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <label asp-for="ToDeliveryTime" class="label-dropdown block"></label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select asp-for="ToDeliveryTime" class="ui search dropdown dropdownWithicon im-icon-Clock-Forward" id="ToDeliveryTime" asp-items="ViewBag.ToDeliveryTimes as IEnumerable<SelectListItem>"></select>
+                                        <span asp-validation-for="ToDeliveryTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div id="working-hour">
+                <fieldset class="section">
+                    <legend class="section-header im-icon-Clock"> Working Hours </legend>
+                    <div class="working-hour-days boxWithPadding">
+                        <div class="row centered">
+                            @foreach (var day in Model.DaysOfWeekViewModel)
+                            {
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+
+                                            <label class="days-check-box boxSub not-box-check inline-block nomargin full-width @(!day.IsEnabled ? "selected" : "")">
+                                                <input type="checkbox" class="filled-in not-box-filled-in days week-day @(!day.IsEnabled ? "disabled" : "")" name="@day.Name" data-title="@day.Title" value="@day.Value" @(!day.IsEnabled ? "disabled=\"disabled\"" : "") @(!day.IsEnabled ? "checked=\"checked\"" : "") />
+                                                <span class="not-box-filled-in">@day.Title</span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 centered">
+                                <div class="boxSub full-width text-center">
+                                    <label class="days-check-box not-box-check">
+                                        <input type="checkbox" class="filled-in not-box-filled-in days" name="AllDays" id="AllDays" value="0" />
+                                        <span class="not-box-filled-in full-width">All days</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box  margin_top_10">
+                        <div class="row centered">
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <label asp-for="StartTime" class="label-dropdown block"></label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select asp-for="StartTime" onchange="FetchEndWorkingHour()" id="StartWorkingHour" class="ui search dropdown dropdownWithicon im-icon-Clock" asp-items="ViewBag.StartTimeWorkingHours as IEnumerable<SelectListItem>"></select>
+                                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12">
+                                <label asp-for="EndTime" class="label-dropdown block"></label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select asp-for="EndTime" class="ui search dropdown dropdownWithicon im-icon-Clock" id="EndWorkingHour" asp-items="ViewBag.EndTimeWorkingHours as IEnumerable<SelectListItem>"></select>
+                                        <span asp-validation-for="EndTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
+                                <a href="javascript:void(0)" class="btn btn-medium btn-green-light btn-3e btn-round" id="add-working-hour" title="افزودن ساعت کاری"><i class="im im-icon-Alarm lnk-icon"></i>Add Working Hours</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="working-hours boxWithPadding margin_top_30">
+                        <div class="row centered">
+                            <div class="col-lg-12 @(Model.WorkingHoursViewModels == null || !Model.WorkingHoursViewModels.Any() ? "empty-working-hour" : "")" id="working-hour-content">
+                                @if (Model.WorkingHoursViewModels != null && Model.WorkingHoursViewModels.Any())
+                                {
+                                    foreach (var item in Model.WorkingHoursViewModels)
+                                    {
+                                        <div class="working-hour-panel">
+                                            <input class="input_working_hours" type="hidden" id="Input_Working-@item.Day" name="Input_Working-@item.Day" value="@item.Day" data-start="@item.Start" data-end="@item.End" data-day="@item.Day" data-val="@item.Id" />
+                                            <a onclick="RemoveWorkingHourPanel(this);"><i class="im im-icon-Close-Window" id="working-hour-panel-remove" title="Remove"></i></a>
+                                            <div class="working-hour-title working-hour-description text-center"><i class="im im-icon-Calendar-3"></i> @item.Title </div>
+                                            <div class="working-hour-open working-hour-description"><span>From&nbsp;</span> @(OnlineFood.Common.Utility.TimeManagerForWorkingHour.GetTitle(item.Start)) </div>
+                                            <div class="working-hour-close working-hour-description"><span>To&nbsp;</span> @(OnlineFood.Common.Utility.TimeManagerForWorkingHour.GetTitle(item.End)) </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="centered">
+                                        <span>Please Enter Working Hour</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- آپلود تصاویر -->
+            <div id="upload-info">
+                <fieldset class="section margin_top_10">
+                    <legend class="section-header im-icon-Upload-toCloud">
+                        <label>
+                            <span>Upload Logo</span>
+                        </label>
+                    </legend>
+                    <div id="upload-main">
+                        @*<div class="row">
+                        <div class="col-lg-12">
+                            <div class="list-info"> لطفا به موارد زیر توجه فرمایید : </div>
+                            <ul class="list-info">
+                                <li><span> تصاویر باید کاملا صاف و واضح باشد. </span></li>
+                                <li><span> تصویر  باید از انواع <strong>"jpg", "png", "jpeg"</strong> باشد. </span></li>
+                                <li><span> حجم تصویر باید حداکثر <strong>@("2000".GetPersianNumber()) مگابایت</strong> باشد. </span></li>
+                            </ul>
+                        </div>
+                    </div>*@
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+                                <div class="form-control-label">
+                                    <label asp-for="LogoFile" class="form-label upload-label"></label>
+                                </div>
+                                <div class="kv-avatar">
+                                    <div class="file-loading">
+                                        <input id="LogoFile" asp-for="LogoFile" type="file">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="row actions">
+                <div class="actions col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" id="frm-restaurant-edit-btn" class="btn btn-green btn-medium btn-3e btn-icon next-step"><i class="im im-icon-Save"></i>Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+
+
+    <script>
+
+        //submit form and push working hour data to form
+        $("#frm-restaurant-edit-btn").click(function () {
+            var working_hours = [];
+            var $this, obj ,data;
+            $('.input_working_hours').each(function (i) {
+                $this = $(this);
+                $strat = $this.attr("data-start");
+                $end = $this.attr("data-end");
+                $day = $this.attr("data-day");
+                $Id = $this.attr("data-val");
+                obj = {};
+                obj.Start = $strat;
+                obj.End = $end;
+                obj.Day = $day;
+                obj.Id = $Id;
+                obj.name = ""
+                working_hours.push(obj);
+                //data = $('#frm-restaurant-edit').serializeArray();
+                //data.push({ WorkingHoursViewModels: working_hours });
+            });
+            $.each(working_hours, function (index, entry) {
+                var start = $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", 'WorkingHoursViewModels[' + index + '].Start')
+                    .val(entry.Start);
+                var end = $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", 'WorkingHoursViewModels[' + index + '].End')
+                    .val(entry.End);
+                var day = $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", 'WorkingHoursViewModels[' + index + '].Day')
+                    .val(entry.Day);
+                var id = $("<input>")
+                    .attr("type", "hidden")
+                    .attr("name", 'WorkingHoursViewModels[' + index + '].Id')
+                    .val(entry.Id);
+                $('#frm-restaurant-edit').append(start).append(end).append(day).append(id);
+            });
+            //$.post($('#frm-restaurant-edit').prop("action"),data)
+            var frm = $('#frm-restaurant-edit').submit();
+        })
+
+        function RemoveWorkingHourPanel(e) {
+            var name = $(e).parent().find("input").attr("data-day");
+            $(".week-day[name='" + name + "']").removeAttr("disabled").prop("checked", false).parent().removeClass("selected");
+            //$(e).parent().remove();
+            var $target = $(e).parent();
+            //$target.slideToggle(500, function () { $target.remove(); });
+            $target.fadeOut("slow", function () { $target.remove(); });
+            isAllDaysCheked = false;
+            $("input.week-day").each(function (i) {
+                if (this.checked) {
+                    isAllDaysCheked = true;
+                }
+                else {
+                    isAllDaysCheked = false;
+                    $('#AllDays').prop('checked', false);
+                    return false;
+                }
+            });
+            if (isAllDaysCheked) {
+                $('#AllDays').prop('checked', true);
+            }
+
+            if ($(".working-hour-panel").length == 1) {
+                $("#working-hour-content").addClass("empty-working-hour");
+            }
+        }
+
+
+
+        function FetchEndWorkingHour() {
+            var url = '/seller/restaurant/getendworkinghour/'
+            var items;
+            var time = $("#StartWorkingHour").val();
+            if (time == -1) {
+                $("#EndWorkingHour").html('<option value="' + -1 + '">' + '-- To --' + '</option>');
+            }
+            else {
+                //items = '<option value="' + -1 + '">' + '-- زمان پایان کار --' + '</option>';
+                $.getJSON(url, { time: time }, function (response) {
+                    $.each(response.results, function (i, item) {
+                        items += "<option value=\"" + item.value + "\">" + item.text + "</option>";
+                    });
+                    $("#EndWorkingHour").html(items);
+                });
+            }
+        }
+
+        function FetchToDeliveryTime() {
+            var url = '/seller/restaurant/gettodeliverytime/'
+            var items;
+            var time = $("#FromDeliveryTime").val();
+            if (time == -1) {
+                $("#ToDeliveryTime").html('<option value="' + -1 + '">' + '-- To --' + '</option>');
+            }
+            else {
+                //items = '<option value="' + -1 + '">' + '-- تا زمان --' + '</option>';
+                $.getJSON(url, { time: time }, function (response) {
+                    $.each(response.results, function (i, item) {
+                        items += "<option value=\"" + item.value + "\">" + item.text + "</option>";
+                    });
+                    $("#ToDeliveryTime").html(items);
+                });
+            }
+        }
+
+        var map;
+        $(document).ready(function () {
+
+            // add working hour
+            $("#add-working-hour").click(function (e) {
+                var myData = {
+                    startTime: $('#StartWorkingHour').val(),
+                    endTime: $('#EndWorkingHour').val()
+                };
+                var myText = {
+                    startTime: $("#StartWorkingHour option:selected").text(),
+                    endTime: $("#EndWorkingHour option:selected").text()
+                };
+                //validate
+                if (myData.startTime == null || myData.startTime < 0 || myData.startTime == "" || myData.endTime == null || myData.endTime < 0 || myData.endTime == "") {
+                    ShowNotification('danger', "Please select working hours", "Error", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                    return false;
+                }
+                var isDaySelected = false;
+                $(".week-day:enabled").each(function (i) {
+                    if (this.checked) {
+                        //add a new working hour panel
+                        var value = $(this).prop("value").toString() ;
+                        var day = $(this).prop("name");
+                        var title = $(this).attr("data-title");
+                        var html =
+                            '<div class="working-hour-panel">' +
+                            '<input class=\"input_working_hours\" type=\"hidden" id=\"Input_Working-' + day + '" name="Input_Working-' + day + '" value="' + value + '" data-start="' + myData.startTime + '" data-end="' + myData.endTime + '" data-day="' + day + '"  data-val="0"/> ' +
+                            '<a onclick="RemoveWorkingHourPanel(this);"><i class="im im-icon-Close-Window" id="working-hour-panel-remove" title="Remove"></i></a>' +
+                            '<div class="working-hour-title working-hour-description"><i class="im im-icon-Calendar-3"></i>' + title + '</div>' +
+                            '<div class="working-hour-open working-hour-description"><span>From&nbsp;</span>' + myText.startTime + '</div>' +
+                            '<div class="working-hour-close working-hour-description"><span>To&nbsp;</span>' + myText.endTime + '</div>' +
+                            '</div>';
+                        $("#working-hour-content").removeClass("empty-working-hour").addClass('animated fadeIn').append(html);
+                        $(this).prop("disabled", "disabled").addClass("disabled");
+                        $(this).parent().addClass("selected");
+                        isDaySelected = true;
+                    }
+                });
+                if (!isDaySelected) {
+                    ShowNotification('danger', "Please select at least one day", "Warning", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                    return false;
+                }
+            })
+            $('#AllDays').change(function () {
+                if (this.checked) {
+                    $("input.days:enabled").each(function (i) {
+                        if (!this.checked) {
+                            this.checked = true
+                        }
+                    });
+                }
+                else {
+                    $("input.days:enabled").each(function (i) {
+                        if (this.checked) {
+                            this.checked = false
+                        }
+                    });
+                }
+            });
+            $('.week-day').change(function () {
+                var isAllDaysCheked = $("#AllDays").prop("checked");
+                if (!(this.checked) && isAllDaysCheked) {
+                    //var returnVal = confirm("Are you sure?");
+                    $('#AllDays').prop('checked', false);
+                    //$("#custom-restaurant-city-area").removeClass("hide").addClass("animated fadeIn");
+                    return;
+                    //$(this).prop("checked", returnVal);
+                }
+                isAllDaysCheked = false;
+                $("input.week-day").each(function (i) {
+                    if (this.checked) {
+                        isAllDaysCheked = true;
+                    }
+                    else {
+                        isAllDaysCheked = false;
+                        return false;
+                    }
+                });
+                if (isAllDaysCheked) {
+                    $('#AllDays').prop('checked', true);
+                }
+            });
+
+
+
+            $('.ui.dropdown').dropdown('setting', {
+                allowAdditions: false,
+                message: { noResults: 'There is no item', count: '{count} chose', },
+            });
+
+
+            var logoFileUrl = '@Model.LogoFileUrl';
+            $("#LogoFile").fileinput({
+                language: "en",
+                //theme: "fas",
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                showBrowse: false,
+                //showPreview: false,
+                browseOnZoneClick: true,
+                removeLabel: '',
+                //removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Delete',
+                //elErrorContainer: '#kv-avatar-errors-2',
+                //msgErrorClass: 'alert alert-block alert-danger',
+                defaultPreviewContent: '<img src="/image/img-upload-placeholder.jpg" alt="Upload Image" title="Upload Image">',
+                layoutTemplates: { main2: '{preview} {remove} {browse}' },
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
+                initialPreviewAsData: true,
+                @if (Model.LogoFileUrl !=null)
+                {
+                    <text>
+                          initialPreview: [logoFileUrl],
+                          initialPreviewConfig: [
+                                {
+                          caption: '@Model.LogoFileName',
+                                  width: '120px',
+                                  url: '/seller/restaurantimage/delete/', // server delete action
+                                  key: 1,
+                                  extra: { id: @Model.LogoFileId }
+                            }
+                          ]
+                    </text>
+                }
+            });
+        })
+
+    </script>
+    @Html.AlertNotify(TempData)
+}

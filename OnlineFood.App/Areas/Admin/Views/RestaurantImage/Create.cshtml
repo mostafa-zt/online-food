@@ -1,0 +1,90 @@
+﻿@model CreateRestaurantImageViewModel
+@{
+    ViewData["Title"] = "آپلود تصویر";
+}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <i class="im im-icon-Folder-Pictures icon-header-card"></i>
+                    ویرایش <strong>نوع غذا</strong>
+                </h2>
+            </div>
+            <div class="body">
+                <form asp-action="create" asp-controller="restaurantimage" asp-area="admin" method="post" id="frm-restaurantimage-create" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="RestaurantId" />
+                    <input type="hidden" asp-for="ReturnUrl" />
+                    <div class="row clearfix">
+                        <div class="col-lg-6">
+                            <div class="list-info"> لطفا به موارد زیر توجه فرمایید : </div>
+                            <ul class="list-info">
+                                <li><span> تصاویر باید کاملا صاف و واضح باشد. </span></li>
+                                <li><span> قالب تصویر غذا را می توانید از <a href="javascript:void(0);" class="lnk-effect">این لینک</a> تهیه کنید . </span></li>
+                                <li><span> کیفیت نصویر در فروش شما تاثیر دارد </span></li>
+                                <li><span> تصویر عذا باید از انواع <strong>"jpg", "png", "jpeg"</strong> باشد. </span></li>
+                                <li><span> حجم تصویر غذا باید حداکثر <strong>@("2000".GetPersianNumber()) مگابایت</strong> باشد. </span></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-xs-12 text-center">
+                            <div class="form-control-label centered">
+                                <i class="im im-icon-Upload-toCloud icon-style"></i>
+                                <label asp-for="ImageFile" class="form-label upload-label"></label>
+                            </div>
+                            <div class="kv-avatar">
+                                <div class="file-loading">
+                                    <input id="ImageFile" asp-for="ImageFile" type="file">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="actions col-md-10 col-sm-8 col-xs-7">
+                            <a href="/admin/restaurantimage?restaurantId=@Model.RestaurantId" class="btn btn-outline-info"><i class="fa fas fa-arrow-right"></i>بازگشت</a>
+                            <button type="submit" class="btn btn-outline-success"><i class="fa fas fa-save"></i>ثبت</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $("#ImageFile").fileinput({
+                language: "fa",
+                //theme: "fa",
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                showBrowse: false,
+                //showPreview: false,
+                browseOnZoneClick: true,
+                removeLabel: '',
+                //removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'حذف',
+                //elErrorContainer: '#kv-avatar-errors-2',
+                //msgErrorClass: 'alert alert-block alert-danger',
+                defaultPreviewContent: '<img src="/image/item/upload-placeholder.jpg" alt="بارگزاری تصویر" title="بارگزاری تصویر">',
+                layoutTemplates: { main2: '{preview} {remove} {browse}' },
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
+                @*initialPreviewAsData: true,
+                @if (Model.ImageFileUrl!=null)
+                {
+                    <text>
+                           initialPreview: [imageFileUrl],
+                           initialPreviewConfig: [
+                               {
+                           caption: '@Model.ImageFileName',
+                                   width: '120px',
+                                   url: '/admin/restaurantimage/remove/', // server delete action
+                                   key: 2,
+                                   extra: { id: @Model.ImageFileId }
+                           }
+                           ]
+                    </text>
+                }*@
+            });
+    </script>
+}

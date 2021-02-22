@@ -1,0 +1,78 @@
+﻿@model SearchViewModel
+@*<form action="/restaurants/" method="post" id="frm-search-restaurant">*@
+
+<input type="hidden" asp-for="CityTitleEng" id="HF_city-title-english" />
+<input type="hidden" asp-for="CityAreaTitleEng" id="HF_cityarea-title-english" />
+<input type="hidden" asp-for="FoodTitleFriendlyUrl" id="HF_food-title-friendly-url" />
+
+
+
+<div class="c-header__btn-container" style="position:relative;">
+    <div class="c-header__btn-address-container centered">
+        <a href="javascript:void(0);" class="c-header__btn-address js-dropdown-toggle">
+            <i class="im im-icon-Location-2 custom-search-address-icon"></i>
+            <div class="custom-search-address-title">
+                در محدوده <b id="custom-search-address-title-cityarea"> @Model.Location </b>
+            </div>
+        </a>
+        <div class="c-header__address-dropdown js-dropdown-menu" style="display: none;">
+            <div class="c-header__tab-container">
+                <ul id="tabs">
+                    <li data-tab="cityarea" class="selected">
+                        <a href="#"> انتخاب محله</a>
+                    </li>
+                    <li data-tab="myaddress">
+                        <a href="#"> آدرس های من</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-container" id="cityarea">
+                <div class="tab-container-cityarea-header">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-xs-12 city" style="margin-top: 13px;">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select asp-for="CityId" class="ui search dropdown" id="city-dropdown-search" asp-items="ViewBag.Cities as IEnumerable<SelectListItem>"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-xs-12" style="text-align: right;">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Location-2 prefix"></i>
+                                    <input type="text" name="searchcityarea" id="cityarea-txt-search" class="form-control" placeholder="جستجوی نام محله در رشت" autocomplete="on">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-container-cityarea-content" style="height:300px">
+                    <div id="tab-container-cityarea-list">
+                        <ul id="cityarea-list">
+                            @foreach (var item in Model.ListCityAreaViewModels)
+                            {
+                                <li class="cityarea-list-item @(item.Selected ? "selected" : "")">
+                                    @*<a href="javascript:void(0);" class="cityarea-item" data-cityareaId="@item.CityAreaId" data-cityareaTitle="@item.CityAreaTitle"
+                                        data-cityareaTitleEng="@item.CityAreaTitleEng" data-cityid="@item.CityId" data-cityTitle="@item.CityTitle" data-cityTilteEng="@item.CityTitleEng">@item.CityAreaTitle</a>*@
+                                    <a href="javascript:void(0);" class="cityarea-item" data-val="@item.Value" data-title="@item.Title">@item.Title</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="custom-search-input">
+    <div class="input-group full-width">
+        <input type="text" name="searchfoodcat" id="restaurant-foodcategory-txt-search" class="search-query" placeholder="نام رستوران یا غذا">
+        <span class="input-group-btn search">
+            <button type="button" id="search-main-btn" class="btn btn-green btn-3e btn-icon"><i class="im im-icon-Magnifi-Glass2"></i>جستجو</button>
+        </span>
+    </div>
+</div>
+@*</form>*@
+
+
+

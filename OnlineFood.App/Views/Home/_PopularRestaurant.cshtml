@@ -1,0 +1,39 @@
+﻿@model List<PopularRestaurantViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <a href="@item.Link">
+            <div class="recipes-review">
+                <div class="recipes-img">
+                    <div class="recipes-img-overlay"></div>
+                    <div class="recipes-img-cover" style="background-image:url(@item.HeaderUrl)"></div>
+                    <img class="recipes-img-logo" src="@item.LogoUrl" />
+                    <div class="favorite active"><i class="fa fa-heart red"></i></div>
+                </div>
+                <div class="recipes-content">
+                    <h3>@item.Title</h3>
+                    <div class="restaurant-cityarea">
+                        <i class="im im-icon-Map-Marker2 icon-style"></i>
+                        <span class="restaurant-cityarea-value">@item.CityArea</span>
+                    </div>
+                    <div class="ratings">
+                        <ul class="stars">
+                            <li class="active"><i class="fa fa-star"></i></li>
+                            <li class="active"><i class="fa fa-star"></i></li>
+                            <li class="active"><i class="fa fa-star"></i></li>
+                            <li class="active"><i class="fa fa-star"></i></li>
+                            <li class="active"><i class="fa fa-star"></i></li>
+                        </ul><!-- End stars -->
+                        <span>@((item.RateCount).GetPersianNumber()) نظر</span>
+                    </div>
+                    <div class="comments pull-left">
+                        <i class="im im-icon-Speach-BubbleDialog icon-style"></i>
+                        <div class="comments-value">@((item.UserComments).GetPersianNumber()) پیام</div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}
+

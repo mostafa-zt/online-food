@@ -1,0 +1,139 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+@section css{
+
+    <style>
+        #seller-account-edit .header-icon::after {
+            position: absolute;
+            content: "";
+            background: url(/image/item/user-chef.svg) top center no-repeat;
+            left: 50%;
+            top: -40px;
+            margin-left: -25px;
+            padding: 50px;
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        .ui.modal input#UserConfirmPhoneNumberToken {
+            text-align: center;
+            font-size: 2rem;
+            height: 3rem;
+        }
+    </style>
+}
+
+<div class="card" id="seller-account-edit">
+    <div class="header">
+        <h2 dir="ltr">
+            <a class="ui green right ribbon label">
+                <i class="im im-icon-User icon-header-card icon-style"></i>
+                My Profile
+            </a>
+        </h2>
+    </div>
+    <div class="body">
+        <form asp-action="edit" asp-controller="profile" asp-area="seller" method="post" id="frm-account-edit">
+
+            <div asp-validation-summary="All" class="ui danger message @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                <i class="material-icons">error</i>
+                <div class="header list-info">
+                    خطا
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Chef prefix"></i>
+                            <input type="text" asp-for="Firstname" class="form-control" autocomplete="on">
+                            <label asp-for="Firstname" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="Firstname" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Chef prefix"></i>
+                            <input type="text" asp-for="Lastname" class="form-control" autocomplete="on">
+                            <label asp-for="Lastname" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <label asp-for="CityId" class="label-dropdown"></label>
+                    <div class="form-group label-dropdown">
+                        <div class="form-line">
+                            <select asp-for="CityId" class="ui search dropdown"
+                                    asp-items="ViewBag.Cities as IEnumerable<SelectListItem>"></select>
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Location-2 prefix"></i>
+                            <input type="text" asp-for="FullAddress" class="form-control ltr-direction" autocomplete="on">
+                            <label asp-for="FullAddress" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="FullAddress" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Email prefix"></i>
+                            <input type="text" asp-for="ZipCode" class="form-control ltr-direction" autocomplete="on">
+                            <label asp-for="ZipCode" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Phone-2 prefix"></i>
+                            <input type="text" asp-for="PhoneNumber" class="form-control ltr-direction" autocomplete="on">
+                            <label asp-for="PhoneNumber" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <i class="im im-icon-Email prefix"></i>
+                            <input type="email" asp-for="Email" class="form-control ltr-direction" autocomplete="on">
+                            <label asp-for="Email" class="form-label"></label>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row actions">
+                <div class="actions col-md-12 col-sm-12 col-xs-12">
+                    <button type="submit" id="frm-account-edit-submit-btn" class="btn btn-green btn-medium btn-3e btn-icon next-step"><i class="im im-icon-Save"></i>Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+        })
+    </script>
+    @Html.AlertNotification(TempData)
+}

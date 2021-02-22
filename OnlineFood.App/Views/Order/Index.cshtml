@@ -1,0 +1,930 @@
+﻿
+@{
+    ViewData["Title"] = "انتخاب آدرس و پرداخت";
+}
+<style>
+    #seller-restaurant-manage .header-icon::after {
+        position: absolute;
+        content: "";
+        background: url(/image/web/chef-user.svg) top center no-repeat;
+        /*width: 113px;
+              height: 105px;*/
+        left: 50%;
+        top: -40px;
+        margin-left: -25px;
+        /* border-radius: 50%; */
+        padding: 50px;
+        opacity: 0.7;
+        z-index: 1;
+    }
+
+    /*#region sub header */
+
+    #img-overlay-sub-header-menu {
+        height: 300px;
+    }
+
+    #sub-header-menu {
+        text-align: unset !important;
+    }
+
+    .logo-holder img {
+        border: 3px solid #35752f;
+        border-radius: 10px;
+    }
+
+    .logo-section {
+        position: relative;
+        display: inline-block;
+        right: 180px;
+        top: 115px;
+        z-index: 2;
+    }
+
+    .info-section {
+        display: inline-block;
+        right: 200px;
+        top: 115px;
+        z-index: 2;
+    }
+
+    .logo-holder {
+        width: 149px;
+        height: 142px;
+    }
+
+    .stars {
+        display: inline-block;
+    }
+
+    .comments {
+        display: inline-block;
+        border-radius: 5px;
+        background-color: #7daf74;
+        padding: 2px 5px;
+        cursor: pointer;
+        background-color: #e6ece5;
+        color: #52880B;
+        opacity: 0.6;
+    }
+
+        .comments i.im {
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+
+
+    .deliverytime-title {
+        /* display: block; */
+        display: block;
+        font-size: 10px;
+        font-size: 0.7rem;
+        color: #52880B;
+        font-weight: 400;
+    }
+
+    .deliverytime {
+        /* display: block; */
+        font-size: 14px;
+        font-size: 0.975rem;
+        overflow: hidden;
+        height: 100%;
+        min-width: 100px;
+        text-align: right;
+        font-weight: 400;
+        /* z-index: 11; */
+        text-align: center;
+        /* color: white; */
+    }
+
+
+    .btn-style {
+        /* display: inline-block; */
+        /* width: 200px; */
+        border: 1px solid;
+        vertical-align: middle;
+        padding: 9px 29px;
+        border-radius: 10px;
+        background-color: #e6ece5;
+        color: #52880B;
+        z-index: 2;
+        position: relative;
+        text-align: center;
+        /* top: 102px; */
+        opacity: 0.7;
+        margin: 2px 0px;
+    }
+
+        .btn-style i.im {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            font-size: 33px;
+            right: -12px;
+        }
+
+
+    #restaurant-ready-section-alarm {
+        animation-duration: 1.2s;
+        animation-timing-function: ease-in;
+        animation-iteration-count: infinite;
+    }
+
+    /*#restaurant-ready-section-alarm {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Creepster';
+        background: #000;
+    }*/
+
+    #back-btn {
+        top: 55px;
+        display: inline-block;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        #back-btn:hover {
+            background-color: #b2b9b2 !important;
+            color: black;
+        }
+
+    #restaurant-ready-section-alarm {
+        position: relative;
+        /* text-transform: uppercase; */
+        /* letter-spacing: 6px; */
+        font-size: 1.0rem;
+        /* font-weight: 900; */
+        text-decoration: none;
+        background: #19960e;
+        color: white;
+        opacity: 1;
+        display: inline-block;
+        background-size: 120% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
+        -ms-background-clip: text;
+        -ms-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        /* background-image: linear-gradient(45deg, #40bc00, #164b00, #be1717, #be1717); */
+        animation: .8s shakee infinite alternate;
+    }
+
+    /*#endregion */
+
+    /*#region order invoice */
+
+    .order-invoice-header {
+        background-color: #ebf7da;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 15px 0;
+    }
+
+    .order-invoice-header-title {
+        font-weight: bold;
+        display: inline-block;
+    }
+
+        .order-invoice-header-title i.im {
+            vertical-align: middle;
+            font-size: 30px;
+            color: #6FAB20;
+        }
+
+    .order-invoice-header::after {
+        width: 100%;
+        height: 2px;
+        background-color: aquamarine;
+        display: block;
+    }
+
+    .order-invoice-edit {
+        display: inline-block;
+        font-size: 12px;
+        padding-left: 5px;
+        width: 50%;
+        text-align: left;
+    }
+
+        .order-invoice-edit i.im {
+            font-weight: bold;
+            margin-left: 5px;
+            font-size: 15px;
+            vertical-align: middle;
+        }
+
+    .tooltip-text-action {
+        top: -80px !important;
+    }
+
+    .order-invoice-restaurant:after {
+        width: 100%;
+        height: 2px;
+        background-color: #d0d8cf;
+        display: block;
+        content: "";
+    }
+
+    .order-invoice-price {
+        font-size: 15px;
+        display: inline-block;
+        line-height: 3;
+    }
+
+    .restaurant-logo {
+        width: 63px;
+        height: 59px;
+        border-radius: 10px;
+        border: 1px solid #35752f;
+        margin: 2px 5px;
+        bottom: 10px;
+        position: relative;
+    }
+
+    .restaurant-title {
+        display: inline-block;
+        font-size: 18px;
+        color: #52880B;
+    }
+
+    .order-invoice-counter {
+        display: inline-block;
+        float: left;
+        top: 16px;
+    }
+
+    .basket-counter {
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        color: #fff;
+        background-color: #78AD73;
+        width: 25px;
+        height: 25px;
+        vertical-align: middle;
+        border-radius: 50%;
+        margin-left: 2px;
+        padding: 2px;
+    }
+
+    .basket-counter-value {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+    .restaurant-info {
+        display: inline-block;
+    }
+
+    .order-invoice-manage {
+        display: inline-block;
+        float: left;
+        text-align: left;
+        line-height: 3;
+    }
+
+    .order-invoice-price-section  {
+        padding: 25px 8px;
+        font-size: 15px;
+    }
+
+    .order-invoice {
+        border: 2px solid #b2b9b2;
+        border-radius: 10px;
+        background-color: white;
+        min-height: 332px;
+    }
+
+    .order-invoice-item {
+        margin: 10px 5px;
+        border: 1px solid #6FAB20;
+        padding: 5px 5px;
+        border-radius: 5px;
+        background-color: #e4e4e4;
+    }
+
+    .ordrercart-remove {
+        float: left;
+        color: #DB2828;
+    }
+
+    .order-invoice-detail:after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-color: #d0d8cf;
+        display: block;
+    }
+
+    .accept-order {
+        padding: 5px 5px;
+    }
+
+    #overlay-order-invoice-close {
+        height: 332px;
+    }
+
+    .order-invoice-sidebar {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .order-invoice-close {
+        z-index: 7;
+        position: absolute;
+        top: 100px;
+        color: white;
+        right: 25%;
+    }
+
+        .order-invoice-close i.im {
+            display: block;
+            text-align: center;
+            font-size: 5.5rem;
+            color: white;
+        }
+
+    .order-invoice-body-section.empty .order-invoice-empty {
+        color: #DB2828;
+    }
+
+    .order-invoice-empty i.im {
+        font-size: 11.5rem;
+    }
+
+    .order-invoice-empty span {
+        display: block;
+        text-align: center;
+    }
+
+    .order-invoice-price-item {
+        padding: 10px 2px;
+    }
+
+    .order-invoice-final-price {
+        font-weight: bold;
+    }
+    .order-invoice-final-price-value {
+        font-size: 16px;
+    }
+    /*#endregion */
+    /*#region address */
+    .address-item {
+        border: 2px solid #dbdbdb;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        background-color: #F0F0F0;
+    }
+
+
+        .address-item:hover {
+            box-shadow: rgba(0,0,0,.1) 0 0 25px 3px;
+        }
+
+    .address-selection, .user-credit, .final-price {
+        margin: 10px 5px;
+        border: 1px solid #6FAB20;
+        padding: 5px 5px;
+        border-radius: 5px;
+        background-color: #e4e4e4;
+    }
+
+    .address-content {
+        padding: 7px;
+    }
+
+    .address-title {
+        display: inline-block;
+        padding: 5px 30px;
+        border: 1px solid;
+        border-radius: 5px;
+        background-color: #c1dcbc;
+    }
+
+    .address-value {
+        display: inline-block;
+    }
+
+    .address-action {
+        margin-top: 5px;
+        padding: 10px;
+    }
+
+        .address-action:before {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background-color: #eaeae8;
+            display: block;
+        }
+
+    .address-action-btn {
+        float: left;
+    }
+
+    .btn-icon-sm {
+        font-size: 1.8rem;
+    }
+
+
+
+    /*#endregion */
+
+    /*#region price credit */
+
+    .user-credit-value {
+        float: left;
+    }
+
+    .verify-discount-code {
+        line-height: 6;
+    }
+
+    .final-price-value {
+        font-weight: bold;
+        float: left;
+        margin-left: 35px;
+        color: #53924C;
+    }
+
+    /*#endregion */
+
+    /*#region bank */
+
+    .bank {
+        border: 2px solid #dbdbdb;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        background-color: #F0F0F0;
+        padding: 5px;
+    }
+
+    .bank-logo {
+        width: 45px;
+        height: 40px;
+        margin-left: 10px;
+    }
+
+    .bank-item {
+        border-radius: 50px;
+        border: 1px dashed;
+        width: 210px;
+        padding: 2px 5px;
+        margin: 5px 0px;
+    }
+
+    /*#endregion */
+
+    /*#region ribbon */
+
+    .ribbon-success {
+        background: #78AD73;
+    }
+
+    .ribbon-danger {
+        background: #e46a76;
+    }
+
+    .ribbon-info {
+        background: #03a9f3;
+    }
+
+    .ribbon-primary {
+        background: #fb9678;
+    }
+
+    .ribbon-default {
+        background: #343a40;
+    }
+
+    .ribbon-right {
+        left: auto;
+        right: -2px;
+    }
+
+    .ribbon {
+        padding: 0 10px;
+        height: 30px;
+        line-height: 30px;
+        clear: left;
+        position: absolute;
+        /*top: 12px;
+        left: -2px;*/
+        color: #fff;
+    }
+
+    .ribbon-bookmark.ribbon-right.ribbon-danger::before {
+        border-right-color: #e46a76;
+        border-left-color: transparent;
+    }
+
+    .ribbon-bookmark.ribbon-danger::before {
+        border-color: #e46a76;
+        border-right-color: rgb(228, 106, 118);
+        border-left-color: rgb(228, 106, 118);
+        border-right-color: transparent;
+    }
+
+    .ribbon-bookmark.ribbon-right.ribbon-success::before {
+        border-right-color: #78AD73;
+        border-left-color: transparent;
+    }
+
+    .ribbon-bookmark.ribbon-success::before {
+        border-color: #78AD73;
+        border-right-color: #78AD73;
+        border-left-color: #78AD73;
+        border-right-color: transparent;
+    }
+
+
+    .ribbon-bookmark.ribbon-right::before {
+        right: 100%;
+        left: auto;
+        border-right: 15px solid #343a40;
+        border-right-color: rgb(52, 58, 64);
+        border-left: 10px solid transparent;
+        border-left-color: transparent;
+    }
+
+    .ribbon-bookmark::before {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        display: block;
+        width: 0;
+        height: 0;
+        content: '';
+        border: 15px solid #343a40;
+        border-top-color: rgb(52, 58, 64);
+        border-right-color: rgb(52, 58, 64);
+        border-right-style: solid;
+        border-right-width: 15px;
+        border-bottom-color: rgb(52, 58, 64);
+        border-left-color: rgb(52, 58, 64);
+        border-left-style: solid;
+        border-left-width: 15px;
+        border-right: 10px solid transparent;
+    }
+
+    /*#endregion */
+
+
+    .card {
+        margin: 2.5rem 0 1rem 0 !important;
+    }
+  
+</style>
+<!-- SubHeader -->
+<section class="parallax-window" id="short">
+    <div id="sub-header-menu" class="sub-header" style="background-image:url(/image/web/main/test/fast-food_1537379346.jpeg);">
+        <div class="img-overlay" id="img-overlay-sub-header-menu"></div>
+        <div class="container" id="sub_content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo-section pull-right">
+                        <div class="ratings">
+                            <ul class="stars">
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                                <li class="active"><i class="fa fa-star"></i></li>
+                            </ul><!-- End stars -->
+                            <span class="comments">@((28).GetPersianNumber()) نظر <i class="im im-icon-User"></i></span>
+                        </div>
+                        <div class="logo-holder">
+                            <img src="~/image/web/main/test/logo--restaurantProfile--delzafe-res.png" />
+                        </div>
+                    </div>
+                    <div class="info-section col-lg-7">
+                        <h1 id="restaurant-title">رستوران دل ضعفه</h1>
+                        <div class="address">
+                            <i class="im im-icon-Location-2 icon-style"></i>
+                            رشت-گلسار-خیابان توحید
+                        </div>
+                    </div>
+                    <div class="pull-left">
+                        <div class="deliverytime-section btn-style">
+                            <i class="im im-icon-Scooter"></i>
+                            <b class="deliverytime">
+                                38 تا 72 دقیقه
+                                <small class="deliverytime-title">میانگین زمان ارسال</small>
+                            </b>
+                        </div>
+                        <div class="restaurant-ready-section btn-style">
+                            <div class="restaurant-ready flashit">
+                                <i class="im im-icon-Pointer"></i>
+                                آماده سفارش هستیم
+                            </div>
+                        </div>
+                        <a class="btn-style full-width" id="back-btn">
+                            <i class="im im-icon-Back"></i>
+                            <b class="">بازگشت</b>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- End row -->
+        </div><!-- End container -->
+    </div>
+</section>
+<!-- End SubHeader -->
+<div class="container margin_50">
+    <!-- Breadcrumb -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="breadcrumb-section">
+                <div class="ui tiny breadcrumb">
+                    <a class="breadcrumb-section">خانه</a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a class="breadcrumb-section">رستوران های رشت </a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a class="breadcrumb-section">رستوران های گلسار</a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a class="breadcrumb-section active">رستوران دل ضعفه</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- address and payment form -->
+        <div class="col-lg-9">
+            <form asp-action="edit" asp-controller="restaurant" asp-area="seller" method="post" id="frm-restaurant-edit" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="ui danger message @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                    <div class="header list-info">
+                        خطا
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card" id="seller-restaurant-manage">
+                            <div class="header header-icon">
+                                <h2 dir="ltr">
+                                    <a href="/" class="ui green right ribbon label">توضیح سفارش</a>
+                                </h2>
+                            </div>
+                            <div class="body">
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-xs-12">
+                                        <div class="form-group form-float">
+                                            <div class="form-line tooltip-input">
+                                                <i class="im im-icon-Shop-3 prefix"></i>
+                                                <input type="text" class="form-control" autocomplete="on">
+                                                <label class="form-label">توضیح سفارش</label>
+                                                @*<ul class="tooltip-text">
+                                                        <li class="list-item">
+                                                            نام تنها شامل حروف فارسی و اعداد میباشد
+                                                        </li>
+                                                        <li class="list-item">
+                                                            حداکثر کاراکتر 25 میباشد
+                                                        </li>
+                                                    </ul>*@
+                                            </div>
+                                            <span class="text-danger invalid label"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card" id="seller-restaurant-manage">
+                            <div class="header header-icon">
+                                <h2 dir="ltr">
+                                    <a href="/" class="ui green right ribbon label">انتخاب آدرس</a>
+                                </h2>
+                            </div>
+                            <div class="body">
+
+                                <div class="address-section">
+
+                                    <div class="address-item">
+                                        <div class="address-content">
+                                            <div class="address-selection">
+                                                <p>
+                                                    <label>
+                                                        <input type="checkbox" class="filled-in" checked="checked" />
+                                                        <span class="full-width">سفارش غذای من به این آدرس ارسال بشه</span>
+                                                    </label>
+                                                </p>
+                                            </div>
+                                            <div class="address-title">
+                                                <p>خانه</p>
+                                            </div>
+                                            <div class="address-value">
+                                                <b>رشت</b>- گلسار - خیابان توحید
+                                            </div>
+                                        </div>
+                                        <div class="address-action">
+                                            <div class="ribbon ribbon-bookmark ribbon-right ribbon-success">
+                                                این آدرس در محدوده پیک رستوران می باشد
+                                            </div>
+                                            <button class="btn btn-green address-action-btn"><i class="im im-icon-Edit btn-icon-sm"></i></button>
+                                            <button class="btn btn-red address-action-btn"><i class="im im-icon-Trash-withMen btn-icon-sm"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card" id="seller-restaurant-manage">
+                            <div class="header header-icon">
+                                <h2 dir="ltr">
+                                    <a href="/" class="ui green right ribbon label"> انتخاب بانک و پرداخت </a>
+                                </h2>
+                            </div>
+                            <div class="body">
+
+                                <div class="row">
+                                    <div class="col-lg-5 col-md-5 col-xs-12">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <div class="user-credit">
+                                                    <label>
+                                                        <input type="checkbox" class="filled-in" />
+                                                        <span class="full-width">
+                                                            <b class="user-credit-value left-label">
+                                                                @(((decimal)1300).GetPersianNumber())
+                                                            </b>
+                                                            استفاده از موجودی حساب
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-xs-12">
+                                        <div class="form-group form-float">
+                                            <div class="form-line">
+                                                <i class="im im-icon-Gift-Box prefix"></i>
+                                                <input type="text" class="form-control" autocomplete="off">
+                                                <label class="form-label">کد تخفیف</label>
+                                            </div>
+                                            <span class="text-danger invalid label"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-xs-4">
+                                        <div class="verify-discount-code">
+                                            <button class="btn btn-large btn-round btn-green-light btn-3e">تایید کد<i class="im im"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="final-price">
+                                            <span class="final-price-title">مبلغ قابل پرداخت:</span>
+                                            <span class="final-price-value">
+                                                @(((decimal)17000).GetPersianNumber())
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="bank">
+                                            <div class="bank-title">پرداخت از طریق کلیه کارت های بانکی عضو شبکه شتاب </div>
+                                            <div class="bank-item">
+                                                <img class="bank-logo" ng-src="https://payment.iiventures.com/public/img/gateways/newSaman.png" src="https://payment.iiventures.com/public/img/gateways/newSaman.png">
+                                                <label>
+                                                    <input type="checkbox" class="filled-in" />
+                                                    <span> بانک سامان </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- order invoice -->
+        <aside class="col-md-3 sidebar sticky-sidebar order-invoice-sidebar">
+            <div class="theiaStickySidebar">
+                <div class="order-invoice">
+                    @*<div class="img-overlay" id="overlay-order-invoice-close"></div>
+                        <div class="order-invoice-close">
+                            <i class="im im-icon-Lock"></i>
+                            <span>رستوارن بسته است</span>
+                        </div>*@
+                    <diV class="order-invoice-header">
+                        <div class="order-invoice-header-title half-WidthRight">
+                            <i class="im im-icon-Full-Basket"></i>
+                            فاکتور سفارش
+                        </div>
+                        <div class="order-invoice-edit">
+                            <a class="lnk-effect order-invoice-edit-btn"><i class="im im-icon-Edit"></i>ویرایش سبد خرید</a>
+                        </div>
+                    </diV>
+
+                    <div class="order-invoice-restaurant">
+                        <div class="restaurant-info">
+                            <img src="~/image/web/main/test/logo--restaurantProfile--delzafe-res.png" class="restaurant-logo" />
+                            <div class="restaurant-title">رستوران دل ضعفه</div>
+                        </div>
+                        <div class="order-invoice-counter">
+                            <div class="inline-block basket-counter">
+                                <span class="basket-counter-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-invoice-body-section full-width">
+                        <div class="order-invoice-detail">
+                            <div class="order-invoice-item">
+                                <i class="im im-icon-Close ordrercart-remove"></i>
+                                <div class="order-invoice-food">
+                                    پیتزا پپرونی
+                                </div>
+                                <div class="order-invoice-price half-width">
+                                    @((16000).GetPersianNumber()) تومان
+                                </div>
+                                <div class="order-invoice-manage">
+                                    <span>+</span><span>-</span>
+                                </div>
+                            </div>
+                            <div class="order-invoice-item">
+                                <i class="im im-icon-Close ordrercart-remove"></i>
+                                <div class="order-invoice-food">
+                                    ساندویچ
+                                </div>
+                                <div class="order-invoice-price half-width">
+                                    @((16000).GetPersianNumber()) تومان
+                                </div>
+                                <div class="order-invoice-manage">
+                                    <span>+</span><span>-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-invoice-price-section fullWidth">
+                            <div class="order-invoice-price-item full-width">
+                                <div class="half-width text-right inline-block">
+                                    مبلغ سفارش
+                                </div>
+                                <div class="half-width text-left order-invoice-total-price inline-block left">
+                                    @((16000).GetPersianNumber()) تومان
+                                </div>
+                            </div>
+                            <div class="order-invoice-price-item full-width">
+                                <div class="half-width text-right inline-block">
+                                    هزینه بسته بندی
+                                </div>
+                                <div class="half-width text-left order-invoice-packaging-post inline-block left">
+                                    @((16000).GetPersianNumber()) تومان
+                                </div>
+                            </div>
+                            <div class="order-invoice-price-item full-width">
+                                <div class="half-width text-right inline-block">
+                                    ارزش افزوده
+                                </div>
+                                <div class="half-width text-left order-invoice-vat inline-block left">
+                                    @((16000).GetPersianNumber()) تومان
+                                </div>
+                            </div>
+                            <div class="order-invoice-price-item full-width order-invoice-final-price">
+                                <div class="half-width text-right inline-block">
+                                    مبلغ قابل پرداخت
+                                </div>
+                                <div class="half-width text-left order-invoice-final-price-value inline-block left">
+                                    @((16000).GetPersianNumber()) تومان
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="order-invoice-body-section full-width empty centered">
+                            <div class="order-invoice-empty">
+                                <i class="im im-icon-Full-Basket"></i>
+                                <span> سبد خرید خالی است </span>
+                            </div>
+                        </div>*@
+
+                   
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

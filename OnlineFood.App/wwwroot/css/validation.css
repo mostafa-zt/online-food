@@ -1,0 +1,35 @@
+﻿/* styles for validation helpers */
+.form-control.input-validation-error {
+    border: 1px solid #f81717 !important;
+    border-radius: 5px !important;
+}
+.text-danger {
+    display: inherit;
+}
+
+/*.field-validation-valid {
+    display: none;
+}
+
+
+input.input-validation-error,
+textarea.input-validation-error,
+select.input-validation-error {
+    border: 1px solid #CD0A0A;
+}
+
+div.has-error ul.select2-choices {
+    border-color: rgb(185, 74, 72) !important;
+}
+
+.validation-summary-errors {
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.validation-summary-errors {
+    display: block;
+}*/

@@ -1,0 +1,98 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<!--<![endif]-->
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <base href="/">
+    <title> Online Food | Page Not Found </title>
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!">
+    <meta name="description" content="Online Food" />
+    <meta name="keywords" content="Online Food" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- logo icon -->
+    <link rel="shortcut icon" href="images/favicon.png">
+    <style>
+        .page-not-found {
+            background-color: #50e42654;
+            width: 40%;
+            height: 244px;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
+    <environment include="Development">
+        <!--  ------ usermain -----   -->
+        <link href="~/css/user/bootstrap.css" rel="stylesheet" />
+        <!-- Main Style -->
+        <link href="~/css/user/style.css" rel="stylesheet" />
+        <!-- customize CSS Style -->
+        <link href="~/css/user/customize.css" rel="stylesheet" />
+        <link href="~/css/user/base.css" rel="stylesheet" />
+        <link href="~/css/user/responsive.css" rel="stylesheet" />
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+        <link href="~/css/fontawesome.css" rel="stylesheet" />
+        <link href="~/css/im-icon.css" rel="stylesheet" />
+        <link href="~/css/material-icon.css" rel="stylesheet" />
+        <link href="~/css/glyphicon.css" rel="stylesheet" />
+        <link href="~/css/menu-category.css" rel="stylesheet" />
+        <!-- bootstrap file input uploader CSS -->
+        <link href="~/lib/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+        <!-- JQuery JS -->
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic css js -->
+        <link href="~/lib/semantic/semantic.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.js"></script>
+        <!-- JQuery Validate Unobtrusive -->
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <link href="~/css/user/usermain.min.css" rel="stylesheet" />
+        <!-- icons and fonts -->
+        <link href="~/css/OnlineFood.min.css" rel="stylesheet" />
+        <!-- bootstrap file input uploader CSS -->
+        <link href="~/lib/bootstrap-fileinput-master/css/fileinput.min.css" rel="stylesheet" />
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic -->
+        <link href="~/lib/semantic/semantic.min.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+</head>
+<body class="sticky logo-white submenu-closed theme-green">
+    <!-- wrap Page -->
+    <div id="wrap">
+        <div class="overlay"></div>
+        <div class="container-login page-background">
+            <div class="page-not-found centered">
+                Page Not Found!
+            </div>
+        </div>
+
+    </div>
+    <environment include="Development">
+        <!-- Core Js -->
+        @*<script src="~/js/admin/admin.js"></script>*@
+        <!-- customize JS -->
+        <script src="~/js/admin/customize.js"></script>
+        <script src="~/js/admin/table.min.js"></script>
+
+        <!-- JQuery UI Custom JS -->
+        <script src="~/js/user/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="~/js/user/theia-sticky-sidebar.min.js"></script>
+        <!-- customize JS -->
+        <script src="~/js/user/customize.js"></script>
+    </environment>
+</body>
+</html>

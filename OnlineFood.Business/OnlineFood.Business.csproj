@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Contracts\ICityAreaService.cs" />
+    <Compile Remove="Contracts\IRestaurantCategoryService.cs" />
+    <Compile Remove="Contracts\IRestaurantCityAreaService.cs" />
+    <Compile Remove="Contracts\ISellerImageService.cs" />
+    <Compile Remove="Contracts\ISellerPositionService.cs" />
+    <Compile Remove="Contracts\IUserAddressTitleService.cs" />
+    <Compile Remove="Services\CityAreaService.cs" />
+    <Compile Remove="Services\RestaurantCategoryService.cs" />
+    <Compile Remove="Services\RestaurantCityAreaService.cs" />
+    <Compile Remove="Services\SellerImageService.cs" />
+    <Compile Remove="Services\SellerPositionService.cs" />
+    <Compile Remove="Services\UserAddressTitleService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="2.8.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineFood.Common\OnlineFood.Common.csproj" />
+    <ProjectReference Include="..\OnlineFood.Domain\OnlineFood.Domain.csproj" />
+    <ProjectReference Include="..\OnlineFood.Infrastructure\OnlineFood.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

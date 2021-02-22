@@ -1,0 +1,364 @@
+﻿@model RestaurantViewModel
+@{
+    ViewData["Title"] = "لیست رستوارن ها";
+    int filterNumber = 3;
+    ViewData["TotalOrderCartNumber"] = Model.TotalOrderCartNumber;
+}
+@section css{
+    <link href="~/lib/autoComplete-master/auto-complete.min.css" rel="stylesheet" />
+    <link href="~/views/user/restaurant.min.css" rel="stylesheet" />
+}
+<div id="st-container" class="st-container hidden-md hidden-lg">
+    <nav class="st-menu st-effect-1">
+        <ul id="m_filterpanel" class="m_panel">
+            <li>
+                <div class="widget widget-filter widget-filter-sort">
+                    <div class="widget-title">
+                        <i class="im im-icon-A-Z"></i>
+                        مرتب سازی
+                    </div>
+                    <div class="widget-filter-content widget-filter-sort-content">
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Medal-2"></i>
+                                    جدید ترین ها
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Scooter"></i>
+                                    زمان ارسال
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Medal-3"></i>
+                                    امتیاز
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Financial"></i>
+                                    سطح اقتصادی
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="widget widget-filter widget-filter-restaurant-level-economy">
+                    <div class="widget-title">
+                        <i class="im im-icon-Financial"></i>
+                        سطح اقتصادی
+                    </div>
+                    <div class="widget-filter-content widget-filter-restaurant-level-economy-content">
+                        @foreach (var item in Model.ListRestaurantLevelEconomyViewModels)
+                        {
+                            <div class="widget-filter-restaurant-level-economy-item">
+                                <label class="widget-filter-check">
+                                    <span class="label">@item.Title</span>
+                                    <input type="checkbox" class="filled-in widget-filter-checkbox" value="@item.Id" data-filtergroup="@item.FilterGroup" />
+                                    <span class="checkbox"></span>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="widget widget-filter widget-filter-restaurant-food-category">
+                    <div class="widget-title">
+                        <i class="im im-icon-Plate"></i>
+                        نوع غذا
+                    </div>
+                    <div class="widget-filter-content widget-filter-restaurant-food-category-content">
+                        @for (int i = 0; i < filterNumber; i++)
+                        {
+                            <div class="widget-filter-restaurant-food-category-item">
+                                <label class="widget-filter-check">
+                                    <i class="menu-category-icon-filterwidget @Model.ListRestaurantFoodCategoryViewModels[i].IconClassName"></i>
+                                    <span class="label">@Model.ListRestaurantFoodCategoryViewModels[i].Title</span>
+                                    <input type="checkbox" class="filled-in widget-filter-checkbox" value="@Model.ListRestaurantFoodCategoryViewModels[i].Id" data-filtergroup="@Model.ListRestaurantFoodCategoryViewModels[i].FilterGroup" />
+                                    <span class="checkbox"></span>
+                                </label>
+                            </div>
+                            if (Model.ListRestaurantFoodCategoryViewModels.Count > filterNumber && i == filterNumber - 1)
+                            {
+                                var morelist = Model.ListRestaurantFoodCategoryViewModels.Skip(filterNumber).ToList();
+                                <div id="m_widget-filter-restaurant-food-category-more" class="collapse">
+                                    @for (int index = 0; index < morelist.Count; index++)
+                                    {
+                                        <div>
+                                            <label class="widget-filter-check">
+                                                <i class="menu-category-icon-filterwidget @morelist[index].IconClassName"></i>
+                                                <span class="label">@morelist[index].Title</span>
+                                                <input type="checkbox" class="filled-in widget-filter-checkbox" value="@morelist[index].Id" data-filtergroup="@morelist[index].FilterGroup" />
+                                                <span class="checkbox"></span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="expand more-button margin_top_30" data-collpase="m_widget-filter-restaurant-food-category-more">
+                                    <button type="button" id="more-button" class="btn btn-default btn-round btn-large btn-3e btn-icon"><i class="im im-icon-Arrow-DowninCircle"></i>بیشتر</button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="widget widget-filter widget-filter-restaurant-type">
+                    <div class="widget-title">
+                        <i class="im im-icon-Shop"></i>
+                        نوع رستوران
+                    </div>
+                    <div class="widget-filter-content widget-filter-restaurant-type-content">
+                        @for (int i = 0; i < filterNumber; i++)
+                        {
+                            <div class="widget-filter-restaurant-type-item">
+                                <label class="widget-filter-check">
+                                    <span class="label">@Model.ListRestaurantTypeViewModels[i].Title</span>
+                                    <input type="checkbox" class="filled-in widget-filter-checkbox" value="@Model.ListRestaurantTypeViewModels[i].Id" data-filtergroup="@Model.ListRestaurantTypeViewModels[i].FilterGroup" />
+                                    <span class="checkbox"></span>
+                                </label>
+                            </div>
+                            if (Model.ListRestaurantTypeViewModels.Count > filterNumber && i == filterNumber - 1)
+                            {
+                                var morelist = Model.ListRestaurantTypeViewModels.Skip(filterNumber).ToList();
+                                <div id="m_widget-filter-restaurant-type-more" class="collapse">
+                                    @for (int index = 0; index < morelist.Count; index++)
+                                    {
+                                        <div>
+                                            <label class="widget-filter-check">
+                                                <span class="label">@morelist[index].Title</span>
+                                                <input type="checkbox" class="filled-in widget-filter-checkbox" value="@morelist[index].Id" data-filtergroup="@morelist[index].FilterGroup" />
+                                                <span class="checkbox"></span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="expand more-button margin_top_30" data-collpase="m_widget-filter-restaurant-type-more">
+                                    <button type="button" id="more-button" class="btn btn-default btn-round btn-large btn-3e btn-icon"><i class="im im-icon-Arrow-DowninCircle"></i>بیشتر</button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="container margin_60">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 hidden-sm hidden-xs">
+            <div id="breadcrumb-section">
+                <div class="ui tiny breadcrumb">
+                    <a href="/" class="breadcrumb-section">خانه</a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a href="@Model.SearchLinkWithCityLimitation" class="breadcrumb-section @(string.IsNullOrEmpty(Model.SearchViewModel.CityAreaTitleEng) ? "active" : "")">رستوران های @Model.SearchViewModel.CityTitle</a>
+                    @if (!string.IsNullOrEmpty(Model.SearchViewModel.CityAreaTitleEng))
+                    {
+                        <i class="im im-icon-Arrow-Back3"></i>
+                        <a href="@Model.SearchLinkWithCityAreaLimitation" class="breadcrumb-section active">رستوران های @Model.SearchViewModel.CityAreaTitle</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xs-12 hidden-lg hidden-md">
+            <div class="boxWithPadding">
+                <span class="icon icon-lab">فیلتر بر اساس</span>
+                <div class="m_filter text-left inline-block pull-left" id="st-trigger-effects">
+                    <a class="m_trigger" data-overlay="true" data-effect="st-effect-1"><i class="im im-icon-Filter-2 m_icon-filter"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <aside class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar sticky-sidebar">
+            <div class="theiaStickySidebar">
+                <div class="widget widget-filter widget-filter-sort">
+                    <div class="widget-title">
+                        <i class="im im-icon-A-Z"></i>
+                        مرتب سازی
+                    </div>
+                    <div class="widget-filter-content widget-filter-sort-content">
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Medal-2"></i>
+                                    جدید ترین ها
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Scooter"></i>
+                                    زمان ارسال
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Medal-3"></i>
+                                    امتیاز
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="widget-filter-check not-box-check">
+                                <span class="label">
+                                    <i class="im im-icon-Financial"></i>
+                                    سطح اقتصادی
+                                </span>
+                                <input type="checkbox" class="filled-in not-box-filled-in" name="sort-checkbox" />
+                                <span class="checkbox not-box-filled-in"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget widget-filter widget-filter-restaurant-level-economy">
+                    <div class="widget-title">
+                        <i class="im im-icon-Financial"></i>
+                        سطح اقتصادی
+                    </div>
+                    <div class="widget-filter-content widget-filter-restaurant-level-economy-content">
+                        @foreach (var item in Model.ListRestaurantLevelEconomyViewModels)
+                        {
+                            <div class="widget-filter-restaurant-level-economy-item">
+                                <label class="widget-filter-check">
+                                    <span class="label">@item.Title</span>
+                                    <input type="checkbox" class="filled-in widget-filter-checkbox" value="@item.Id" data-filtergroup="@item.FilterGroup" />
+                                    <span class="checkbox"></span>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="widget widget-filter widget-filter-restaurant-food-category">
+                    <div class="widget-title">
+                        <i class="im im-icon-Plate"></i>
+                        نوع غذا
+                    </div>
+                    <div class="widget-filter-content widget-filter-restaurant-food-category-content">
+                        @for (int i = 0; i < filterNumber; i++)
+                        {
+                            <div class="widget-filter-restaurant-food-category-item">
+                                <label class="widget-filter-check">
+                                    <i class="menu-category-icon-filterwidget @Model.ListRestaurantFoodCategoryViewModels[i].IconClassName"></i>
+                                    <span class="label">@Model.ListRestaurantFoodCategoryViewModels[i].Title</span>
+                                    <input type="checkbox" class="filled-in widget-filter-checkbox" value="@Model.ListRestaurantFoodCategoryViewModels[i].Id" data-filtergroup="@Model.ListRestaurantFoodCategoryViewModels[i].FilterGroup" />
+                                    <span class="checkbox"></span>
+                                </label>
+                            </div>
+                            if (Model.ListRestaurantFoodCategoryViewModels.Count > filterNumber && i == filterNumber - 1)
+                            {
+                                var morelist = Model.ListRestaurantFoodCategoryViewModels.Skip(filterNumber).ToList();
+                                <div id="widget-filter-restaurant-food-category-more" class="collapse">
+                                    @for (int index = 0; index < morelist.Count; index++)
+                                    {
+                                        <div>
+                                            <label class="widget-filter-check">
+                                                <i class="menu-category-icon-filterwidget @morelist[index].IconClassName"></i>
+                                                <span class="label">@morelist[index].Title</span>
+                                                <input type="checkbox" class="filled-in widget-filter-checkbox" value="@morelist[index].Id" data-filtergroup="@morelist[index].FilterGroup" />
+                                                <span class="checkbox"></span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="expand more-button margin_top_30" data-collpase="widget-filter-restaurant-food-category-more">
+                                    <button type="submit" id="more-button" class="btn btn-default btn-round btn-large btn-3e btn-icon"><i class="im im-icon-Arrow-DowninCircle"></i>بیشتر</button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="widget widget-filter widget-filter-restaurant-type">
+                    <div class="widget-title">
+                        <i class="im im-icon-Shop"></i>
+                        نوع رستوران
+                    </div>
+                    <div class="widget-filter-content widget-filter-restaurant-type-content">
+                        @for (int i = 0; i < filterNumber; i++)
+                        {
+                            <div class="widget-filter-restaurant-type-item">
+                                <label class="widget-filter-check">
+                                    <span class="label">@Model.ListRestaurantTypeViewModels[i].Title</span>
+                                    <input type="checkbox" class="filled-in widget-filter-checkbox" value="@Model.ListRestaurantTypeViewModels[i].Id" data-filtergroup="@Model.ListRestaurantTypeViewModels[i].FilterGroup" />
+                                    <span class="checkbox"></span>
+                                </label>
+                            </div>
+                            if (Model.ListRestaurantTypeViewModels.Count > filterNumber && i == filterNumber - 1)
+                            {
+                                var morelist = Model.ListRestaurantTypeViewModels.Skip(filterNumber).ToList();
+                                <div id="widget-filter-restaurant-type-more" class="collapse">
+                                    @for (int index = 0; index < morelist.Count; index++)
+                                    {
+                                        <div>
+                                            <label class="widget-filter-check">
+                                                <span class="label">@morelist[index].Title</span>
+                                                <input type="checkbox" class="filled-in widget-filter-checkbox" value="@morelist[index].Id" data-filtergroup="@morelist[index].FilterGroup" />
+                                                <span class="checkbox"></span>
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="expand more-button margin_top_30" data-collpase="widget-filter-restaurant-type-more">
+                                    <button type="button" id="more-button" class="btn btn-default btn-round btn-large btn-3e btn-icon"><i class="im im-icon-Arrow-DowninCircle"></i>بیشتر</button>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div id="restaurant-list-main">
+                <div class="row col-centered">
+                    <div id="restaurant-list-main-search" class="full-width">
+                        <div class="overlaymask brighter border_radius_10"></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
+                            <div id="search-section" class="col-centered border_radius_10">
+                                <partial name="_Search" model="Model.SearchViewModel" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin_top_40">
+                    <div id="restaurant-list-container" class="full-width">
+                        <partial name="_List" model="Model.ListRestaurantViewModels" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End container -->
+@section scripts{
+    <script src="~/lib/autoComplete-master/auto-complete.min.js"></script>
+    <script src="~/views/user/restaurant.min.js"></script>
+}

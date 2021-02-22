@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<!--<![endif]-->
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <base href="/">
+    <title> Online Food | @ViewData["Title"] </title>
+    <meta charset="utf-8" />
+    <meta name="fragment" content="!">
+    <meta name="description" content="Online Food" />
+    <meta name="keywords" content="Online Food" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- logo icon -->
+    <link rel="shortcut icon" href="images/favicon.png">
+    <environment>
+        <!--  ------ usermain -----   -->
+        <link href="~/css/user/bootstrap.css" rel="stylesheet" />
+        <!-- Main Style -->
+        <link href="~/css/user/style.css" rel="stylesheet" />
+        <!-- customize CSS Style -->
+        <link href="~/css/user/customize.css" rel="stylesheet" />
+        <link href="~/css/user/base.css" rel="stylesheet" />
+        <link href="~/css/user/responsive.css" rel="stylesheet" />
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+
+        <link href="~/css/fontawesome.css" rel="stylesheet" />
+        <link href="~/css/im-icon.css" rel="stylesheet" />
+        <link href="~/css/material-icon.css" rel="stylesheet" />
+        <link href="~/css/glyphicon.css" rel="stylesheet" />
+        <link href="~/css/menu-category.css" rel="stylesheet" />
+        <!-- bootstrap file input uploader CSS -->
+        <link href="~/lib/bootstrap-fileinput-master/css/fileinput.css" rel="stylesheet" />
+        <!-- JQuery JS -->
+        <script src="~/js/user/jquery-2.2.4.min.js"></script>
+        <!-- semantic css js -->
+        <link href="~/lib/semantic/semantic.css" rel="stylesheet" />
+        <script src="~/lib/semantic/semantic.js"></script>
+        <!-- JQuery Validate Unobtrusive -->
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    </environment>
+    
+    @RenderSection("css", required: false)
+</head>
+<body class="sticky logo-white submenu-closed theme-green">
+    <!-- wrap Page -->
+    <div id="wrap">
+        <!-- Header -->
+        <header class="style1 sticky">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">
+                        <img src="~/image/logo.png" />
+                    </a>
+                </div>
+                <div class="bt-menu-trigger hidden-lg hidden-md" id="sidebarCollapse">
+                    <span></span>
+                </div>
+                <nav id="sidebar">
+                    <div id="responsive-sidebar">
+                        <div class="sidebar-header">
+                            <h3>@User.GetRoleName()</h3>
+                        </div>
+                        <ul class="list-link">
+                            <li class="sidebar-user-panel">
+                                <div class="user-panel">
+                                    <div class=" image">
+                                        <img src="~/image/item/user-chef.svg" class="img-circle user-img-circle" alt="User Image" />
+                                    </div>
+                                </div>
+                                <div class="profile-usertitle">
+                                    <div class="profile-responsive-sidebar-fullname"> @User.GetUsername() </div>
+                                    <div class="profile-responsive-sidebar-restaurant-title"> @User.GetRoleName() </div>
+                                </div>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "home")">
+                                <a href="/admin/">
+                                    <i class="im im-icon-Home"></i>
+                                    <span>Main Page</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "account")">
+                                <a href="/admin/account/">
+                                    <i class="im im-icon-Chef"></i>
+                                    <span>My Profile</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "restaurant")">
+                                <a href="/admin/restaurant/">
+                                    <i class="im im-icon-Shop"></i>
+                                    <span>My Restaurant</span>
+                                </a>
+                            </li>
+                            <li class="@Html.MakeActiveClass(controller: "restaurantimage")">
+                                <a href="/admin/restaurantimage/">
+                                    <i class="im im-icon-Folder-Pictures"></i>
+                                    <span>My Gallery</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/seller/account/logout/">
+                                    <i class="im im-icon-Arrow-TurnRight icon-style"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="row">
+                    <!-- user header dropdown -->
+                    <nav class="col-lg-6 hidden-sm hidden-xs">
+                        <div class="c-header__btn-container">
+                            <div class="c-header__btn-user-container">
+                                <a class="c-header__btn-user js-dropdown-toggle">
+                                    <img src="~/image/item/user-chef.svg" class="c-header-user-img" />
+                                    <div class="c-header-restaurant-title"> @User.GetUsername() </div>
+                                    <div class="c-header-role-name"> @User.GetRoleName() </div>
+                                </a>
+                                <div class="c-header__user-dropdown js-dropdown-menu" style="display: none;">
+                                    <ul class="list-link">
+                                        <li><a href="/seller/profile/edit/"><i class="im im-icon-User icon-style"></i>My Profile</a></li>
+                                        <li><a href="/seller/account/logout/"><i class="im im-icon-Arrow-TurnRight icon-style"></i>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <!-- notify header dropdown -->
+                </div>
+            </div>
+            <!-- End container -->
+        </header>
+        <!-- End Header -->
+        <div class="overlay"></div>
+        <div class="container main margin_top_100">
+            <div class="row">
+                <div class="col-lg-3 hidden-sm hidden-xs">
+                    <!-- Right Sidebar -->
+                    <aside id="rightsidebar" class="sidebar">
+                        <!-- Menu -->
+                        <div class="menu">
+                            <ul class="list-link">
+                                <li class="sidebar-user-panel">
+                                    <div class="user-panel">
+                                        <div class=" image">
+                                            <img src="~/image/item/user-chef.svg" class="img-circle user-img-circle" alt="User Image" />
+                                        </div>
+                                    </div>
+                                    <div class="profile-usertitle">
+                                        <div class="profile-user-fullname"> @User.GetUsername() </div>
+                                        <div class="profile-user-rolename "> @User.GetRoleName() </div>
+                                    </div>
+                                </li>
+                                <li class="@Html.MakeActiveClass(controller: "home")">
+                                    <a href="/seller/">
+                                        <i class="im im-icon-Home icon-style"></i>
+                                        <span>Main Page</span>
+                                    </a>
+                                </li>
+                                <li class="@Html.MakeActiveClass(controller: "account")">
+                                    <a href="/seller/profile/edit/">
+                                        <i class="im im-icon-Chef icon-style"></i>
+                                        <span>My Profile</span>
+                                    </a>
+                                </li>
+                                <li class="@Html.MakeActiveClass(controller: "restaurant")">
+                                    <a href="/seller/restaurant/manage/">
+                                        <i class="im im-icon-Shop icon-style"></i>
+                                        <span>My Restaurant</span>
+                                    </a>
+                                </li>
+                                <li class="@Html.MakeActiveClass(controller: "restaurantimage")">
+                                    <a href="/seller/restaurantimage/manage/">
+                                        <i class="im im-icon-Folder-Pictures icon-style"></i>
+                                        <span>My Gallery</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);" class="menu-toggle @(Html.HasActiveClass(new List<string> {"city","restauranttype","restaurantfoodcategory" }) ? "toggled" : "")">
+                                        <i class="im im-icon-Wrench icon-style"></i>
+                                        <span>Basic Info</span>
+                                    </a>
+                                    <ul class="ml-menu" style="@(Html.HasActiveClass(new List<string> {"city","restauranttype","restaurantfoodcategory" }) ? "display: block;" : "")">
+                                        <li class="@Html.MakeActiveClass(controller: "city")">
+                                            <a href="/seller/city/index/">
+                                                <i class="im im-icon-Map-Marker2 icon-style"></i>
+                                                <span>City</span>
+                                            </a>
+                                        </li>
+                                        <li class="@Html.MakeActiveClass(controller: "restauranttype")">
+                                            <a href="/seller/restauranttype/index/">
+                                                <i class="im im-icon-Shop-3 icon-style"></i>
+                                                <span>Restaurant Type</span>
+                                            </a>
+                                        </li>
+                                        <li class="@Html.MakeActiveClass(controller: "restaurantfoodcategory")">
+                                            <a href="/seller/restaurantfoodcategory/index/">
+                                                <i class="im im-icon-Plate icon-style"></i>
+                                                <span>Food Type</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="/seller/account/logout/">
+                                        <i class="im im-icon-Arrow-TurnRight icon-style"></i>
+                                        <span>Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- #Menu -->
+                    </aside>
+                    <!-- #END# Right Sidebar -->
+                </div>
+                <div class="col-lg-9 col-sm-12 col-xs-12">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    <environment>
+        <!-- Core Js -->
+        @*<script src="~/js/admin/admin.js"></script>*@
+        <!-- customize JS -->
+        <script src="~/js/admin/customize.js"></script>
+        <script src="~/js/admin/table.min.js"></script>
+
+        <!-- JQuery UI Custom JS -->
+        <script src="~/js/user/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="~/js/user/theia-sticky-sidebar.min.js"></script>
+        <!-- customize JS -->
+        <script src="~/js/user/customize.js"></script>
+        <!-- bootstrap notification JS -->
+        <script src="~/js/bootstrap-notify.js"></script>
+        <!-- jquery slim scroll -->
+        <script src="~/js/jquery.slimscroll.min.js"></script>
+        <!-- bootstrap file input uploader JS -->
+        <script src="~/lib/bootstrap-fileinput-master/js/fileinput.js"></script>
+        <script src="~/lib/bootstrap-fileinput-master/js/locales/fa.js"></script>
+        <script src="~/lib/bootstrap-fileinput-master/themes/fa/theme.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    </environment>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //slim scroll for responsive sidebar
+            $('#responsive-sidebar').slimscroll({
+                height: 'auto'
+            });
+            //slim scroll for notify dropdown
+            $('#notify-dropdown-content').slimscroll({
+                height: 'auto'
+            });
+            //responsive sidebar
+            function responsive_sidebar_btn_trigger(element) {
+
+                if ($(element).hasClass('bt-menu-open')) {
+                    $('#sidebar').removeClass('active');
+                    $('.overlay').removeClass('active');
+                }
+                else {
+                    $('#sidebar').addClass('active');
+                    $('.overlay').addClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                }
+            }
+            $(".bt-menu-open, .overlay").on('click', function () {
+                $('#sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+                $('.bt-menu-trigger').removeClass('bt-menu-open')
+            });
+            function init() {
+
+                var button = document.querySelector('.bt-menu-trigger');
+                button.addEventListener('click', function () {
+                    responsive_sidebar_btn_trigger(button);
+                    button.classList.toggle('bt-menu-open');
+                });
+            }
+            init();
+            //Collapse or Expand Menu toggle
+            $('.menu-toggle').on('click', function (e) {
+                var $this = $(this);
+                var $content = $this.next();
+
+                if ($($this.parents('ul')[0]).hasClass('list')) {
+                    var $not = $(e.target).hasClass('menu-toggle') ? e.target : $(e.target).parents('.menu-toggle');
+
+                    $.each($('.menu-toggle.toggled').not($not).next(), function (i, val) {
+                        if ($(val).is(':visible')) {
+                            $(val).prev().toggleClass('toggled');
+                            $(val).slideUp();
+                        }
+                    });
+                }
+                $this.toggleClass('toggled');
+                $content.slideToggle(320);
+            });
+            //dropdown toggle
+            $('.js-dropdown-toggle').click(function (e) {
+
+                e.preventDefault();
+                e.stopPropagation();
+                $('.js-dropdown-menu').not($(this).next('.js-dropdown-menu')).hide();
+                if ($(this).next('.js-dropdown-menu').is(':visible')) {
+                    $(this).next('.js-dropdown-menu').hide();
+                    //notifAnimation.removeClass('c-header__btn-user--has-notif-no-animation');
+                } else {
+                    //notifAnimation.before().addClass('c-header__btn-user--has-notif-no-animation');
+                    $(this).next('.js-dropdown-menu').show();
+                }
+            })
+            $('html').click(function (e) {
+                jQuery('.js-dropdown-menu').hide();
+            })
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

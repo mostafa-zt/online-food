@@ -1,0 +1,164 @@
+﻿@model RestaurantImageViewModel
+@{
+    ViewData["Title"] = "گالری رستوران";
+}
+@section css{
+    <!-- lightgallery -->
+    <link href="~/lib/lightgallery/dist/css/lightgallery.css" rel="stylesheet" />
+    <style>
+        .c-profile-empty {
+            background-color: #fff;
+            -webkit-box-shadow: 0 12px 12px 0 hsla(0,0%,71%,.1);
+            box-shadow: 0 12px 12px 0 hsla(0,0%,71%,.1);
+            border: 1px solid #dedede;
+            padding: 15px 15px 20px;
+            padding-top: 15px;
+            padding-bottom: 20px;
+            min-height: 337px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            font-size: 21px;
+            font-size: 1.5rem;
+            line-height: 1.048;
+            color: #c8c8c8;
+            letter-spacing: .4px;
+            font-size: 25px;
+            font-size: 1.786rem;
+            line-height: 1.76;
+            padding-top: 37px;
+            padding-bottom: 50px;
+            font-size: 27px;
+            font-size: 1.929rem;
+            line-height: 1.63;
+            letter-spacing: .5px;
+        }
+
+            .c-profile-empty::before {
+                font-size: 154px;
+                margin-bottom: 30px;
+                display: block;
+                color: #dadada;
+            }
+    </style>
+}
+
+<div class="ui basic modal">
+    <div class="ui icon header">
+        <i class="im im-icon-Trash-withMen icon-header-delete-confirm"></i>
+        <span>حذف</span>
+    </div>
+    <div class="content">
+        <p> آیا میخواهید حذف کنید؟ </p>
+    </div>
+    <div class="actions">
+        <button class="ui inverted grey cancel  basic button"> <i class="im im-icon-Close icon-action-delete-confirm"></i>خیر</button>
+        <button class="ui inverted ok red basic button">  <i class="im im-icon-Yes icon-action-delete-confirm"></i>بلی، حذف شود</button>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <i class="im im-icon-Folder-Pictures icon-header-card"></i>
+                    <strong>گالری رستوران</strong>
+                </h2>
+            </div>
+            <div class="body">
+                @if (Model.GalleryRestaurantImageViewModels != null && Model.GalleryRestaurantImageViewModels.Any())
+                {
+                    <div id="aniimated-thumbnials" class="list-unstyled ">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 @(Model.GalleryRestaurantImageViewModels == null || !Model.GalleryRestaurantImageViewModels.Any()? "" : "")" id="image-gallery-panel">
+                                @foreach (var item in Model.GalleryRestaurantImageViewModels)
+                                {
+                                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 image-gallery-panel-section">
+                                        <div class="center"><label class="lbl-list-info-text">@item.Type</label></div>
+                                        <div><label class="lbl-list-info">اندازه</label> <label class="">@item.Size</label></div>
+                                        <div><label class="lbl-list-info">پسوند</label> <label class="" dir="ltr">@item.Extension</label></div>
+                                        <div><label class="lbl-list-info">آدرس</label> <label class="d-block" dir="ltr">@item.Url</label></div>
+                                        <div class="panel-action-tools">
+                                            <div class="panel-action-tools-edit d-inline-block">
+                                                <a href="/admin/restaurantimage/edit/@item.Id/" class="btn-panel-edit" title="ویرایش"><i class="im im-icon-Edit"></i></a>
+                                            </div>
+                                            <div class="panel-action-tools-delete d-inline-block">
+                                                <a href="javascript:void(0);" class="btn-panel-delete" title="حذف" data-val="@item.Id"><i class="im im-icon-Trash-withMen"></i></a>
+                                            </div>
+                                            <div class="panel-action-tools-detail d-inline-block">
+                                                <a href="javascript:void(0);" class="btn-panel-detail" title="جزییات"><i class="im im-icon-Eye"></i></a>
+                                            </div>
+                                        </div>
+                                        <a href="@item.Url" class="zoom_light_gallery" data-sub-html="Demo Description">
+                                            <img class="img-responsive thumbnail" src="@item.Url" title="@item.Type">
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="empty empty-image-gallery col-centered">
+                        موردی برای نمایش وجود ندارد!
+                    </div>
+                }
+
+                <div class="row clearfix actions">
+                    <div class="actions col-md-12 col-sm-12 col-xs-12">
+                        <a href="/admin/restaurant/" class="btn btn-outline-info"><i class="fa fas fa-arrow-right"></i>بازگشت</a>
+                        <a href="/admin/restaurantimage/create?restaurantId=@Model.RestaurantId" class="btn btn-outline-success"><i class="fa fa-plus combination-icon-actions"></i><i class="im im-icon-Folder-Pictures combination-icon-actions"></i>افزودن تصویر جدید</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <!-- lightgallery -->
+    <script src="~/lib/lightgallery/dist/js/lightgallery-all.js"></script>
+    <script src="~/js/admin/light-gallery-image.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', ".btn-panel-delete", function () {
+                debugger;
+                var id = $(this).attr("data-val");
+                var $deleteUrl = "/admin/restaurantimage/delete/";
+                var $target = $(this).parent().parent().parent();
+                $('.ui.basic.modal').modal({
+                    closable: false,
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove: function () {
+                        debugger;
+                        $.post($deleteUrl, { id }, function (data) {
+                            debugger;
+                            if (data.success) {
+                                $target.fadeOut("slow", function () { $target.remove(); });
+                                showNotification('alert-success', data.message, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                            }
+                            else {
+                                showNotification('alert-danger', data.message, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                            }
+                        });
+                    }
+                }).modal('show');
+            });
+        })
+    </script>
+    @Html.AlertNotification(TempData)
+}
+
+

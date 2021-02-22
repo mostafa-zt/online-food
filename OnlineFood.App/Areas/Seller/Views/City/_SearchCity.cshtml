@@ -1,0 +1,68 @@
+﻿@model SearchCityViewModel
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+            <div class="header">
+                <h2 dir="ltr">
+                    <a class="ui green right ribbon label">
+                        <i class="im im-icon-File-Search icon-header-card icon-style"></i>
+                        Search
+                    </a>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-3">
+                        <div class="form-group form-float">
+                            <div class="form-line ">
+                                <i class="im im-icon-Map-Marker2 prefix"></i>
+                                <input type="text" asp-for="Title" class="form-control" autocomplete="off">
+                                <label asp-for="Title" class="form-label"></label>
+                            </div>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label asp-for="ActivityStatus"></label>
+                        <div class="form-group">
+                            <div class="form-line ">
+                                <select asp-for="ActivityStatus" class="ui search dropdown" multiple=""
+                                        asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.ActivityStatus>()"></select>
+                                <span asp-validation-for="ActivityStatus" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group form-float">
+                            <div class="form-line ">
+                                <i class="im im-icon-Dec prefix"></i>
+                                <input type="text" asp-for="FromCreatorDateTime" autocomplete="off" class="form-control datepicker">
+                                <label asp-for="FromCreatorDateTime" class="form-label"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group form-float">
+                            <div class="form-line ">
+                                <i class="im im-icon-Dec prefix"></i>
+                                <input type="text" asp-for="ToCreatorDateTime" autocomplete="off" class="form-control datepicker">
+                                <label asp-for="ToCreatorDateTime" class="form-label"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row clearfix actions">
+                    <div class="actions col-md-12 col-sm-12 col-xs-12">
+                        <button type="button" class="btn btn-green btn-medium btn-3e btn-icon" id="btn-search"><i class="fa fas fa-search"></i>Search</button>
+                        <button type="button" class="btn btn-red btn-medium btn-3e btn-icon" id="btn-search-reset"><i class="fa fas fa-eraser"></i>Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

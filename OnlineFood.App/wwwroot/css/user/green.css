@@ -1,0 +1,67 @@
+/*::selection, 
+.chef-detail .chef-info .chef-text .title small, 
+.page-not-found-background, 
+.forumstatistics, 
+.widget .widget-title:before, 
+.widget .widget-title i, 
+.login-app a, 
+.navigation.pagination .nav-links a:hover,
+.navigation.pagination .nav-links span, 
+.go-up, 
+.progressbar-percent,
+a.button-more,
+.btn-primary,
+a.button-download,
+.button-browse-more, 
+.newslatter,
+#footer-top .subcribe a,
+header.style1,
+header.sticky, 
+a.button-radius:hover, 
+.box-icon > div, 
+.slideshow .tparrows:hover, 
+.slide-a a, 
+.blog-img:before, 
+.blog-continue a, 
+.review-box h2.review-box-header, 
+.review-percentage .review-item span, 
+.recipes-review .review-final-score, 
+.review-box .review-final-score, 
+.product-item .add-to-cart-button, 
+.form-single-product .single-add-to-cart-button
+{
+    background-color: #7daf74;
+}*/
+
+header {
+    background: rgba(125, 175, 116, 0.9);
+}
+
+ul.tags li a:hover, 
+.tagcloud a:hover, 
+.login-app a:hover, 
+.login-app a:focus
+{
+    background-color: #7daf74;
+    border-color: #7daf74;
+}
+
+.info-icons .semipart i,
+.col-recipe .excerpt h3 a, 
+.col-video .hover-icon a:hover, 
+ul.blog-posts li .inner .post-detail span i, 
+.widget-list ul li a:hover, 
+.user-signup a,
+.main-menu ul ul li:hover>a,
+a.comment-reply,
+.main-menu ul ul li a:hover,
+.main-menu ul ul a:hover, 
+.menu-content h3 a, 
+.blog-content h3 a, 
+.slide-h2 h2, 
+.product-item .price, 
+.product-summary .price, 
+.footer-shop i
+{
+    color: #7daf74;
+}

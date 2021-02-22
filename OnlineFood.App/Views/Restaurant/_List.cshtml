@@ -1,0 +1,49 @@
+﻿@model List<ListRestaurantViewModel>
+@foreach (var item in Model)
+{
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <a href="@item.Link">
+            <div class="restaurant-item">
+                <div class="corner-ribbon"><span>جدید</span></div>
+                <div class="restaurant-item-wrap">
+                    <div class="figure-wrap bg-image" data-image-src="@item.HeaderUrl" style="background: rgba(0, 0, 0, 0) url(@item.HeaderUrl) no-repeat scroll center center /cover;">
+                        <div class="favorite centered">
+                            <like-object><i class="fa fa-heart red"></i></like-object>
+                        </div>
+                        <div class="rating pull-left">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <div class="restaurant-logo">
+                            <img src="@item.LogoUrl" />
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h5 class="restaurant-title">@item.Title</h5>
+                        <div class="address truncateText"><i class="im im-icon-Location-2 icon-style"></i>@item.CityArea</div>
+                        <div class="restaurantypes truncateText">
+                            <i class="im im-icon-Plate icon-style inline-block"></i>
+                            @foreach (var type in item.RestaurantTypes)
+                            {
+                                <span class="restaurantypes-item">@type</span>
+                            }
+                        </div>
+                        <div class="deliverytime">
+                            <i class="im im-icon-Scooter icon-style inline-block"></i>
+                            <span class="point">زمان تحویل</span>
+                            <span>@item.DeliveryTime</span>
+                        </div>
+                        <div class="minorder">
+                            <i class="im im-icon-Money icon-style inline-block"></i>
+                            <span class="point">حداقل سفارش</span>
+                            <span>@item.MinOrder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}

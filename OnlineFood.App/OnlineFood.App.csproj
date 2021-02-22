@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\**" />
+    <Compile Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <Content Remove="Areas\Admin\**" />
+    <Content Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <EmbeddedResource Remove="Areas\Admin\**" />
+    <EmbeddedResource Remove="Areas\Seller\Views\RestaurantMenu\**" />
+    <None Remove="Areas\Admin\**" />
+    <None Remove="Areas\Seller\Views\RestaurantMenu\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Seller\Controllers\CityAreaController.cs" />
+    <Compile Remove="Areas\Seller\Controllers\RestaurantMenuController.cs" />
+    <Compile Remove="Areas\Seller\Controllers\SellerImageController.cs" />
+    <Compile Remove="Areas\Seller\ViewModels\CityAreaViewModel.cs" />
+    <Compile Remove="Areas\Seller\ViewModels\RestaurantMenuViewModel.cs" />
+    <Compile Remove="Controllers\OrderController.cs" />
+    <Compile Remove="Controllers\RestaurantController.cs" />
+    <Compile Remove="Controllers\RestaurantMenuController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Seller\Views\Account\Edit.cshtml" />
+    <Content Remove="Areas\Seller\Views\Account\RegisterResult.cshtml" />
+    <Content Remove="Areas\Seller\Views\Account\_RegisterConfirmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineFood.Business\OnlineFood.Business.csproj" />
+    <ProjectReference Include="..\OnlineFood.Common\OnlineFood.Common.csproj" />
+    <ProjectReference Include="..\OnlineFood.Domain\OnlineFood.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\CODE_OF_CONDUCT.md" />
+    <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\CONTRIBUTING.md" />
+    <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\lib\bootstrap-fileinput-master\.github\PULL_REQUEST_TEMPLATE.md" />
+  </ItemGroup>
+
+</Project>

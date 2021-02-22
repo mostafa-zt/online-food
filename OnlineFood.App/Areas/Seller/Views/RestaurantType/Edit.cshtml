@@ -1,0 +1,72 @@
+﻿@model EditRestaurantTypeViewModel
+
+@{
+    ViewData["Title"] = "Edit Restaurant Type";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2 dir="ltr">
+                    <a class="ui green right ribbon label">
+                        <i class="im im-icon-Shop-3 icon-header-card icon-style"></i>
+                        Edit Restaurant Type
+                    </a>
+                </h2>
+            </div>
+            <div class="body">
+                <form asp-action="edit" asp-controller="restauranttype" asp-area="seller" method="post">
+
+                    <div asp-validation-summary="All" class="message danger-msg @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                        <i class="material-icons">error</i>
+                        <div class="message-body">
+                            <h4 style="margin-right: 20px;color: red;">خطا !</h4>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-4">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <i class="im im-icon-Shop-3 prefix"></i>
+                                    <input type="text" asp-for="Title" class="form-control" autocomplete="off">
+                                    <label asp-for="Title" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label asp-for="ActivityStatus"></label>
+                            <div class="form-group">
+                                <div class="form-line ">
+                                    <select asp-for="ActivityStatus" class="ui dropdown"
+                                            asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.ActivityStatus>()"></select>
+                                    <span asp-validation-for="ActivityStatus" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="actions col-md-10 col-sm-8 col-xs-7">
+                            <a href="/seller/restauranttype/" class="btn btn-red btn-medium btn-3e btn-icon"><i class="fa fas fa-arrow-left"></i>Return</a>
+                            <button type="submit" class="btn btn-green btn-medium btn-3e btn-icon"><i class="fa fas fa-save"></i>Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+        })
+    </script>
+
+}

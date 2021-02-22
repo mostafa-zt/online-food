@@ -1,0 +1,1519 @@
+﻿/*#region sub header */
+.subheader-infobox {
+    position: relative;
+    top: 60px;
+}
+
+.logo-holder img {
+    border: 3px solid #35752f;
+    border-radius: 10px;
+}
+
+.logo-section {
+    position: relative;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.info-section {
+    display: inline-block;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    width: 50%;
+    text-align: right;
+    color: #111;
+}
+
+.logo-holder {
+    width: 149px;
+    height: 142px;
+}
+
+.stars {
+    display: inline-block;
+}
+
+.comments {
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #7daf74;
+    padding: 2px 5px;
+    cursor: pointer;
+    background-color: #e6ece5;
+    color: #52880B;
+    opacity: 0.6;
+}
+
+    .comments i.im {
+        vertical-align: middle;
+        font-size: 0.9rem;
+    }
+
+.deliverytime-title {
+    display: block;
+    font-size: 10px;
+    font-size: 0.7rem;
+    color: #52880B;
+    font-weight: 400;
+}
+
+.btnstyle-section {
+    float: left;
+}
+
+.btn-style i.im {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    font-size: 33px;
+    right: -5px;
+}
+
+#restaurant-ready-section-alarm {
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
+#back-btn {
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    #back-btn:hover {
+        background-color: #b2b9b2 !important;
+        color: black;
+    }
+
+#restaurant-ready-section-alarm {
+    position: relative;
+    /* text-transform: uppercase; */
+    /* letter-spacing: 6px; */
+    font-size: 1.0rem;
+    /* font-weight: 900; */
+    text-decoration: none;
+    background: #19960e;
+    color: white;
+    opacity: 1;
+    display: inline-block;
+    background-size: 120% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    -ms-background-clip: text;
+    -ms-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    /* background-image: linear-gradient(45deg, #40bc00, #164b00, #be1717, #be1717); */
+    animation: .8s shakee infinite alternate;
+}
+
+/*#endregion */
+
+/*#region order cart */
+.overlaymask {
+    border-radius: 10px;
+}
+
+.sticky-sidebar {
+    height: 100%;
+}
+
+.ordercart-header {
+    background-color: #ebf7da;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px 0;
+}
+
+.ordercart-header-title {
+    font-weight: bold;
+    display: inline-block;
+}
+
+    .ordercart-header-title i.im {
+        vertical-align: middle;
+        font-size: 30px;
+        color: #6FAB20;
+    }
+
+.ordercart-header::after {
+    width: 100%;
+    height: 2px;
+    background-color: aquamarine;
+    display: block;
+}
+
+.ordercart-header-clear {
+    display: inline-block;
+    font-size: 12px;
+    padding-left: 5px;
+    width: 50%;
+    text-align: left;
+}
+
+    .ordercart-header-clear i.im {
+        font-weight: bold;
+        margin-left: 5px;
+        font-size: 15px;
+        vertical-align: middle;
+    }
+
+.tooltip-text-action {
+    top: -80px !important;
+}
+
+.ordercart-restaurant:after {
+    width: 100%;
+    height: 2px;
+    background-color: #d0d8cf;
+    display: block;
+    content: "";
+}
+
+.ordercart-price {
+    font-size: 15px;
+    display: inline-block;
+    line-height: 3;
+}
+
+.restaurant-logo {
+    width: 70px;
+    height: 65px;
+    border-radius: 10px;
+    border: 2px solid #35752f;
+    margin: 2px 5px;
+    bottom: 10px;
+    position: relative;
+}
+
+.restaurant-title {
+    color: #35752F;
+    font-size: 15px;
+}
+
+.ordercart-counter {
+    display: inline-block;
+    top: 60px;
+    left: 0;
+    /* text-align: right; */
+    position: absolute;
+    /* bottom: -17px; */
+}
+
+.basket-counter {
+    border-radius: 5px;
+    background-color: #7daf74;
+    padding: 1px 2px;
+    cursor: pointer;
+    background-color: #d3e0d1;
+    color: #000000;
+    margin: 1px 10px;
+    border: 2px solid #7daf74;
+    width: 70px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+    .basket-counter .im {
+        color: #35752F
+    }
+
+.basket-counter-value {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.ordercart-manage {
+    display: inline-block;
+    float: left;
+    text-align: left;
+    line-height: 3;
+}
+
+.ordercart-totalprice {
+    padding: 25px 8px;
+    display: flex;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.ordercart {
+    border: 2px solid #b2b9b2;
+    border-radius: 10px;
+    background-color: white;
+    min-height: 332px;
+}
+
+.ordercart-item {
+    margin: 10px 5px;
+    border: 1px solid #6FAB20;
+    padding: 5px 5px;
+    border-radius: 5px;
+    background-color: #e4e4e4;
+}
+
+.ordrercart-remove {
+    float: left;
+    color: #DB2828;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ordercart-detail:after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: #d0d8cf;
+    display: block;
+}
+
+.accept-order {
+    padding: 5px 5px;
+}
+
+.ordercart-sidebar {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.ordercart-close {
+    z-index: 7;
+    position: absolute;
+    top: 100px;
+    color: white;
+    right: 0;
+    left: 0;
+    text-align: center;
+}
+
+    .ordercart-close i.im {
+        display: block;
+        text-align: center;
+        font-size: 5.5rem;
+        color: white;
+    }
+
+.ordercart-body-section.empty .ordercart-empty {
+    color: #DB2828;
+}
+
+.ordercart-empty i.im {
+    font-size: 11.5rem;
+}
+
+.ordercart-empty span {
+    display: block;
+    text-align: center;
+}
+
+.ordercart-clear-btn {
+    border-radius: 5px;
+    background-color: #7daf74;
+    padding: 1px 2px;
+    cursor: pointer;
+    background-color: #d3e0d1;
+    color: #000000;
+    margin: 1px 10px;
+    border: 2px solid #7daf74;
+    width: 70px;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.ordercart-header-clear .tooltip-text-action::after {
+    left: 25px !important;
+    margin-left: 0 !important;
+}
+
+#basket-totalprice-value {
+    width: 100%;
+    white-space: nowrap;
+}
+
+/*#endregion */
+
+/*#region horizontal navigation sticky tabs */
+.horizontal-navigation-tabs {
+    position: -webkit-sticky;
+    position: sticky;
+    /*width: 74.4rem;*/
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: auto;
+    top: 48px;
+    display: block;
+    z-index: 2;
+    -webkit-box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1);
+    box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1);
+    margin-top: -3rem;
+}
+
+    .horizontal-navigation-tabs .nav-tabs {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-flow: wrap row;
+        flex-flow: row wrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        list-style: none;
+        margin: auto;
+        padding: 0;
+        height: 80px;
+        height: 4rem;
+        background-color: #fff;
+        position: relative;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        margin-bottom: 10px;
+    }
+
+.tabs-container {
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+    /* margin-bottom: 25px; */
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,.11);
+    /* border-bottom-left-radius: 10px; */
+    /* border-bottom-right-radius: 10px; */
+    /* border-top-left-radius: 10px; */
+    overflow: hidden;
+}
+
+/*.tab-icon {
+            font-size: 1.9rem;
+            vertical-align: middle;
+            font-weight: bold;
+            color: #ACE266;
+        }*/
+
+.tablink {
+    text-align: center;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    -webkit-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
+    font-size: 19.2px;
+    font-size: 1.0rem;
+}
+
+    .tablink.active:before {
+        content: "";
+        position: absolute;
+        bottom: -20.8px;
+        bottom: -0.8rem;
+        left: 50%;
+        margin-left: -25.6px;
+        margin-left: -1.6rem;
+        width: 51.2px;
+        width: 3.2rem;
+        height: 3.2px;
+        height: 0.2rem;
+        background-color: #35752f;
+    }
+
+
+/*.tablink.active {
+            color: #6FAB20;
+        }
+
+            .tablink.active:before {
+                left: 0px;
+                width: 100%;
+                height: 5px;
+                background: #6FAB20;
+                content: '';
+                position: absolute;
+                transform: scaleX(1);
+                top: 60px;
+            }*/
+
+/*#endregion */
+
+/*#region food category smooth sticky sidebar */
+
+.food-category-item {
+    padding: 10px;
+}
+
+    .food-category-item.active {
+        background-color: #ebf7da;
+    }
+
+.menu-food-category {
+    border: 2px solid #b2b9b2;
+    border-radius: 10px;
+    background-color: white;
+    min-height: 332px;
+}
+
+.food-category-link:before, .food-category-link:after {
+    content: '';
+    position: absolute;
+    transition: transform .5s ease;
+}
+
+.food-category-link {
+    padding-top: 0;
+    /*transition: 0.3s;*/
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    line-height: 45px;
+    -webkit-transition: all .6s;
+    -o-transition: all .6s;
+    transition: all .6s;
+}
+
+    .food-category-link:before {
+        left: 0px;
+        /* bottom: -22px; */
+        width: 100%;
+        height: 5px;
+        background: #6FAB20;
+        transform: scaleX(0);
+        top: 40px;
+    }
+
+.food-category-item.active .food-category-link {
+    margin-right: 1rem;
+}
+
+    .food-category-item.active .food-category-link:before {
+        transform: scaleX(1);
+    }
+
+
+ul.menu-food-container {
+    padding: 0px;
+}
+
+    ul.menu-food-container li.food-category-item:first-child {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+/*ul.menu-food-container li.food-category-item:last-child {
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }*/
+
+/*#endregion */
+
+/*#region menu items */
+
+.actions:before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #ecf1f1;
+    display: block;
+    padding: 3px 0px;
+    margin-bottom: 10px;
+}
+
+.restaurant-menu-title {
+    display: flex;
+    margin-top: 5px;
+}
+
+.restaurant-menu-description {
+    margin-top: 35px;
+    font-size: 13px;
+    color: #111;
+    width: 90%;
+}
+
+.restaurant-menu-price {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+.menu-comments {
+    position: absolute;
+    bottom: 0;
+}
+
+    .menu-comments .comments {
+        background-color: #000000;
+        color: #ffffff;
+        opacity: 0.5;
+    }
+
+.menu-add-btn .im {
+    font-size: 18px;
+    vertical-align: middle;
+    bottom: 4px;
+    position: relative;
+    padding: 0px 5px;
+}
+
+
+.ordered .menu-item {
+    border: 2px solid #2d6b1d !important;
+    -webkit-box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1);
+    box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1);
+}
+/*#endregion */
+
+/*#region increase decrease buttons */
+
+.increase-decrease-buttons {
+    display: inline-block;
+    border: 2px solid #6FAB20;
+    background-color: white;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 10px;
+    margin: 10px 0px;
+    cursor: pointer;
+    /* letter-spacing: .5px; */
+    transition: .2s ease-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    cursor: pointer;
+    min-width: 30px;
+}
+
+    .increase-decrease-buttons:hover {
+        background: #6FAB20 !important;
+        color: #fff !important;
+        border: 2px solid #6FAB20 !important;
+    }
+
+
+.incdec-value {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    max-width: 30px;
+}
+
+/*#endregion */
+
+/*#region user comments */
+
+.comment {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.comment-body.haschildren:after {
+    content: " ";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #f1ede8;
+    /* padding: 1px; */
+    margin-top: 10px;
+}
+
+.satisfaction-status-emoji .im {
+    font-size: 25px;
+    color: #0d8822;
+    font-weight: bold;
+}
+
+
+
+.ordered-food {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: #35752f;
+    color: white;
+    font-size: 12px;
+}
+
+.text {
+    margin: 3px 3px;
+    display: inline-block;
+    width: 70%;
+    background-color: #dddddb;
+    list-style: none;
+    border-radius: 10px;
+    padding: 3px 9px;
+    font-size: 13px;
+}
+
+.emoji-status {
+    text-align: center;
+}
+
+    .emoji-status .im {
+        display: block;
+        font-size: 60px;
+        padding: 12px 5px;
+    }
+
+.emoji-review {
+    float: left;
+    width: 50%;
+    height: 100%;
+    color: black;
+}
+
+.im-icon-Angry {
+    color: #da2a1f;
+}
+
+.im-icon-Confused {
+    color: #8b807b;
+}
+
+.im-icon-Thumbs-UpSmiley {
+    color: #8bc63f;
+}
+
+.comment-body {
+    padding: 2px;
+}
+
+/*#endregion */
+
+/*#region panel side bar with effect */
+
+.st-container,
+.st-pusher,
+.st-content {
+    height: 100%;
+}
+
+.st-content {
+    overflow-y: scroll;
+    background: #f3efe0;
+}
+
+.st-content,
+.st-content-inner {
+    position: relative;
+}
+
+.st-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.st-pusher {
+    position: relative;
+    left: 0;
+    z-index: 99;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+    .st-pusher::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        background: rgba(0,0,0,0.2);
+        content: '';
+        opacity: 0;
+        -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+        transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    }
+
+.st-menu-open .st-pusher::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.st-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    visibility: hidden;
+    width: 300px;
+    height: 100%;
+    overflow: scroll;
+    background: #fff;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+    .st-menu::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.2);
+        content: '';
+        opacity: 1;
+        -webkit-transition: opacity 0.5s;
+        transition: opacity 0.5s;
+    }
+
+.st-menu-open .st-menu::after {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+    transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+}
+
+/* content style */
+
+.st-menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.st-menu h2 {
+    margin: 0;
+    padding: 1em;
+    color: rgba(0,0,0,0.4);
+    text-shadow: 0 0 1px rgba(0,0,0,0.1);
+    font-weight: 300;
+    font-size: 2em;
+}
+
+.st-menu ul li a {
+    display: block;
+    padding: 1em 1em 1em 1.2em;
+    outline: none;
+    box-shadow: inset 0 -1px rgba(0,0,0,0.2);
+    color: #f3efe0;
+    text-transform: uppercase;
+    text-shadow: 0 0 1px rgba(255,255,255,0.1);
+    letter-spacing: 1px;
+    font-weight: 400;
+    -webkit-transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.st-menu ul li:first-child a {
+    box-shadow: inset 0 -1px rgba(0,0,0,0.2), inset 0 1px rgba(0,0,0,0.2);
+}
+
+.st-menu ul li a:hover {
+    background: rgba(0,0,0,0.2);
+    box-shadow: inset 0 -1px rgba(0,0,0,0);
+    color: #fff;
+}
+
+/* Individual effects */
+
+/* Effect 1: Slide in on top */
+.st-effect-1.st-menu {
+    visibility: visible;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-1.st-menu-open .st-effect-1.st-menu {
+    width: 100%;
+    visibility: visible;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.st-effect-1.st-menu::after {
+    display: none;
+}
+
+/* Effect 2: Reveal */
+.st-effect-2.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-2.st-menu {
+    z-index: 1;
+}
+
+.st-effect-2.st-menu-open .st-effect-2.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.st-effect-2.st-menu::after {
+    display: none;
+}
+
+/* Effect 3: Push*/
+.st-effect-3.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-3.st-menu {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-3.st-menu-open .st-effect-3.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.st-effect-3.st-menu::after {
+    display: none;
+}
+
+/* Effect 4: Slide along */
+.st-effect-4.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-4.st-menu {
+    z-index: 1;
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+}
+
+.st-effect-4.st-menu-open .st-effect-4.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.st-effect-4.st-menu::after {
+    display: none;
+}
+
+/* Effect 5: Reverse slide out */
+.st-effect-5.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-5.st-menu {
+    z-index: 1;
+    -webkit-transform: translate3d(50%, 0, 0);
+    transform: translate3d(50%, 0, 0);
+}
+
+.st-effect-5.st-menu-open .st-effect-5.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+/* Effect 6: Rotate pusher */
+
+.st-effect-6.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+}
+
+.st-effect-6 .st-pusher {
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-6.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0) rotateY(-15deg);
+    transform: translate3d(300px, 0, 0) rotateY(-15deg);
+}
+
+.st-effect-6.st-menu {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-6.st-menu-open .st-effect-6.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(15deg);
+    transform: translate3d(-100%, 0, 0) rotateY(15deg);
+}
+
+.st-effect-6.st-menu::after {
+    display: none;
+}
+
+/* Effect 7: 3D rotate in */
+
+.st-effect-7.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+    -webkit-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+}
+
+.st-effect-7 .st-pusher {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-7.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-7.st-menu {
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+    transform: translate3d(-100%, 0, 0) rotateY(-90deg);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-7.st-menu-open .st-effect-7.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(0deg);
+    transform: translate3d(-100%, 0, 0) rotateY(0deg);
+}
+
+/* Effect 8: 3D rotate out */
+
+.st-effect-8.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+    -webkit-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+}
+
+.st-effect-8 .st-pusher {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-8.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-8.st-menu {
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg);
+    transform: translate3d(-100%, 0, 0) rotateY(90deg);
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-8.st-menu-open .st-effect-8.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(0deg);
+    transform: translate3d(-100%, 0, 0) rotateY(0deg);
+}
+
+.st-effect-8.st-menu::after {
+    display: none;
+}
+
+/* Effect 9: Scale down pusher */
+
+.st-effect-9.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+}
+
+.st-effect-9 .st-pusher {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-9.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(0, 0, -300px);
+    transform: translate3d(0, 0, -300px);
+}
+
+.st-effect-9.st-menu {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-9.st-menu-open .st-effect-9.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.st-effect-9.st-menu::after {
+    display: none;
+}
+
+/* Effect 10: Scale up */
+
+.st-effect-10.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+    -webkit-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+}
+
+.st-effect-10.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-10.st-menu {
+    z-index: 1;
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, -300px);
+    transform: translate3d(0, 0, -300px);
+}
+
+.st-effect-10.st-menu-open .st-effect-10.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+/* Effect 11: Scale and rotate pusher */
+
+.st-effect-11.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+}
+
+.st-effect-11 .st-pusher {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-11.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+    transform: translate3d(100px, 0, -600px) rotateY(-20deg);
+}
+
+.st-effect-11.st-menu {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-11.st-menu-open .st-effect-11.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.st-effect-11.st-menu::after {
+    display: none;
+}
+
+/* Effect 12: Open door */
+
+.st-effect-12.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+}
+
+.st-effect-12 .st-pusher {
+    -webkit-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-12.st-menu-open .st-pusher {
+    -webkit-transform: rotateY(-10deg);
+    transform: rotateY(-10deg);
+}
+
+.st-effect-12.st-menu {
+    opacity: 1;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.st-effect-12.st-menu-open .st-effect-12.st-menu {
+    visibility: visible;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.st-effect-12.st-menu::after {
+    display: none;
+}
+
+/* Effect 13: Fall down */
+
+.st-effect-13.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+    -webkit-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+}
+
+.st-effect-13.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-13.st-menu {
+    z-index: 1;
+    opacity: 1;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+}
+
+.st-effect-13.st-menu-open .st-effect-13.st-menu {
+    visibility: visible;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: transform;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition-speed: 0.2s;
+    transition-speed: 0.2s;
+}
+
+/* Effect 14: Delayed 3D rotate */
+
+.st-effect-14.st-container {
+    -webkit-perspective: 1500px;
+    perspective: 1500px;
+    -webkit-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+}
+
+.st-effect-14 .st-pusher {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-14.st-menu-open .st-pusher {
+    -webkit-transform: translate3d(300px, 0, 0);
+    transform: translate3d(300px, 0, 0);
+}
+
+.st-effect-14.st-menu {
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(90deg);
+    transform: translate3d(-100%, 0, 0) rotateY(90deg);
+    -webkit-transform-origin: 0% 50%;
+    transform-origin: 0% 50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.st-effect-14.st-menu-open .st-effect-14.st-menu {
+    visibility: visible;
+    -webkit-transition-delay: 0.1s;
+    transition-delay: 0.1s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: transform;
+    -webkit-transform: translate3d(-100%, 0, 0) rotateY(0deg);
+    transform: translate3d(-100%, 0, 0) rotateY(0deg);
+}
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+.no-csstransforms3d .st-pusher,
+.no-js .st-pusher {
+    padding-left: 300px;
+}
+
+/*#endregion */
+
+/*#region owl smooth scroll for food category
+        */
+
+.owl-stage-outer {
+    height: 45px;
+}
+
+.m_foodcategory-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    /* width: 74.4rem; */
+    left: 0;
+    right: 0;
+    background-color: #ededec;
+    margin-left: auto;
+    border: 1px dashed green;
+    margin-right: auto;
+    bottom: auto;
+    top: 110px;
+    display: block;
+    z-index: 2;
+    /* -webkit-box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1); */
+    /* box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1); */
+    margin-top: -8px;
+}
+
+.smoothscroll {
+    cursor: pointer;
+}
+
+    .smoothscroll.active :after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        top: 35px;
+        display: inline-block;
+        left: 50%;
+        margin-top: 8px;
+        width: 4.2rem;
+        height: 3.2px;
+        background-color: #35752f;
+    }
+
+/*#endregion */
+
+/*#region restaurant information tab */
+
+.boxWithPadding {
+    font-size: 13px;
+}
+
+.icon-style-big {
+    font-size: 25px;
+    font-weight: bold;
+    color: #35752f;
+    vertical-align: middle;
+}
+
+.restaurant-location {
+    padding: 10px 10px;
+}
+
+.restaurantinfo-item > div {
+    padding-right: 25px;
+    line-height: 28px;
+}
+
+.restaurantinfo-item > span, .restaurant_info_item > span {
+    font-weight: bold;
+}
+
+.restaurant-location-item {
+    margin: 20px 1px;
+}
+
+.workinghours-item, .days-item {
+    padding: 5px 0;
+    position: relative;
+}
+
+    .workinghours-item.selected, .days-item.selected {
+        background: #7daf74;
+        border-radius: 10px;
+        color: white;
+    }
+
+
+.overlaymask:before {
+    right: 0;
+}
+
+.pointseprate:not(:last-child):after {
+    content: "";
+    width: 4px;
+    height: 4px;
+    display: inline-block;
+    background-color: #35752f;
+    margin-right: 5px;
+}
+
+
+.restaurantinfo-title, .restaurantinfo-address {
+    font-weight: 600;
+}
+
+/*#endregion */
+
+/*#region restaurant information - working hour */
+
+.pin {
+    background: url(/image/template/pin.png) no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    z-index: 3;
+}
+
+#ribbon2 {
+    background: #35752f;
+    width: 30px;
+    height: 80px;
+    position: absolute;
+    margin: 0 auto;
+    top: -5px;
+    left: -5px;
+    display: block;
+    z-index: 0;
+    -webkit-box-shadow: 5px 1px 6px -2px rgba(0,0,0,0.64);
+    -moz-box-shadow: 5px 1px 6px -2px rgba(0,0,0,0.64);
+    box-shadow: 5px 1px 6px -2px rgba(0,0,0,0.64);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    animation: swing ease-in-out 1s infinite alternate;
+    -webkit-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    transform-origin: center -5px;
+}
+
+.traditional:before {
+    border-left: 25px solid transparent;
+    right: 0;
+}
+
+.traditional:after {
+    border-right: 25px solid transparent;
+    left: 0;
+}
+
+.traditional:after, .traditional:before {
+    border-top: 19px solid #35752f;
+    bottom: -20px;
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+    z-index: -1;
+    top: 80px;
+}
+
+.dayOfweek {
+    color: #f6f6f6;
+    width: 95px;
+    position: absolute;
+    text-align: center;
+    transform: rotate(-87deg);
+    text-shadow: 1 -1px 1px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    left: -35px;
+}
+
+.workinghour-background {
+    height: 85px;
+    background: url(/image/item/workinghour.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    display: inline-block;
+    width: 85px;
+    position: absolute;
+    opacity: 0.3;
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.workinghour {
+    margin: 10px 0px;
+}
+
+/*#endregion */
+
+/*#region menu item */
+
+.m_menu-item {
+    background-color: #ededec;
+    margin: 5px 0px;
+    border-radius: 10px;
+    border: 2px solid #7daf74;
+    -webkit-box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1);
+    box-shadow: 0 1.7rem 1.4rem -0.8rem rgba(0,0,0,.1);
+    height: 145px;
+    overflow: hidden;
+}
+
+.m_menu-image {
+    width: 100px;
+    height: 75px;
+    max-height: 75px;
+    max-width: 100px;
+    display: inline-block;
+}
+
+    .m_menu-image img {
+        border-radius: 10px;
+        border: 1px dashed #cff09e;
+        height: 100%;
+        width: 100%;
+    }
+
+.m_menu-title {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.m_menu-description {
+    padding: 0px 10px;
+}
+
+.m_menu-price {
+    font-weight: 800;
+    padding: 5px 10px;
+}
+
+.m_addbtn {
+    text-align: left;
+    display: inline-block;
+    float: left;
+}
+
+/*#endregion */
+
+.m_closepanel {
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    font-size: 30px;
+    z-index: 2;
+    right: 20px;
+    cursor: pointer;
+}

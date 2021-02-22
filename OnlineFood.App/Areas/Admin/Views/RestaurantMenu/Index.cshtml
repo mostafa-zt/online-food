@@ -1,0 +1,120 @@
+﻿@model RestaurantMenuViewModel
+@{
+    ViewData["Title"] = "منوی رستوران";
+}
+<div class="ui basic modal">
+    <div class="ui icon header">
+        <i class="im im-icon-Trash-withMen icon-header-delete-confirm"></i>
+        <span>حذف</span>
+    </div>
+    <div class="content">
+        <p> آیا میخواهید حذف کنید؟ </p>
+    </div>
+    <div class="actions">
+        <button class="ui inverted grey cancel  basic button"> <i class="im im-icon-Close icon-action-delete-confirm"></i>خیر</button>
+        <button class="ui inverted ok red basic button">  <i class="im im-icon-Yes icon-action-delete-confirm"></i>بلی، حذف شود</button>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    <i class="im im-icon-Receipt-3 icon-header-card"></i>
+                    <strong>منوی رستوران</strong>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="" id="restaurant-menu-list-content">
+                            @if (Model.ListRestaurantMenuViewModels != null && Model.ListRestaurantMenuViewModels.Any())
+                            {
+                                @foreach (var item in Model.ListRestaurantMenuViewModels)
+                                {
+                                    <div class="expand restaurant-food-category-header" data-collpase="restaurant-food-category_@item.RestaurantFoodCategoryId">
+                                        <div class="restaurant-food-category-title">
+                                            <i class="menu-category-icon  @item.RestaurantFoodCategoryClassname"></i>
+                                            @item.RestaurantFoodCategory
+                                        </div>
+                                    </div>
+                                    <div id="restaurant-food-category_@item.RestaurantFoodCategoryId" class="row full-width restaurant-food-category-content">
+                                        @foreach (var subItem in item.SubListRestaurantMenuViewModels)
+                                        {
+                                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 restaurant-menu-panel-content centered">
+                                                <div class="menu-item">
+                                                    <div class="menu-img"><img src="@subItem.ImageUrl" alt="@subItem.Title" /></div>
+                                                    <div class="menu-content">
+                                                        <div class="restaurant-menu-title text-right"><h3>@subItem.Title</h3></div>
+                                                        <div class="restaurant-menu-description text-right text-muted"><p>@subItem.TitleDescription</p></div>
+                                                        <div class="actions action-btn-panel">
+                                                            <a href="/admin/restaurantmenu/edit/@subItem.Id/" class="restaurant-menu-edit btn-panel-edit" data-val="@subItem.Id" data-title="@subItem.Title" data-titleDesc="@subItem.TitleDescription" data-price="@subItem.Price" data-priceDesc="@subItem.PriceDescription" data-cat="@item.RestaurantFoodCategory" data-catId="@item.RestaurantFoodCategoryId" data-resImagId="@subItem.ImageId"><i class="im im-icon-Edit"></i></a>
+                                                            <a href="javascript:void(0);" class="restaurant-menu-delete btn-panel-delete" data-val="@subItem.Id"><i class="im im-icon-Trash-withMen"></i></a>
+                                                            @*<div class="tooltip-text-action tooltip-text-action-delete hide">
+                                            <p>آیا می خواهید حذف کنید؟</p>
+                                            <a href="javascript:void(0);" onclick="RemoveRestaurantMenuPanel(this);" data-val="@subItem.Id" class="btn btn-xs btn-red btn-panel-delete-yes">بلی</a>
+                                            <a href="javascript:void(0);" class="btn btn-xs btn-default btn-panel-delete-no">خیر</a>
+                                        </div>*@
+                                                            <div class="restaurant-menu-price">
+                                                                <span>@subItem.Price.GetPersianNumber()</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="empty empty-restaurant-menu col-centered">
+                                    موردی برای نمایش وجود ندارد!
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="actions col-lg-12 col-md-12 col-sm-12  col-xs-12">
+                        <a href="/admin/restaurant/" class="btn btn-outline-info"><i class="fa fas fa-arrow-right"></i>بازگشت</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', ".restaurant-menu-delete", function () {
+                debugger;
+                var id = $(this).attr("data-val");
+                var $deleteUrl = "/admin/restaurantmenu/delete/";
+                var $target = $(this).parent().parent().parent().parent();
+                $('.ui.basic.modal').modal({
+                    closable: false,
+                    onDeny: function () {
+                        return true;
+                    },
+                    onApprove: function () {
+                        debugger;
+                        $.post($deleteUrl, { id }, function (data) {
+                            debugger;
+                            if (data.success) {
+                                $target.fadeOut("slow", function () { $target.remove(); });
+                                showNotification('alert-success', data.message, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                            }
+                            else {
+                                showNotification('alert-danger', data.message, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                            }
+                        });
+                    }
+                }).modal('show');
+            });
+        })
+    </script>
+    @Html.AlertNotification(TempData)
+}
+
+

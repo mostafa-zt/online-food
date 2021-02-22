@@ -1,0 +1,294 @@
+﻿@model CreateRestaurantFoodCategoryViewModel
+
+@{
+    ViewData["Title"] = "Create Food Type";
+}
+
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2 dir="ltr">
+                    <a class="ui green right ribbon label">
+                        <i class="im im-icon-Plate icon-header-card icon-style"></i>
+                        Create Food Type
+                    </a>
+                </h2>
+            </div>
+            <div class="body">
+                <form asp-action="create" asp-controller="restaurantfoodcategory" asp-area="seller" method="post">
+                    <input type="hidden" asp-for="RestaurantImageId" />
+
+                    <div asp-validation-summary="All" class="message danger-msg @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                        <i class="material-icons">error</i>
+                        <div class="message-body">
+                            <h4 style="margin-right: 20px;color: red;">خطا !</h4>
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-lg-4">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <i class="im im-icon-Plate prefix"></i>
+                                    <input type="text" asp-for="Title" class="form-control" autocomplete="off">
+                                    <label asp-for="Title" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <i class="im im-icon-Plate prefix"></i>
+                                    <input type="text" asp-for="Price" class="form-control" autocomplete="off">
+                                    <label asp-for="Price" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label asp-for="ActivityStatus"></label>
+                            <div class="form-group">
+                                <div class="form-line ">
+                                    <select asp-for="ActivityStatus" class="ui dropdown"
+                                            asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.ActivityStatus>()"></select>
+                                    <span asp-validation-for="ActivityStatus" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-lg-12">
+                            <div class="form-group form-float">
+                                <div class="form-line ">
+                                    <i class="im im-icon-Plate prefix"></i>
+                                    <input type="text" asp-for="Description" class="form-control" autocomplete="off">
+                                    <label asp-for="Description" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="upload-info">
+                        <fieldset class="section ">
+                            <legend class="section-header im-icon-Upload-toCloud">Upload Food Image</legend>
+                            <div id="upload-main ">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+                                        <div class="form-control-label">
+                                            <label asp-for="ImageFile" class="form-label upload-label"></label>
+                                        </div>
+                                        <div class="kv-avatar">
+                                            <div class="file-loading">
+                                                <input id="ImageFile" asp-for="ImageFile" type="file">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div id="aniimated-thumbnials">
+                        <fieldset class="section">
+                            <legend class="section-header im-icon-Folder-Pictures"> گالری تصاویر </legend>
+                            <div class="row">
+
+                                <div class="col-lg-12" id="image-gallery-panel">
+                                    <div class="img-gallery">
+                                        @foreach (var item in Model.GalleryRestaurantImageViewModels)
+                                        {
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                                <div class="img-gallery-detail" data-val="@item.Id">
+                                                    @*<a onclick="RemoveImageGalleryPanel(this);" data-val="@item.Id"><i class="im im-icon-Close-Window" id="image-gallery-panel-remove" title="حذف"></i></a>*@
+                                                    <div class="centered" style="flex-flow:column;">
+                                                        <div class="lbl-list-info-text">Image Category: @item.Type</div>
+                                                        <div class="lbl-list-info-text">Image Size: @item.Size</div>
+                                                        <div class="lbl-list-info-text">Image Extension: @item.Extension</div>
+                                                    </div>
+                                                    <div class="centered justified-gallery">
+                                                        <a class="zoom_light_gallery" style="width: 187px;height: 126.144px;opacity: 1;">
+                                                            <img class="img-responsive" src="@item.Url" title="@item.Type">
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="actions col-md-10 col-sm-8 col-xs-7">
+                            <a href="/seller/restaurantfoodcategory/" class="btn btn-red btn-medium btn-3e btn-icon"><i class="fa fas fa-arrow-left"></i>Return</a>
+                            <button type="submit" class="btn btn-green btn-medium btn-3e btn-icon"><i class="fa fas fa-save"></i>Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.ui.dropdown').dropdown();
+
+            $("#ImageFile").fileinput({
+                language: "en",
+                uploadUrl: "/seller/restaurantimage/upload/" + $("#RestaurantId").val(),
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                showBrowse: false,
+                browseOnZoneClick: true,
+                removeLabel: '',
+                removeTitle: 'حذف',
+                defaultPreviewContent: '<img src="/image/img-upload-placeholder.jpg" alt="Upload Image" title="Upload Image">',
+                layoutTemplates: { main2: '{preview} {browse}' },
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
+                @* initialPreviewAsData: true,
+                initialPreview: [frontOfNationalCardFileUrl],
+                    initialPreviewConfig: [
+                        {
+                            caption: '@Model.FrontOfNationalCardFileName',
+                            width: '120px',
+                            url: '/seller/sellerimage/delete/', // server delete action
+                            key: 1,
+                            extra: { id: @Model.FrontOfNationalCardFileId
+        }
+                    }
+                ]*@
+            }).on('fileuploaded', function (event, previewId, index, fileId) {
+            if (previewId.response.success) {
+                var html = '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">' +
+                              '<div class="img-gallery-detail" data-val="' + previewId.response.id + '">' +
+                              //'<a onclick="RemoveImageGalleryPanel(this);" data-val="' + previewId.response.id + '"><i class="im im-icon-Close-Window" id="image-gallery-panel-remove" title="حذف"></i></a>' +
+                               '<div class="centered" style="flex-flow:column;">' +
+                                 '<div class="lbl-list-info-text">Image Category: ' + previewId.response.type + '</div>' +
+                                 '<div class="lbl-list-info-text">Image Size: ' + previewId.response.size + '</div>' +
+                                 '<div class="lbl-list-info-text">Image Extension: ' + previewId.response.extension + '</div>' +
+                               '</div>' +
+                              '<div class="centered justified-gallery ">' +
+                                '<a class="zoom_light_gallery" data-sub-html="Demo Description" style="width: 187px;height: 126.144px;opacity: 1;">' +
+                                '<img class="img-responsive" src="' + previewId.response.url + '" title="' + previewId.response.type + '">' +
+                                 //'<div class="demo-gallery-poster">' +
+                                 //  '<img src="/image/web/zoom.png"/>' +
+                                 //'</div>' +
+                                '</a>' +
+                              '</div>' +
+                             '</div>' +
+                           '</div>';
+                $("#image-gallery-panel").removeClass("empty-image-gallery").append(html).lightGallery({
+                    thumbnail: true,
+                    selector: 'a.zoom_light_gallery'
+                });
+                //$('#aniimated-thumbnials').lightGallery({
+                //    thumbnail: true,
+                //    selector: 'a'
+                //});
+                ShowNotification('success', previewId.response.message, previewId.response.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+            }
+            else {
+                ShowNotification('danger', previewId.response.message, previewId.response.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+            }
+            console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
+        }).on('fileuploaderror', function (event, data, msg) {
+            $(event.target).parent().find(".kv-file-upload").attr("disabled", "disabled");
+            ShowNotification('danger', msg, "خطا در ورود عکس", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+            console.log('File Upload Error', 'ID: ' + data.fileId + ', Thumb ID: ' + data.previewId);
+        });
+        $('#aniimated-thumbnials').lightGallery({
+            thumbnail: true,
+            selector: 'a.zoom_light_gallery',
+        });
+
+           
+            //config file input
+            $("#ImageFile").fileinput({
+                language: "en",
+                //theme: "fas",
+                uploadUrl: "/seller/restaurantimage/upload/" + $("#RestaurantId").val(),
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                showBrowse: false,
+                //showPreview: false,
+                browseOnZoneClick: true,
+                removeLabel: '',
+                //removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'Delete',
+                //elErrorContainer: '#kv-avatar-errors-2',
+                //msgErrorClass: 'alert alert-block alert-danger',
+                defaultPreviewContent: '<img src="/image/img-upload-placeholder.jpg" alt="Upload Image" title="Upload Image">',
+                layoutTemplates: { main2: '{preview} {browse}' },
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
+                @* initialPreviewAsData: true,
+                initialPreview: [frontOfNationalCardFileUrl],
+                    initialPreviewConfig: [
+                        {
+                            caption: '@Model.FrontOfNationalCardFileName',
+                            width: '120px',
+                            url: '/seller/sellerimage/delete/', // server delete action
+                            key: 1,
+                            extra: { id: @Model.FrontOfNationalCardFileId
+        }
+                    }
+                ]*@
+            }).on('fileuploaded', function (event, previewId, index, fileId) {
+            if (previewId.response.success) {
+                var html = '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 img-gallery-detail">' +
+                    '<a onclick="RemoveImageGalleryPanel(this);" data-val="' + previewId.response.id + '"><i class="im im-icon-Close-Window" id="image-gallery-panel-remove" title="حذف"></i></a>' +
+                    '<div class="centered">' +
+                    '<label class="lbl-list-info-text">' + previewId.response.type + '</label>' +
+                    '</div>' +
+                    '<div class="centered justified-gallery ">' +
+                    '<a href="' + previewId.response.url + '"class="zoom_light_gallery" data-sub-html="Demo Description" style="width: 187px;height: 126.144px;opacity: 1;">' +
+                    '<img class="img-responsive" src="' + previewId.response.url + '" title="' + previewId.response.type + '>' +
+                    '<div class="demo-gallery-poster">' +
+                    '<img src="/image/web/zoom.png"/>' +
+                    '</div>' +
+                    '</a>' +
+                    '</div>' +
+                    '</div>';
+                $("#image-gallery-panel").removeClass("empty-image-gallery").append(html).lightGallery({
+                    thumbnail: true,
+                    selector: 'a.zoom_light_gallery'
+                });
+                //$('#aniimated-thumbnials').lightGallery({
+                //    thumbnail: true,
+                //    selector: 'a'
+                //});
+                ShowNotification('success', previewId.response.message, previewId.response.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+            }
+            else {
+                ShowNotification('danger', previewId.response.message, previewId.response.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+            }
+            console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
+        }).on('fileuploaderror', function (event, data, msg) {
+            $(event.target).parent().find(".kv-file-upload").attr("disabled", "disabled");
+            ShowNotification('danger', msg, "Error", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+            console.log('File Upload Error', 'ID: ' + data.fileId + ', Thumb ID: ' + data.previewId);
+        });
+        })
+        $(document).on('click', ".img-gallery-detail", function () {
+            var selectedElement = $(this);
+            $("#RestaurantImageId").val(selectedElement.attr('data-val'));
+            $(".img-gallery-detail").each(function (i) {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected')
+                }
+            });
+            selectedElement.addClass("selected");
+        });
+    </script>
+
+}

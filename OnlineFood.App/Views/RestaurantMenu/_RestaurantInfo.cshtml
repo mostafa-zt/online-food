@@ -1,0 +1,94 @@
+﻿@model RestaurantInfoViewModel
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="restaurant-info">
+        <div class="restaurantinfo-title restaurantinfo-item box">
+            <i class="im im-icon-Shop icon-style-big"></i>
+            <div class="inline-block">@Model.RestaurantTilte</div>
+        </div>
+        <div class="restaurantinfo-address restaurantinfo-item box margin_top_10">
+            <i class="im im-icon-Location-2 icon-style-big"></i>
+            <div class="restaurantinfo-address-title inline-block">@Model.RestaurantAddress</div>
+        </div>
+        <hr />
+        <div class="restaurantinfo-item boxWithPadding margin_top_10 full-width">
+            <i class="im im-icon-Shop-3 icon-style-big"></i>
+            <span>نوع رستوران</span>
+            <div>
+                @foreach (var item in Model.RestaurantTypes)
+                {
+                    <div class="restauranttypes-item inline-block pointseprate">@item</div>
+                }
+            </div>
+        </div>
+        <div class="restaurantinfo-item boxWithPadding margin_top_10 full-width">
+            <i class="im im-icon-Receipt-3 icon-style-big"></i>
+            <span>منوی رستوران</span>
+            <div>
+                @foreach (var item in Model.RestaurantFoodCategories)
+                {
+                    <div class="restaurantfoodcategories-item inline-block pointseprate">@item</div>
+                }
+            </div>
+        </div>
+    </div>
+    <fieldset class="section">
+        <legend class="section-header im-icon-Scooter">پیک رستوران</legend>
+        <ul class="nopadding">
+            <li class="restaurantinfo-item boxWithPadding margin_top_10 full-width">
+                <i class="im im-icon-Money icon-style-big"></i>
+                <span>حداقل مبلغ سفارش</span>
+                <div class="">@Model.AcceptableMinimumOrder.Value.GetPersianNumber()</div>
+            </li>
+            <li class="restaurantinfo-item box margin_top_10 full-width">
+                <i class="im im-icon-Scooter icon-style-big"></i>
+                <span>هزینه پیک</span>
+                <div class="">@Model.RestaurantCourierCost.Value.GetPersianNumber()</div>
+            </li>
+            <li class="restaurantinfo-item boxWithPadding margin_top_10 full-width">
+                <i class="im im-icon-Clock-Forward icon-style-big"></i>
+                <span>متوسط زمان ارسال</span>
+                <div class="">@Model.DeliveryTime</div>
+            </li>
+            <li class="restaurantinfo-item box margin_top_10 full-width">
+                <i class="im im-icon-Location-2 icon-style-big"></i>
+                <span>مناطق تحت پوشش</span>
+                <div>
+                    @if (Model.RestaurantCityAreas == null || Model.SelectedAllRestaurantCityAreas)
+                    {
+                        <div class="cityareas-item"> همه مناطق شهر </div>
+                    }
+                    else
+                    {
+                        @foreach (var item in Model.RestaurantCityAreas)
+                        {
+                            <div class="cityareas-item inline-block pointseprate">@item</div>
+                        }
+                    }
+                </div>
+            </li>
+        </ul>
+    </fieldset>
+    <fieldset class="section">
+        <legend class="section-header im-icon-Clock">ساعات کاری</legend>
+        @foreach (var item in Model.ListRestaurantWorkingHourViewModels)
+        {
+            <div class="item workinghour inline-block half-width boxWithPadding" style="height: 85px;">
+                @if (item.IsToday && !item.IsOpened)
+                {
+                    <div class="overlaymask lock" style="text-align:right"></div>
+                }
+                <div class="workinghour-background"></div>
+                <div class="pin" style="visibility: visible"></div>
+                <div id="ribbon2" class="traditional sb-effect-displayed animated FadeInLeftFast" animation-type="FadeInLeftFast" style="visibility: visible; opacity: 1;">
+                    <span class="dayOfweek">@item.Day</span>
+                </div>
+                <div class="workinghour-content centered full-height">
+                    <span> @item.WorkingHour </span>
+                </div>
+            </div>
+        }
+    </fieldset>
+</div>
+
+
+

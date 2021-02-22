@@ -1,0 +1,181 @@
+﻿@model RestaurantMenuViewModel
+@{
+    ViewData["Title"] = "منوی رستوران";
+    ViewData["TotalOrderCartNumber"] = Model.OrderCartViewModel.TotalNumber;
+}
+@section css{
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/views/user/restaurantmenu.min.css" rel="stylesheet" />
+}
+
+<!-- SubHeader -->
+<section class="parallax-window" id="short">
+    <div id="sub-header-menu" class="image above sub-header overlay1" style="background-image:url(@Model.HeaderUrl);">
+        <div class="overlaymask subheader_cruved"></div>
+        <div class="container">
+            <div class="subheader-infobox">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="logo-section pull-right">
+                                <div class="ratings">
+                                    <ul class="stars">
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                        <li class="active"><i class="fa fa-star"></i></li>
+                                    </ul><!-- End stars -->
+                                    <span class="comments">@((0).GetPersianNumber()) نظر <i class="im im-icon-User"></i></span>
+                                </div>
+                                <div class="logo-holder">
+                                    <img id="restaurant-logoholder" src="@Model.LogoUrl" />
+                                </div>
+                            </div>
+                            <div class="info-section">
+                                <h1 id="restaurant-title">@Model.RestaurantTitle</h1>
+                                <div class="address">
+                                    <i class="im im-icon-Location-2 icon-style"></i>
+                                    @Model.RestaurantFullAddress
+                                </div>
+                            </div>
+                            <div class="btnstyle-section">
+                                <div class="deliverytime-section btn-style centered full-height">
+                                    <i class="im im-icon-Scooter"></i>
+                                    <b class="deliverytime">
+                                        @Model.DeliveryTime
+                                    </b>
+                                    <small class="deliverytime-title">متوسط زمان ارسال</small>
+                                </div>
+                                <div class="restaurant-ready-section btn-style">
+                                    <div class="restaurant-ready flashit centered full-height">
+                                        <i class="im im-icon-Pointer"></i>
+                                        آماده سفارش هستیم
+                                    </div>
+                                </div>
+                                <a href="@Model.ReturnLink" class="btn-style full-width" id="back-btn">
+                                    <div class="centered full-height">
+                                        <i class="im im-icon-Back"></i>
+                                        <b>بازگشت</b>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End row -->
+                </div>
+            </div>
+        </div>
+        <div class="separator reverse"></div>
+        <!-- End container -->
+    </div>
+</section>
+<!-- End SubHeader -->
+<div class="container margin_50">
+    <!-- Breadcrumb -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12 hidden-sm hidden-xs">
+            <div id="breadcrumb-section">
+                <div class="ui tiny breadcrumb">
+                    <a href="/" class="breadcrumb-section">خانه</a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a href="@Model.SearchLinkWithCityLimitation" class="breadcrumb-section">رستوران های @Model.RestaurantCity </a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a href="@Model.SearchLinkWithCityAreaLimitation" class="breadcrumb-section">رستوران های @Model.RestaurantCityArea</a>
+                    <i class="im im-icon-Arrow-Back3"></i>
+                    <a href="@Model.RestaurantLink" class="breadcrumb-section active">رستوران @Model.RestaurantTitle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m_row">
+        <!-- food category smooth scrolling -->
+        @*<aside class="col-lg-2 col-md-2 hidden-sm hidden-xs sidebar sticky-sidebar menu-food-category-sidebar">
+                <div class="theiaStickySidebar">
+                    <div class="menu-food-category">
+                        <ul class="menu-food-container">
+                            @{
+                                var i = 0;
+                                foreach (var item in Model.ListRestaurantMenuViewModels)
+                                {
+                                    <li class="food-category-item @(i==0 ? "active" : "")">
+                                        <i class="menu-category-icon @item.RestaurantFoodCategoryClassname.ToLower()"></i>
+                                        <a class="food-category-link scroll" href="#restaurant_food_category-@item.RestaurantFoodCategoryClassname.ToLower()">@item.RestaurantFoodCategory</a>
+                                    </li>
+                                    ++i;
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </aside>*@
+        <!-- menu -->
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m_column">
+            <div class="row margin_top_40">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
+                    <!-- Nav tabs -->
+                    <div class="horizontal-navigation-tabs">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="tab-item active" role="presentation">
+                                <a class="tablink active" id="restaurantmenutab" href="javascript:void(0);">
+                                    <i class="im im-icon-Receipt-3 icon-style"></i>
+                                    منو
+                                </a>
+                            </li>
+                            <li class="tab-item" role="presentation">
+                                <a class="tablink" data-val="@Model.RestaurantId" id="usercommenttab" href="javascript:void(0);">
+                                    <i class="im im-icon-Medal-3 icon-style"></i>
+                                    امتیاز و نظر
+                                </a>
+                            </li>
+                            <li class="tab-item" role="presentation">
+                                <a class="tablink" id="restaurantinfotab" href="javascript:void(0);">
+                                    <i class="im im-icon-Information icon-style"></i>
+                                    اطلاعات
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="owl-carousel m_foodcategory-sticky" id="owl-carousel-foodcat">
+                        @foreach (var item in Model.ListRestaurantMenuViewModels)
+                        {
+                            <div class="item">
+                                <div class="smoothscroll" data-id="#@item.RestaurantFoodCategoryClassname.ToLower()">
+                                    <i class="menu-category-icon @item.RestaurantFoodCategoryClassname"></i>
+                                    @item.RestaurantFoodCategory
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="tabs-container">
+                        <div id="restaurantmenu" class="tabcentent">
+                            <partial name="_MenuList" model="Model.ListRestaurantMenuViewModels" />
+                        </div>
+
+                        <div id="usercomments" class="tabcentent hide">
+                            @*<partial name="_UserComment" model="Model.ListRestaurantMenuViewModels" />*@
+                        </div>
+                        <div id="restaurantinfo" class="tabcentent hide">
+                            <partial name="_RestaurantInfo" model="Model.RestaurantInfoViewModel" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- order cart -->
+        <aside class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar sticky-sidebar ordercart-sidebar">
+            <div class="theiaStickySidebar">
+                <partial name="_OrderCart" model="Model.OrderCartViewModel" />
+            </div>
+        </aside>
+        <aside class="hidden-lg hidden-md col-sm-3 col-xs-3 ordercart-sidebar">
+            <partial name="_m_OrderCart" model="Model.OrderCartViewModel" />
+        </aside>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/views/user/restaurantmenu.min.js"></script>
+}

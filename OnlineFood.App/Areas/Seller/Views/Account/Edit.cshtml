@@ -1,0 +1,615 @@
+﻿@model EditAccountViewModel
+@{
+    ViewData["Title"] = "پروفایل کاربری";
+}
+@section css{
+
+    <style>
+        #seller-account-edit .header-icon::after {
+            position: absolute;
+            content: "";
+            background: url(/image/item/user-chef.svg) top center no-repeat;
+            left: 50%;
+            top: -40px;
+            margin-left: -25px;
+            padding: 50px;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        .ui.modal input#UserConfirmPhoneNumberToken {
+            text-align: center;
+            font-size: 2rem;
+            height: 3rem;
+        }
+    </style>
+}
+
+<div class="card" id="seller-account-edit">
+    <div class="header header-icon">
+        <h2 dir="ltr">
+            <a class="ui green right ribbon label">پروفایل کاربری</a>
+        </h2>
+    </div>
+    <div class="body">
+        <form asp-action="edit" asp-controller="account" asp-area="seller" method="post" id="frm-account-edit" enctype="multipart/form-data">
+            @*@Html.ValidationSummary()*@
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="SellerType" />
+            <input type="hidden" asp-for="FrontOfNationalCardFileId" />
+            <input type="hidden" asp-for="FrontOfNationalCardFileName" />
+            <input type="hidden" asp-for="FrontOfNationalCardFileUrl" />
+            <input type="hidden" asp-for="BehindOfNationalCardFileId" />
+            <input type="hidden" asp-for="BehindOfNationalCardFileName" />
+            <input type="hidden" asp-for="BehindOfNationalCardFileUrl" />
+
+            <input type="hidden" asp-for="SellerPositionId" />
+            <input type="hidden" asp-for="RestaurantCategoryId" />
+            <input type="hidden" asp-for="Title" />
+            <input type="hidden" asp-for="SellerPersonalViewModel.NationalCode" />
+            <input type="hidden" asp-for="SellerPersonalViewModel.Gender" />
+            <input type="hidden" asp-for="SellerPersonalViewModel.BirthCertificateNumber" />
+
+            <input type="hidden" asp-for="PhoneNumberToken" />
+            <input type="hidden" asp-for="ConfirmPhoneNumberToken" />
+
+            <div asp-validation-summary="All" class="ui danger message @(ViewData.ModelState.IsValid ? "hide" : "animated fadeInUp")">
+                @*<i class="close icon"></i>*@
+                <div class="header list-info">
+                    خطا
+                </div>
+            </div>
+            <div class="ui modal">
+                <i class="close icon"></i>
+                <div class="header">
+                    تایید شماره موبایل
+                </div>
+                <div class="content">
+                    <div class="description">
+                        <div class="ui success message">
+                            <div class="message-body">
+                                <p class="message-body-content">برای شماره موبایل <span id="confirmation-mobile-label"></span> کد تایید ارسال گردید.</p>
+                                <p><a href="javascript:void(0);" class="lnk-effect ConfirmPhoneNumberToken_back">تغییر شماره موبایل</a></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <i class="im im-icon-Phone-SMS prefix"></i>
+                                        <input type="text" asp-for="ConfirmPhoneNumberToken" id="UserConfirmPhoneNumberToken" class="form-control" autocomplete="on" placeholder="_ _ _ _">
+                                        <label asp-for="ConfirmPhoneNumberToken" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="ConfirmPhoneNumberToken" class="text-danger invalid label"></span>
+                                    <div class="margin_top_10 ConfirmPhoneNumberToken_timer">دریافت مجدد کد تایید&nbsp;&nbsp;(<span id="timer"></span>)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    @*<div class="ui black deny button">
+                            Nope
+                        </div>
+                        <div class="ui positive right labeled icon button">
+                            Yep, that's me
+                            <i class="checkmark icon"></i>
+                        </div>*@
+                    @*<button type="button" class="btn deny btn-green-light btn-medium btn-3e btn-icon back-step"><i class="im im-icon-Right-4"></i>انصراف</button>*@
+                    <button type="button" class="btn positive btn-green btn-large btn-3e btn-icon next-step"><i class="im im-icon-Phone-SMS"></i>تایید کد</button>
+                </div>
+            </div>
+            @if (Model.SellerType == Domain.Enum.SellerType.Personal)
+            {
+                <!-- اطلاعات حقیقی -->
+                <div id="seller-info-personal">
+                    <fieldset class="section">
+                        <legend class="section-header im-icon-User"> اطلاعات حقیقی </legend>
+                        <div class="row ">
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <i class="im im-icon-Chef prefix"></i>
+                                        <input type="text" asp-for="SellerPersonalViewModel.Firstname" class="form-control" autocomplete="on">
+                                        <label asp-for="SellerPersonalViewModel.Firstname" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerPersonalViewModel.Firstname" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line ">
+                                        <i class="im im-icon-Chef prefix"></i>
+                                        <input type="text" asp-for="SellerPersonalViewModel.Lastname" class="form-control" autocomplete="on">
+                                        <label asp-for="SellerPersonalViewModel.Lastname" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerPersonalViewModel.Lastname" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <label class="label-dropdown">تاریخ تولد</label>
+                                <div class="form-group">
+                                    <div class="form-line ">
+                                        <select asp-for="SellerPersonalViewModel.YearOfBirthDate" class="col-lg-4 col-md-12 col-xs-12 ui search dropdown date"
+                                                asp-items="@(new SelectList(Html.GetEnumSelectList<OnlineFood.Domain.Enum.Year>(),"Value","Value"))">
+                                            <option>سال</option>
+                                        </select>
+                                        <span asp-validation-for="SellerPersonalViewModel.YearOfBirthDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-line ">
+                                        <select asp-for="SellerPersonalViewModel.MonthOfBirthDate" class="col-lg-4 col-md-12 col-xs-12 ui search dropdown date"
+                                                asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.Month>()">
+                                            <option>ماه</option>
+                                        </select>
+                                        @*@Html.DropDownList("CategoryID", selectList: null, optionLabel: "", htmlAttributes: new { @class = "form-control" })*@
+                                        <span asp-validation-for="SellerPersonalViewModel.MonthOfBirthDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-line ">
+                                        <select asp-for="SellerPersonalViewModel.DayOfBirthDate" class="col-lg-4 col-md-12 col-xs-12 ui search dropdown date"
+                                                asp-items="@(new SelectList(Html.GetEnumSelectList<OnlineFood.Domain.Enum.Day>(),"Value","Value"))">
+                                            <option>روز</option>
+                                        </select>
+                                        <span asp-validation-for="SellerPersonalViewModel.DayOfBirthDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <label asp-for="SellerPersonalViewModel.Gender" class="label-dropdown"></label>
+                                <div class="form-group label-dropdown">
+                                    <div class="form-line">
+                                        <div class="overlaymask lock"></div>
+                                        <select asp-for="SellerPersonalViewModel.Gender" class="ui search dropdown" disabled=""
+                                                asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.Gender>()"></select>
+                                        <span asp-validation-for="SellerPersonalViewModel.Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <i class="im im-icon-Numbering-List prefix"></i>
+                                        <div class="overlaymask lock"></div>
+                                        <input type="text" asp-for="SellerPersonalViewModel.NationalCode" class="form-control ltr-direction" disabled="disabled" autocomplete="on">
+                                        <label asp-for="SellerPersonalViewModel.NationalCode" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerPersonalViewModel.NationalCode" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <i class="im im-icon-Numbering-List prefix"></i>
+                                        <div class="overlaymask lock"></div>
+                                        <input type="text" asp-for="SellerPersonalViewModel.BirthCertificateNumber" class="form-control ltr-direction" disabled="disabled" autocomplete="on">
+                                        <label asp-for="SellerPersonalViewModel.BirthCertificateNumber" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerPersonalViewModel.BirthCertificateNumber" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            }
+            else if (Model.SellerType == Domain.Enum.SellerType.Legal)
+            {
+                <!-- اطلاعات حقوقی -->
+                <div id="seller-info-legal">
+                    <fieldset class="section">
+                        <legend class="section-header im-icon-Business-Man"> اطلاعات حقوقی </legend>
+                        <div class="row ">
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line ">
+                                        <i class="im im-icon-Tower-2 prefix"></i>
+                                        <input type="text" asp-for="SellerLegalViewModel.CompanyTitle" class="form-control" autocomplete="on">
+                                        <label asp-for="SellerLegalViewModel.CompanyTitle" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerLegalViewModel.CompanyTitle" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <label asp-for="SellerLegalViewModel.CompanyType" class="label-dropdown"></label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select asp-for="SellerLegalViewModel.CompanyType" class="ui search dropdown"
+                                                asp-items="Html.GetEnumSelectList<OnlineFood.Domain.Enum.CompanyType>()"></select>
+                                        <span asp-validation-for="SellerLegalViewModel.CompanyType" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line ">
+                                        <i class="im im-icon-Numbering-List prefix"></i>
+                                        <input type="text" asp-for="SellerLegalViewModel.RegistrationNumber" class="form-control ltr-direction" autocomplete="on">
+                                        <label asp-for="SellerLegalViewModel.RegistrationNumber" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerLegalViewModel.RegistrationNumber" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <i class="im im-icon-Numbering-List prefix"></i>
+                                        <input type="text" asp-for="SellerLegalViewModel.NationalId" class="form-control ltr-direction" autocomplete="on">
+                                        <label asp-for="SellerLegalViewModel.NationalId" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerLegalViewModel.NationalId" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <i class="im im-icon-Numbering-List prefix"></i>
+                                        <input type="text" asp-for="SellerLegalViewModel.EconomicCode" class="form-control ltr-direction" autocomplete="on">
+                                        <label asp-for="SellerLegalViewModel.EconomicCode" class="form-label"></label>
+                                    </div>
+                                    <span asp-validation-for="SellerLegalViewModel.EconomicCode" class="text-danger invalid label"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            }
+            <!-- اطلاعات تجاری -->
+            <div id="seller-info-commercial">
+                <fieldset class="section">
+                    <legend class="section-header im-icon-Shop"> اطلاعات تجاری </legend>
+
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Shop prefix"></i>
+                                    <div class="overlaymask lock"></div>
+                                    <input type="text" asp-for="Title" class="form-control " autocomplete="on" disabled="disabled">
+                                    <label asp-for="Title" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Credit-Card2 prefix"></i>
+                                    <input type="text" asp-for="ShabaNumber" class="form-control ltr-direction" autocomplete="on">
+                                    <label asp-for="ShabaNumber" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="ShabaNumber" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <label asp-for="RestaurantCategoryId" class="label-dropdown"></label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <div class="overlaymask lock"></div>
+                                    <select asp-for="RestaurantCategoryId" class="ui search dropdown" disabled=""
+                                            asp-items="ViewBag.RestaurantCategories as IEnumerable<SelectListItem>"></select>
+                                    <span asp-validation-for="RestaurantCategoryId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <label asp-for="SellerPositionId" class="label-dropdown"></label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <div class="overlaymask lock"></div>
+                                    <select asp-for="SellerPositionId" class="ui search dropdown" disabled=""
+                                            asp-items="ViewBag.SellerPositions as IEnumerable<SelectListItem>"></select>
+                                    <span asp-validation-for="SellerPositionId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- اطلاعات تماس -->
+            <div id="seller-info-contact">
+                <fieldset class="section">
+                    <legend class="section-header im-icon-Phone"> اطلاعات تماس </legend>
+                    <div class="row ">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <label asp-for="CityId" class="label-dropdown"></label>
+                            <div class="form-group">
+                                <div class="form-line ">
+                                    <select asp-for="CityId" class="ui search dropdown"
+                                            asp-items="ViewBag.Cities as IEnumerable<SelectListItem>"></select>
+                                    <span asp-validation-for="CityId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Location-2 prefix"></i>
+                                    <input type="text" asp-for="FullAddress" class="form-control" autocomplete="on">
+                                    <label asp-for="FullAddress" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="FullAddress" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Location-2 prefix"></i>
+                                    <input type="text" asp-for="ZipCode" class="form-control ltr-direction" autocomplete="on">
+                                    <label asp-for="ZipCode" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="ZipCode" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Phone-Wifi prefix"></i>
+                                    <input type="text" asp-for="PhoneNumber" class="form-control ltr-direction" autocomplete="on">
+                                    <label asp-for="PhoneNumber" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="PhoneNumber" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Phone-2 prefix"></i>
+                                    <input type="text" asp-for="TelphoneNumber" class="form-control ltr-direction" autocomplete="on">
+                                    <label asp-for="TelphoneNumber" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="TelphoneNumber" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-xs-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <i class="im im-icon-Email prefix"></i>
+                                    <input type="text" asp-for="Email" class="form-control ltr-direction" autocomplete="on">
+                                    <label asp-for="Email" class="form-label"></label>
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger invalid label"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!-- آپلود تصاویر -->
+            <div id="upload-info">
+                <fieldset class="section ">
+                    <legend class="section-header im-icon-Upload-toCloud"> بارگذاری مدارک </legend>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="list-info"> لطفا به موارد زیر توجه فرمایید : </div>
+                            <ul class="list-info">
+                                <li><span> تصاویر باید کاملا صاف و واضح باشد. </span></li>
+                                <li><span> تصویر رو و پشت کارت ملی باید به صورت جداگانه بارگذاری شود. </span></li>
+                                <li><span> تصویر کارت ملی باید از انواع <strong>"jpg", "png", "jpeg"</strong> باشد. </span></li>
+                                <li><span> حجم تصویر کارت ملی باید حداکثر <strong>@("2000".GetPersianNumber()) مگابایت</strong> باشد. </span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-xs-12 text-center">
+                            <div class="form-control-label">
+                                <label asp-for="FrontOfNationalCardFile" class="form-label upload-label"></label>
+                            </div>
+                            <div class="kv-avatar overlaymask_fileinput">
+                                <div class="file-loading">
+                                    <input id="FrontOfNationalCardFile" asp-for="FrontOfNationalCardFile" type="file" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-xs-12 text-center">
+                            <div class="form-control-label">
+                                <label asp-for="BehindOfNationalCardFile" class="form-label upload-label"></label>
+                            </div>
+                            <div class="kv-avatar overlaymask_fileinput">
+                                <div class="file-loading">
+                                    <input id="BehindOfNationalCardFile" asp-for="BehindOfNationalCardFile" type="file" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+            <div class="row actions">
+                <div class="actions col-md-12 col-sm-12 col-xs-12">
+                    <button type="button" id="frm-account-edit-submit-btn" class="btn btn-green btn-medium btn-3e btn-icon next-step"><i class="im im-icon-Save"></i>ثبت نهایی</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(".ConfirmPhoneNumberToken_back").click(function () {
+                debugger;
+                $('.ui.modal').modal('hide');
+            })
+
+            $("#frm-account-edit-submit-btn").click(function (e) {
+                debugger;
+                $mobileNumber = $("#PhoneNumber").val();
+                $.ajax({
+                    type: 'POST',
+                    data: { mobileNumber: $mobileNumber },
+                    url: "/seller/account/generatemobiletoken/",
+                    datatype: 'application/json',
+                    complete: function (data) {
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            $("#confirmation-mobile-label").html($mobileNumber);
+                            $("#UserConfirmPhoneNumberToken").val(data.code);
+                            $("#PhoneNumberToken").val(data.code);
+                            //$(".message .header").html(data.title);
+                            $('.ui.modal').modal({
+                                closable: false,
+                                onDeny: function () {
+                                    debugger;
+                                    window.alert('Wait not yet!');
+                                    return false;
+                                },
+                                onApprove: function () {
+                                    debugger;
+                                    var userPhoneNumberToken = $("#UserConfirmPhoneNumberToken").val();
+                                    var phoneNumberToken = $("#PhoneNumberToken").val();
+                                    if (userPhoneNumberToken == phoneNumberToken) {
+                                        $("#ConfirmPhoneNumberToken").val(userPhoneNumberToken);
+                                        $("#frm-account-edit").submit();// Submit the form
+                                    }
+                                    else {
+                                        ShowNotification('danger', "کد تایید شماره موبایل اشتباه است", "خطا", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                                        return false;
+                                    }
+                                }
+                            }).modal('show');
+                            $(".ConfirmPhoneNumberToken_timer").html('دریافت مجدد کد تایید&nbsp;(<span id="timer"></span>)')
+                            timer(5);
+                        }
+                    },
+                    beforeSend: function (data, status) {
+                    },
+                    error: function () {
+                        ShowNotification('danger', "خطایی در سیستم رخ داده است!", "خطا", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                    }
+                })
+            });
+
+            $('.ui.dropdown').dropdown('setting', {
+                allowAdditions: false,
+                message: { noResults: 'گزینه ای وجود ندارد', count: '{count} انتخاب شده است', },
+            });
+            
+            var frontOfNationalCardFileUrl = '@Model.FrontOfNationalCardFileUrl',
+                behindOfNationalCardFileUrl = '@Model.BehindOfNationalCardFileUrl';
+            $("#FrontOfNationalCardFile").fileinput({
+                language: "fa",
+                //theme: "fas",
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                showBrowse: false,
+                //showPreview: false,
+                browseOnZoneClick: true,
+                removeLabel: '',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'حذف',
+                //elErrorContainer: '#kv-avatar-errors-2',
+                //msgErrorClass: 'alert alert-block alert-danger',
+                defaultPreviewContent: '<img src="/image/web/items/upload-placeholder.jpg" alt="بارگزاری تصویر" title="بارگزاری تصویر">',
+                layoutTemplates: { main2: '{preview} {remove} {browse}' },
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
+                initialPreviewAsData: true,
+                initialPreview: [frontOfNationalCardFileUrl],
+                initialPreviewConfig: [
+                    {
+                        caption: '@Model.FrontOfNationalCardFileName',
+                        width: '120px',
+                        url: '/seller/sellerimage/delete/', // server delete action
+                        key: 1,
+                        extra: { id: @Model.FrontOfNationalCardFileId }
+                    }
+                ]
+            });
+            $("#BehindOfNationalCardFile").fileinput({
+                language: "fa",
+                //theme: "fas",
+                overwriteInitial: true,
+                maxFileSize: 1500,
+                showClose: false,
+                showCaption: false,
+                showBrowse: false,
+                //showPreview: false,
+                browseOnZoneClick: true,
+                removeLabel: '',
+                removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+                removeTitle: 'حذف',
+                //elErrorContainer: '#kv-avatar-errors-2',
+                //msgErrorClass: 'alert alert-block alert-danger',
+                defaultPreviewContent: '<img src="/image/web/items/upload-placeholder.jpg" alt="بارگزاری تصویر" title="بارگزاری تصویر">',
+                layoutTemplates: { main2: '{preview} {remove} {browse}' },
+                allowedFileExtensions: ["jpg", "png", "jpeg"],
+                initialPreviewAsData: true,
+                initialPreview: [behindOfNationalCardFileUrl],
+                initialPreviewConfig: [
+                    {
+                        caption: '@Model.BehindOfNationalCardFileName',
+                        width: '120px',
+                        url: '/seller/sellerimage/delete/', // server delete action
+                        key: 1,
+                        extra: { id: @Model.BehindOfNationalCardFileId }
+                    }
+                ]
+            });
+            $('.ui.dropdown').dropdown('setting', {
+                allowAdditions: false,
+                message: { noResults: 'گزینه ای وجود ندارد', count: '{count} انتخاب شده است', },
+            });
+        })
+
+        let timerOn = true;
+        function timer(remaining) {
+            var m = Math.floor(remaining / 60);
+            var s = remaining % 60;
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
+            document.getElementById('timer').innerHTML = m + ':' + s;
+            remaining -= 1;
+            if (remaining >= 0 && timerOn) {
+                setTimeout(function () {
+                    timer(remaining);
+                }, 1000);
+                return;
+            }
+            if (!timerOn) {
+                // Do validate stuff here
+                return;
+            }
+            $(".ConfirmPhoneNumberToken_timer").html('<a id="lnk-resend-phonenumber-token" onclick="resend();"  href="javascript:void(0);" class="lnk-effect">دریافت مجدد کد تایید</a>')
+        }
+
+        function resend() {
+            debugger;
+            $btn = $(this);
+            $mobileNumber = $("#PhoneNumber").val();
+            $.ajax({
+                type: 'POST',
+                data: { mobileNumber: $mobileNumber },
+                url: "/seller/account/generatemobiletoken/",
+                datatype: 'application/json',
+                complete: function (data) {
+                },
+                success: function (data) {
+                    debugger;
+                    $("#confirmation-mobile-label").html($mobileNumber);
+                    $("#UserConfirmPhoneNumberToken").val(data.code);
+                    $("#PhoneNumberToken").val(data.code);
+                    ShowNotification('success', data.message, data.title, 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                    $(".ConfirmPhoneNumberToken_timer").html('دریافت مجدد کد تایید&nbsp;(<span id="timer"></span>)')
+                    timer(5);
+                },
+                beforeSend: function (data, status) {
+                },
+                error: function () {
+                    ShowNotification('danger', "خطایی در سیستم رخ داده است!", "خطا", 'top', 'center', 'animated zoomInRight', 'animated zoomOutRight');
+                }
+            })
+        }
+    </script>
+    @Html.AlertNotify(TempData)
+}

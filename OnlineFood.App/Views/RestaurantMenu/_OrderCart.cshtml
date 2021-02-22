@@ -1,0 +1,95 @@
+﻿@model OrderCartViewModel
+<div class="ordercart">
+    @if (!Model.IsOpened)
+    {
+        <div class="overlaymask" id="overlay-ordercart-close"></div>
+        <div class="ordercart-close">
+            <i class="im im-icon-Lock"></i>
+            <span>رستوارن بسته است</span>
+        </div>
+    }
+    <diV class="ordercart-header">
+        <div class="ordercart-header-title half-WidthRight">
+            <i class="im im-icon-Full-Basket"></i>
+            سبد خرید
+        </div>
+        <div class="ordercart-header-clear">
+            <a class="ordercart-clear-btn btn-panel-delete"><i class="im im-icon-Trash-withMen"></i></a>
+            <div class="tooltip-text-action tooltip-text-action-delete hide">
+                <p>آیا می خواهید سبد خرید را خالی کنید؟</p>
+                <a href="javascript:void(0);" onclick="ClearOrderCart(this);" data-val="1" class="btn btn-xs btn-red btn-panel-delete-yes">بلی</a>
+                <a href="javascript:void(0);" class="btn btn-xs btn-default btn-panel-delete-no">خیر</a>
+            </div>
+        </div>
+        <div class="ordercart-counter">
+            <div class="inline-block basket-counter">
+                <span class="im im-icon-Full-Basket icon-style"></span>
+                <span class="basket-counter-value">@Model.TotalNumber.GetPersianNumber()</span>
+            </div>
+        </div>
+    </diV>
+
+    <div class="ordercart-body">
+        <div class="ordercart-restaurant @(Model.IsEmpty ? "hide"  :"")" id="ordercart_restaurant">
+            <div class="restaurant-info text-center">
+                <img id="ordercart_restaurant_logo" src="@(!Model.IsEmpty ? Model.RestaurantLogo:"")" class="restaurant-logo" />
+                <div id="ordercart_restaurant_title" class="restaurant-title">@(!Model.IsEmpty ? Model.RestaurantTitle : "")</div>
+            </div>
+        </div>
+        <div id="ordercart-body-restaurant">
+            @if (!Model.IsEmpty)
+            {
+                <div class="ordercart-detail-section full-width">
+                    <div class="ordercart-detail" id="ordercart-detail-content">
+                        @foreach (var item in Model.ListOrderCartViewModels)
+                        {
+                            <div class="ordercart-item" id="cartitem@(item.MenuId)">
+                                <a class="remove-cartitem" onclick="Remove(@item.MenuId,this)"><i class="im im-icon-Close ordrercart-remove"></i></a>
+                                <div class="ordercart-food">
+                                    @item.Title
+                                </div>
+                                <div class="ordercart-price half-width">
+                                    @item.Price.GetPersianNumber()
+                                </div>
+                                <div class="ordercart-management inline-block pull-left">
+                                    <div class="increase inline-block">
+                                        <a class="increase-decrease-buttons unselectable" title="افزایش تعداد سفارش" onclick="Increase(@item.MenuId)">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    </div>
+                                    <span class="incdec-value unselectable">@item.Number.GetPersianNumber()</span>
+                                    <div class="decrease inline-block">
+                                        <a class="increase-decrease-buttons unselectable" title="کاهش تعداد سفارش" onclick="Decrease(@item.MenuId)">
+                                            <i class="fas fa-minus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="ordercart-totalprice fullWidth">
+                        <div class="half-width text-right">مبلغ سفارش</div>
+                        <div class="text-left" id="basket-totalprice-value">
+                            @Model.TotalPrice.GetPersianNumber()
+                        </div>
+                    </div>
+                </div>
+                <div class="fullWidth accept-order">
+                    <button class="btn btn-3e btn-large btn-green-light">
+                        <i class="im im-icon-Basket-Items"></i>
+                        تایید سفارش
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="ordercart-body-section full-width empty centered" id="ordercart-body-empty">
+                    <div class="ordercart-empty">
+                        <i class="im im-icon-Full-Basket"></i>
+                        <span> سبد خرید خالی است </span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
