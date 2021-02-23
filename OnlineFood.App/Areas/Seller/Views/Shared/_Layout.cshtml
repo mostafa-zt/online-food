@@ -74,33 +74,60 @@
                                     </div>
                                 </div>
                                 <div class="profile-usertitle">
-                                    <div class="profile-responsive-sidebar-fullname"> @User.GetUsername() </div>
-                                    <div class="profile-responsive-sidebar-restaurant-title"> @User.GetRoleName() </div>
+                                    <div class="profile-user-fullname"> @User.GetUsername() </div>
+                                    <div class="profile-user-rolename "> @User.GetRoleName() </div>
                                 </div>
                             </li>
                             <li class="@Html.MakeActiveClass(controller: "home")">
-                                <a href="/admin/">
-                                    <i class="im im-icon-Home"></i>
+                                <a href="/seller/">
+                                    <i class="im im-icon-Home icon-style"></i>
                                     <span>Main Page</span>
                                 </a>
                             </li>
                             <li class="@Html.MakeActiveClass(controller: "account")">
-                                <a href="/admin/account/">
-                                    <i class="im im-icon-Chef"></i>
+                                <a href="/seller/profile/edit/">
+                                    <i class="im im-icon-Chef icon-style"></i>
                                     <span>My Profile</span>
                                 </a>
                             </li>
                             <li class="@Html.MakeActiveClass(controller: "restaurant")">
-                                <a href="/admin/restaurant/">
-                                    <i class="im im-icon-Shop"></i>
+                                <a href="/seller/restaurant/manage/">
+                                    <i class="im im-icon-Shop icon-style"></i>
                                     <span>My Restaurant</span>
                                 </a>
                             </li>
                             <li class="@Html.MakeActiveClass(controller: "restaurantimage")">
-                                <a href="/admin/restaurantimage/">
-                                    <i class="im im-icon-Folder-Pictures"></i>
+                                <a href="/seller/restaurantimage/manage/">
+                                    <i class="im im-icon-Folder-Pictures icon-style"></i>
                                     <span>My Gallery</span>
                                 </a>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle @(Html.HasActiveClass(new List<string> {"city","restauranttype","restaurantfoodcategory" }) ? "toggled" : "")">
+                                    <i class="im im-icon-Wrench icon-style"></i>
+                                    <span>Basic Info</span>
+                                </a>
+                                <ul class="ml-menu" style="@(Html.HasActiveClass(new List<string> {"city","restauranttype","restaurantfoodcategory" }) ? "display: block;" : "")">
+                                    <li class="@Html.MakeActiveClass(controller: "city")">
+                                        <a href="/seller/city/index/">
+                                            <i class="im im-icon-Map-Marker2 icon-style"></i>
+                                            <span>City</span>
+                                        </a>
+                                    </li>
+                                    <li class="@Html.MakeActiveClass(controller: "restauranttype")">
+                                        <a href="/seller/restauranttype/index/">
+                                            <i class="im im-icon-Shop-3 icon-style"></i>
+                                            <span>Restaurant Type</span>
+                                        </a>
+                                    </li>
+                                    <li class="@Html.MakeActiveClass(controller: "restaurantfoodcategory")">
+                                        <a href="/seller/restaurantfoodcategory/index/">
+                                            <i class="im im-icon-Plate icon-style"></i>
+                                            <span>Food Type</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="/seller/account/logout/">

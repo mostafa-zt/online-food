@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using OnlineFood.Business.Contracts;
 using OnlineFood.Common.Extensions;
 using OnlineFood.Common.Utility;
@@ -11,8 +9,6 @@ using OnlineFood.Domain.Entities;
 using OnlineFood.Infrastructure.DataAccess;
 using OnlineFood.Web.Areas.Seller.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,34 +16,20 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
 {
     public class RestaurantController : BaseController
     {
-        private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-        //private readonly ILogger<AccountController> _logger;
         private readonly IViewRenderService _viewRenderService;
-        //for post file
-        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUnitOfWork _unitOfWork;
-
-        private readonly ISellerService _sellerService;
         private readonly IRestaurantLevelEconomyService _restaurantLevelEconomyService;
         private readonly IRestaurantTypeService _restaurantTypeService;
-
         private readonly IRestaurantFoodCategoryService _restaurantFoodCategoryService;
-
         private readonly IRestaurantService _restaurantService;
-
         private readonly IRestaurantImageService _restaurantImageService;
-
         private readonly ICityService _cityService;
 
         public RestaurantController(
           UserManager<User> userManager,
-          SignInManager<User> signInManager,
-          //ILogger<AccountController> logger,
-          IHostingEnvironment hostingEnvironment,
           IUnitOfWork unitOfWork,
           IViewRenderService viewRenderService,
-          ISellerService sellerService,
           IRestaurantLevelEconomyService restaurantLevelEconomyService,
           IRestaurantTypeService restaurantTypeService,
           IRestaurantService restaurantService,
@@ -56,21 +38,13 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
           ICityService cityService)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
-            //_logger = logger;
             _unitOfWork = unitOfWork;
-            _hostingEnvironment = hostingEnvironment;
             _viewRenderService = viewRenderService;
-            _sellerService = sellerService;
             _restaurantLevelEconomyService = restaurantLevelEconomyService;
             _restaurantTypeService = restaurantTypeService;
-
-
             _restaurantFoodCategoryService = restaurantFoodCategoryService;
             _restaurantService = restaurantService;
-
             _restaurantImageService = restaurantImageService;
-
             _cityService = cityService;
         }
 
@@ -87,20 +61,6 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
                                                          .Include(x=>x.RestaurantMenus)
                                                          .FirstOrDefaultAsync(x => x.CreatorUserId == userId);
 
-            //if (model == null)
-            //{
-            //    _restaurantService.Add(new Restaurant() { });
-            //    await _unitOfWork.SaveAllChangesAsync();
-            //    model = await _restaurantService.GetAll(asNoTracking: true)
-            //                                            .Include(x => x.CreatorUser)
-            //                                            .ThenInclude(x => x.Seller)
-            //                                            .Include(x => x.RestaurantStyles)
-            //                                            .Include(x => x.RestaurantWorkingHours)
-            //                                            .Include(x => x.RestaurantImages)
-            //                                            .FirstOrDefaultAsync(x => x.CreatorUserId == userId);
-            //}
-
-            //var headerFile = model.RestaurantImages.FirstOrDefault(x => x.ImageType == Domain.Enum.ImageType.Header);
             var logoFile = model.RestaurantImages.FirstOrDefault(x => x.ImageType == Domain.Enum.ImageType.Logo);
             EditRestaurantViewModel viewModel = new EditRestaurantViewModel()
             {
@@ -171,16 +131,9 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
         [HttpPost]
         public async Task<IActionResult> Manage(EditRestaurantViewModel viewModel)
         {
-            //check unique user
             var userId = Convert.ToInt32(_userManager.GetUserId(User));
             var user = await _userManager.GetUserAsync(User);
-            //if (_userManager.Users.AsNoTracking().Any(u => (u.Email == viewModel.Email || u.UserName == viewModel.PhoneNumber) && u.Id != userId))
-            //{
-            //    AddErrors(this, "", "شماره موبایل یا ایمیل تکراری است");
-            //}
-
-   
-
+      
             if (ModelState.IsValid)
             {
 
@@ -206,19 +159,8 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
 
                 model.CreatorUser.Seller.CityId = viewModel.CityId;
 
-                model.FromDeliveryTime = viewModel.FromDeliveryTime;  //  DeliveryTimeManager.ToTimeSpan(viewModel.FromDeliveryHour.Hours, viewModel.FromDeliveryMinute.Minutes);
-                model.ToDeliveryTime = viewModel.ToDeliveryTime;  //DeliveryTimeManager.ToTimeSpan(viewModel.ToDeliveryHour.Hours, viewModel.ToDeliveryMinute.Minutes);
-
-                //add a new collection
-                //model.RestaurantCityAreas = _cityAreaService.GetAll(x => viewModel.RestaurantCityAreas.Any(a => a == x.Id))
-                //                                            .Select(s => new RestaurantCityArea()
-                //                                            {
-                //                                                CityAreaId = s.Id,
-                //                                                RestaurantId = viewModel.Id
-                //                                            }).ToList();
-
-                //manage city areas
-
+                model.FromDeliveryTime = viewModel.FromDeliveryTime;  
+                model.ToDeliveryTime = viewModel.ToDeliveryTime;  
 
                 //manage restaurant types
                 if (viewModel.RestaurantTypes != null && viewModel.RestaurantTypes.Any())
@@ -241,8 +183,7 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
                     //remove all collection
                     model.RestaurantStyles.ToList().ForEach(entity => model.RestaurantStyles.Remove(entity));
                 }
-
-
+                
                 //manage restaurant food types
                 if (viewModel.RestaurantFoodTypes != null && viewModel.RestaurantFoodTypes.Any())
                 {
@@ -292,9 +233,7 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
 
                 if (viewModel.LogoFile != null && viewModel.LogoFile.Length > 0)
                     await _restaurantImageService.SaveFile(viewModel.LogoFile, user, Domain.Enum.ImageType.Logo);
-
-
-
+                
                 await _unitOfWork.SaveAllChangesAsync();
                 Success(this, "Your restaurant has been successfully updated");
                 return RedirectToAction("manage");
@@ -323,48 +262,7 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
 
             return View(viewModel);
         }
-
-
-        //public async Task<JsonResult> CheckTitleEnglish(string value)
-        //{
-        //    value = !string.IsNullOrEmpty(value) ? value.Trim() : null;
-        //    var userId = System.Convert.ToInt32(_userManager.GetUserId(User));
-        //    var restaurant = await _restaurantService.GetAll().AsNoTracking()
-        //                                             .Include(x => x.CreatorUser)
-        //                                             .ThenInclude(x => x.Seller)
-        //                                             //.Include(x => x.CityArea).ThenInclude(x => x.City)
-        //                                             .FirstOrDefaultAsync(x => x.CreatorUserId == userId);
-        //    if (string.IsNullOrEmpty(value) || !System.Text.RegularExpressions.Regex.IsMatch(value, "^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"))
-        //    {
-        //        return new JsonResult(new
-        //        {
-        //            isvalid = false,
-        //            message = "",
-        //            link = ""
-        //        });
-        //    }
-        //    var existRestaurant = await _restaurantService.GetAsync(x => x.TitleEng == value && x.CreatorUserId != userId, asNoTracking: true);
-        //    if (existRestaurant == null)
-        //    {
-        //        return new JsonResult(new
-        //        {
-        //            isvalid = true,
-        //            message = "ابن نام معتبر است",
-        //            //link = TextGenerator.RestaurantLinkWithWWW(restaurant.CityArea.City.TitleEng, restaurant.CreatorUser.Seller.RestaurantCategory.TitleEng, value)
-        //        });
-        //    }
-        //    else
-        //    {
-        //        return new JsonResult(new
-        //        {
-        //            isvalid = false,
-        //            message = "ابن نام نامعتبر است",
-        //            link = ""
-        //        });
-        //    }
-        //}
-
-
+        
         public JsonResult GetEndWorkingHour(TimeSpan time)
         {
             var times = TimeManagerForWorkingHour.GetToTimes(time);

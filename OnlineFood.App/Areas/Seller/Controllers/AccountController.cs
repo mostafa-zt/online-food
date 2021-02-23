@@ -29,24 +29,16 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
         private readonly ILogger<AccountController> _logger;
         private readonly IUnitOfWork _unitOfWork;
 
-        private readonly IUserService _userService;
-
-        private readonly IRestaurantService _restaurantService;
-
         public AccountController(
                 UserManager<User> userManager,
                 SignInManager<User> signInManager,
                 ILogger<AccountController> logger,
-                IUnitOfWork unitOfWork,
-                IUserService userService,
-                IRestaurantService restaurantService)
+                IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _userService = userService;
-            _restaurantService = restaurantService;
         }
         #endregion
 
@@ -102,36 +94,26 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
                 var result = await _signInManager.PasswordSignInAsync(viewModel.UserName, viewModel.Password, viewModel.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    //await _userService.SignInClaimAsync(OnlineFood.Business.Security.AuthenticationSchema.SellerArea, viewModel.UserName, viewModel.Password);
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.IsNotAllowed)
                 {
-                    //return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                    //_logger.LogWarning("User does not have permission.");
-                    //return RedirectToPage("./NotAllowed");
-                    Danger(this, "شما مجاز به ورود به سیستم نیستید!");
+                    Danger(this, "You are not allowed to login!");
                     return View(new LoginViewModel() { ReturnUrl = returnUrl });
                 }
                 if (result.IsLockedOut)
                 {
-                    //_logger.LogWarning("User account locked out.");
-                    //return RedirectToPage("./Lockout");
-                    Danger(this, "حساب کاربری شما تا 24 ساعت مسدود است.لطفا بعد از 24 ساعت مجددا سعی کنید.");
+                    Danger(this, "You are not allowed to login.");
                     return View(new LoginViewModel() { ReturnUrl = returnUrl });
                 }
                 else
                 {
-                    //ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    //return Page();
-                    Danger(this, "نام کاربری یا رمز عبور اشتباه است");
+                    Danger(this, "Your username or password is wrong!");
                     return View(new LoginViewModel() { ReturnUrl = returnUrl });
                 }
             }
 
-            // If we got this far, something failed, redisplay form
-            //Danger(this, "ورود به مرکز فروشندگان امکانپذیر نیست!");
             return View(viewModel);
         }
         #endregion
@@ -157,7 +139,7 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
                     return View(registerViewModel);
                 }
 
-                var user = new User { UserName = registerViewModel.UserName };
+                var user = new User { UserName = registerViewModel.UserName, Seller = new Domain.Entities.Seller() { CreatorDateTime = DateTime.Now } };
                 var result = await _userManager.CreateAsync(user, registerViewModel.Password);
                 if (result.Succeeded)
                 {
@@ -179,8 +161,7 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
                     var rolenameClaimAdded = await _userManager.AddClaimAsync(user, new Claim(StandardClaims.RoleName, StandardRoles.GetSysmteRoles().FirstOrDefault(w => w.Name == StandardRoles.Seller).Description));
 
                     _unitOfWork.Set<Restaurant>().Add(new Restaurant() { CreatorDateTime = DateTime.Now, CreatorUserId = user.Id });
-                    _unitOfWork.Set<Domain.Entities.Seller>().Add(new Domain.Entities.Seller() { CreatorDateTime = DateTime.Now, User = user, CreatorUserId = user.Id });
-                    _unitOfWork.SaveAllChanges(updateCommonFields: false);
+                    await _unitOfWork.SaveAllChangesAsync(updateCommonFields: false);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
@@ -202,13 +183,7 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
         }
         #endregion
 
-        //[Route("Identity/Account/Login")]
-        //public IActionResult LoginRedirect(string ReturnUrl)
-        //{
-        //    return Redirect("/Admin/Account/Login?ReturnUrl=" + ReturnUrl);
-        //}
-
-
+        
         #region AccessDenied
         [AllowAnonymous]
         public IActionResult AccessDenied(string returnUrl = null)

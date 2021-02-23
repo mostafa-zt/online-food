@@ -20,42 +20,32 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
 {
     public class RestaurantImageController : BaseController
     {
-
-        private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly ILogger<AccountController> _logger;
         private readonly IViewRenderService _viewRenderService;
         private readonly IHostingEnvironment _hostingEnvironment; //for post file
         private readonly IUnitOfWork _unitOfWork;
-
-        private readonly ISellerService _sellerService;
         private readonly IRestaurantLevelEconomyService _restaurantLevelEconomyService;
         private readonly IRestaurantTypeService _restaurantTypeService;
-
         private readonly IRestaurantService _restaurantService;
-
         private readonly IRestaurantImageService _restaurantImageService;
 
         public RestaurantImageController(
           UserManager<User> userManager,
-          SignInManager<User> signInManager,
           ILogger<AccountController> logger,
           IHostingEnvironment hostingEnvironment,
           IUnitOfWork unitOfWork,
           IViewRenderService viewRenderService,
-          ISellerService sellerService,
           IRestaurantLevelEconomyService restaurantLevelEconomyService,
           IRestaurantTypeService restaurantTypeService,
           IRestaurantImageService restaurantImageService,
           IRestaurantService restaurantService)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _logger = logger;
             _unitOfWork = unitOfWork;
             _hostingEnvironment = hostingEnvironment;
             _viewRenderService = viewRenderService;
-            _sellerService = sellerService;
             _restaurantLevelEconomyService = restaurantLevelEconomyService;
             _restaurantTypeService = restaurantTypeService;
             _restaurantImageService = restaurantImageService;

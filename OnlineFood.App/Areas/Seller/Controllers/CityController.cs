@@ -19,17 +19,12 @@ namespace OnlineFood.Web.Areas.Seller.Controllers
     public class CityController : BaseController
     {
         #region Private Properties and Constructor
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICityService _cityService;
         private readonly ILogger<CityController> _logger;
 
-        public CityController(SignInManager<User> signInManager, UserManager<User> userManager,
-                              ICityService cityService, IUnitOfWork unitOfWork, ILogger<CityController> logger)
+        public CityController(ICityService cityService, IUnitOfWork unitOfWork, ILogger<CityController> logger)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
             _cityService = cityService;
             _unitOfWork = unitOfWork;
             _logger = logger;

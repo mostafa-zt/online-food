@@ -38,10 +38,15 @@ namespace OnlineFood.Web.Areas.Seller.ViewModels
         public ActivityStatus ActivityStatus { get; set; }
 
         public List<GalleryRestaurantImageViewModel> GalleryRestaurantImageViewModels { get; set; }
+
         [Display(Name = "Description")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "{0} is required", AllowEmptyStrings = false)]
         [Display(Name = "Price")]
+        [DataType(DataType.Currency, ErrorMessage = "{0} is not valid")]
         public decimal? Price { get; set; }
+
         [Display(Name = "Food Image")]
         public IFormFile ImageFile { get; set; }
 
@@ -62,10 +67,15 @@ namespace OnlineFood.Web.Areas.Seller.ViewModels
         public ActivityStatus ActivityStatus { get; set; }
 
         public List<GalleryRestaurantImageViewModel> GalleryRestaurantImageViewModels { get; set; }
+
         [Display(Name = "Description")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "{0} is required", AllowEmptyStrings = false)]
         [Display(Name = "Price")]
+        [DataType(DataType.Currency, ErrorMessage = "{0} is not valid")]
         public decimal? Price { get; set; }
+
         [Display(Name = "Food Image")]
         public IFormFile ImageFile { get; set; }
 
