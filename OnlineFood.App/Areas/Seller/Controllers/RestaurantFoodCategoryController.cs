@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineFood.Business.Contracts;
 using OnlineFood.Common.Extensions;
 using OnlineFood.Common.Model;

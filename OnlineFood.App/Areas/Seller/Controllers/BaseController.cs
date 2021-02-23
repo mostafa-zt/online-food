@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineFood.Common.Extensions;
 using OnlineFood.Common.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineFood.Web.Areas.Seller.Controllers
 {

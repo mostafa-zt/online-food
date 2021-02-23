@@ -1,14 +1,6 @@
-﻿using OnlineFood.Business.Contracts;
-using OnlineFood.Domain.Entities;
-using OnlineFood.Infrastructure.DataAccess;
-using Microsoft.AspNetCore.Hosting;
+﻿using OnlineFood.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineFood.Web.Areas.Seller.Controllers

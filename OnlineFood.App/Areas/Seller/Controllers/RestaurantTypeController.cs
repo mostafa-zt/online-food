@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineFood.Business.Contracts;
 using OnlineFood.Common.Extensions;
 using OnlineFood.Common.Model;
@@ -9,7 +7,6 @@ using OnlineFood.Domain.Entities;
 using OnlineFood.Infrastructure.DataAccess;
 using OnlineFood.Web.Areas.Seller.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
