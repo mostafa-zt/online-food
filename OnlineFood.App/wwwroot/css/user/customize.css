@@ -6765,3 +6765,24 @@ td {
     background-color: transparent;
     margin: 0 auto;
 }
+
+
+@media (max-width:730px) {
+    .food_type,.day{
+        width:40%!important;
+    }
+
+    .working-hour-panel {
+        width: 100% !important;
+    }
+}
+
+@media (max-width:435px) {
+    .food_type, .restaurant_working_hour .day {
+        width: 100% !important;
+    }
+
+    .working-hour-panel{
+        width:100%!important;
+    }
+}

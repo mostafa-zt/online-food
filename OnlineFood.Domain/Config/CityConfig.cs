@@ -17,7 +17,7 @@ namespace OnlineFood.Domain.Config
             builder.HasData(new List<City>() {
                               { new City() {  ActivityStatus = Enum.ActivityStatus.Available, Id =1 , Title= "Vancouver" ,CreatorDateTime=DateTime.Now } },
                               { new City() {  ActivityStatus = Enum.ActivityStatus.Available, Id =2 , Title= "Toronto" , CreatorDateTime=DateTime.Now } },
-                              { new City() {  ActivityStatus = Enum.ActivityStatus.Available, Id =3 , Title= "Montreal" ,CreatorDateTime=DateTime.Now } },
+                              { new City() {  ActivityStatus = Enum.ActivityStatus.Available, Id =3 , Title= "Victoria" ,CreatorDateTime=DateTime.Now } },
                               { new City() {  ActivityStatus = Enum.ActivityStatus.Available, Id =4 , Title= "Montreal" ,CreatorDateTime=DateTime.Now } },
                               { new City() {  ActivityStatus = Enum.ActivityStatus.Available, Id =5 , Title= "Calgary" ,CreatorDateTime=DateTime.Now } }
                            });

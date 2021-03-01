@@ -65,8 +65,8 @@
         #working-hour-panel-remove {
             color: #DB2828;
             font-weight: bold;
+            float: right;
             position: relative;
-            left: -70px;
             bottom: 21px;
             cursor: pointer;
         }
@@ -346,7 +346,7 @@
 
                     <div class="working-hours boxWithPadding margin_top_30">
                         <div class="row centered">
-                            <div class="col-lg-12 @(Model.WorkingHoursViewModels == null || !Model.WorkingHoursViewModels.Any() ? "empty-working-hour" : "")" id="working-hour-content">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="working-hour-content">
                                 @if (Model.WorkingHoursViewModels != null && Model.WorkingHoursViewModels.Any())
                                 {
                                     foreach (var item in Model.WorkingHoursViewModels)

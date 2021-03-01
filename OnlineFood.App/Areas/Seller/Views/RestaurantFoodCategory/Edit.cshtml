@@ -4,6 +4,18 @@
     ViewData["Title"] = "Edit Food Type";
 }
 
+@section css{
+    <style>
+        .info_section {
+            font-size: 1rem;
+            color: #157903;
+            font-weight: bold;
+            margin: 15px 10px;
+            border: 1px dashed;
+        }
+    </style>
+}
+
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -77,7 +89,12 @@
                             <legend class="section-header im-icon-Upload-toCloud">Upload Food Image</legend>
                             <div id="upload-main ">
                                 <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="info_section">
+                                            <i class="im im-icon-Information"></i> Please upload or select an image in your gallery
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                                         <div class="form-control-label">
                                             <label asp-for="ImageFile" class="form-label upload-label"></label>
                                         </div>
@@ -96,7 +113,7 @@
                             <legend class="section-header im-icon-Folder-Pictures"> Gallery </legend>
                             <div class="row">
 
-                                <div class="col-lg-12" id="image-gallery-panel">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="image-gallery-panel">
                                     <div class="img-gallery">
                                         @foreach (var item in Model.GalleryRestaurantImageViewModels)
                                         {

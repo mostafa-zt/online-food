@@ -1,14 +1,146 @@
-﻿@{
-    ViewData["Title"] = "پروفایل کاربری";
+﻿@model RestaurantViewModel
+
+@{
+    ViewData["Title"] = "My Restaurant";
 }
 
 @section css{
-    <link href="~/lib/loading-bar/loading-bar.css" rel="stylesheet" />
+    <style>
+        .restaurant_box .restaurant_item.title {
+            font-size: 2.2rem;
+            color: #7daf74;
+        }
+
+        .restaurant_item {
+            font-size: 1.2rem;
+            margin: 5px 0;
+            color: #8bc63f;
+        }
+
+        .restaurant_food_types .food_type img {
+            width: 96px;
+            height: auto;
+            border-radius: 10px;
+            padding: 2px;
+            border: 1px solid;
+            box-shadow: 1px 2px 9px #8e8b87;
+            margin-top: 10px;
+        }
+
+        .restaurant_food_types .food_type .img_box {
+            display: flex;
+        }
+
+        .food_type, .day {
+            width: 21%;
+            display: inline-block;
+            padding: 2px 3px;
+            border: 1px solid;
+            border-radius: 5px;
+            background-color: #e9efe9;
+            margin: 2px 5px;
+            min-height: 98px;
+        }
+
+        .restaurant_food_types, .restaurant_working_hour {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .food_type span, .day span {
+            background-color: #d8d6d3;
+            padding: 2px 5px;
+            border-radius: 4px;
+            margin: 1px 0px;
+        }
+
+        .limitation {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+    </style>
 }
 
+<div class="card" id="my-restaurant">
+    <div class="header">
+        <h2 dir="ltr">
+            <a class="ui green right ribbon label">
+                <i class="im im-icon-User icon-header-card icon-style"></i>
+                My Restaurant
+            </a>
+        </h2>
+    </div>
+    <div class="body">
+        @if (Model.IsExist)
+        {
+        <div class="restaurant_box">
+            <div class="restaurant_item title"><i class="im im-icon-Shop"></i> @Model.Title </div>
+            @if (Model.City != null)
+            {
+                <div class="restaurant_item"><i class="im im-icon-Map-Marker"></i> @Model.City </div>
+            }
+            @if (Model.FullAddress != null)
+            {
+                <div class="restaurant_item"><i class="im im-icon-Location-2"></i> @Model.FullAddress </div>
+            }
+            <div class="restaurant_item"><i class="im im-icon-Email"></i> @Model.PostalCode </div>
+            <div class="restaurant_item"><i class="im im-icon-Clock-Forward"></i> @Model.DeliveryTime </div>
+            <div class="restaurant_item"><i class="im im-icon-Scooter"></i> $ @Model.RestaurantCourierCost (Average Delivery Cost)</div>
+            <div class="restaurant_item"><i class="im im-icon-Financial"></i> @Model.RestaurantLevelEconomy (Budget Level)</div>
+            <div class="restaurant_item"><i class="im im-icon-Plates"></i> @Model.RestaurantTypes </div>
+
+            <div style="margin-top: 27px;font-size: 1.5rem;">Restaurant Menus:</div>
+            <div class="restaurant_food_types">
+                @foreach (var item in Model.RestaurantFoodTypeViewMdels)
+                {
+                    <div class="food_type">
+                        <span style="display:block;color: #157304;font-weight: bold;"><i class="im im-icon-Plate"></i>@item.FoodName</span>
+
+                        @if (item.Description != null)
+                        {
+                            <span class="limitation">@item.Description</span>
+                        }
+                        @if (item.Price != null)
+                        {
+                            <span>$ @item.Price</span>
+                        }
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <div class="img_box">
+                                <img src="@item.ImageUrl" />
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
 
 
+            <div style="margin-top: 27px;font-size: 1.5rem;">Restaurant Working Hours:</div>
+            <div class="restaurant_working_hour">
+                @foreach (var item in Model.WorkingHoursViewModels)
+                {
+                    <div class="day">
+                        <span style="display:block;color: #157304;font-weight: bold;"><i class="im im-icon-Calendar-3"></i> @item.Day </span>
+                        <span style="display:block;">From @item.Start</span>
+                        <span style="display:block;">To @item.End</span>
+                    </div>
+                }
+            </div>
+        </div>
+        }
+        else
+        {
+            <div>
+                <a class="lnk-effect" href="/seller/restaurant/manage/">You can register your rastaurant now!</a>
+            </div>
+        }
+
+    </div>
+</div>
 @section scripts{
-    <script src="~/lib/loading-bar/loading-bar.js"></script>
-
+    @Html.AlertNotification(TempData)
 }

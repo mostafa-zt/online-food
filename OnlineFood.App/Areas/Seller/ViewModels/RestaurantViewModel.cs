@@ -88,4 +88,62 @@ namespace OnlineFood.Web.Areas.Seller.ViewModels
         public string Day { get; set; }
         public string Title { get; set; }
     }
+
+
+    public class RestaurantViewModel
+    {
+        [Display(Name = "Restaurant Name")]
+        public string Title { get; set; }
+
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Display(Name = "Full Address")]
+        public string FullAddress { get; set; }
+
+        [Display(Name = "Postal Code")]
+        public string PostalCode { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Budget Level ")]
+        public string RestaurantLevelEconomy { get; set; }
+
+        [Display(Name = "Delivery Time Average")]
+        public string DeliveryTime { get; set; }
+
+        //[Display(Name = "Delivery Time Average, To: ")]
+        //public TimeSpan? ToDeliveryTime { get; set; }
+
+        [Display(Name = "Delivery Cost Average")]
+        public decimal? RestaurantCourierCost { get; set; }
+
+        [Display(Name = "Restaurant Types")]
+        public string RestaurantTypes { get; set; }
+
+        [Display(Name = "Restaurant Menus")]
+        public List<RestaurantFoodTypeViewMdel> RestaurantFoodTypeViewMdels { get; set; }
+
+        //public List<DaysOfWeekViewModel> DaysOfWeekViewModel { get; set; }
+
+        [Display(Name = "Working Hours, From: ")]
+        public TimeSpan? StartTime { get; set; }
+
+        [Display(Name = "Working Hours, To: ")]
+        public TimeSpan? EndTime { get; set; }
+        
+        public List<WorkingHoursViewModel> WorkingHoursViewModels { get; set; }
+
+        public bool IsExist { get; set; }
+
+    }
+
+    public class RestaurantFoodTypeViewMdel
+    {
+        public string Price { get; set; }
+        public string FoodName { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
+    }
 }
