@@ -1,8 +1,8 @@
-Online Food Mini Project with .Net Core
+Online Food Mini Project with .NET Core
 
 Technologies and frameworks:
 
-•	.Net Core 2.1
+•	.NET Core 2.1
 •	Entity Framework Core
 •	Microsoft SQL Server
 • ASP.NET Core Identity
